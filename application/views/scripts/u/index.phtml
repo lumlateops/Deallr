@@ -1,0 +1,54 @@
+	<div id="sidebar">
+		<div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			<h3 id="sidebar-title">Filters</h3>
+			<ul id="main-filter">  <!-- Accordion Menu -->
+				<li> 
+					<a href="#" class="filter-group current"> <!-- Add the class "current" to current menu item -->
+						Companies
+					</a>
+					<ul id="publisher-filter">
+					</ul>
+				</li>
+				
+				<li>
+					<a href="#" class="filter-group">
+						Discount %
+					</a>
+					<ul>
+						<li>
+							<div id="discount-per-slider"></div>
+							<div id="discount-slider-values"></div>
+						</li>
+					</ul>
+				</li>
+				
+				<li>
+					<a href="#" class="filter-group">
+						Expiry Date
+					</a>
+					<ul>
+					</ul>
+				</li>
+				
+				<li>
+					<a href="#" class="filter-group">
+						Categories
+					</a>
+					<ul id="category-filter">
+					</ul>
+				</li>
+			</ul> <!-- End #main-filter -->
+			
+		</div>
+	</div> <!-- End #sidebar -->
+<div id="deals-container">
+	<div id="deals-filter-overlay" style="display: none;"><img src="<?= $this->baseUrl() ?>/resources/images/loading.gif" alt="Loading" /> Applying Filter...</div>
+	<div id="deals-loading"><img src="<?= $this->baseUrl() ?>/resources/images/loading.gif" alt="Loading" /> Loading Deals...</div>
+	<div id="filter-no-results" style="display: none;">No deals matching your filter conditions was found.</div>
+	<script type="text/javascript">
+		Application.__user_deals = <?= json_encode( $this->user_deals ); ?>;
+		Application.__deals_obj = new Deals();
+		Application.__deals_obj.init( Application.__user_deals );
+	</script>
+</div>
+<div class="clear"></div>
