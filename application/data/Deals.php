@@ -87,4 +87,48 @@ class Application_Data_Deals
 		}
 		return $DEALS;
 	}
+	
+	static function getParsedDeals()
+	{
+		$deal_id_count = 1;
+		$DEALS = array();
+		
+		$deal_file = realpath(APPLICATION_PATH.'/../../parser_data/deal.json');
+		if( file_exists( $deal_file ) )
+		{
+			$deals = file( $deal_file );
+			foreach($deals as $deal)
+			{
+				if( $deal_id_count == 100 )
+				{
+					break;
+				}
+
+				$deal = rtrim($deal, "\n");
+				$deal = json_decode($deal, true);
+				
+				if( !$deal["email"]["html"]["title"] || !$deal["coupon"]["retailer"]["name"] )
+				{
+					continue;
+				}
+				
+				$DEALS[] = array(
+					'deal_id' => $deal_id_count++,
+					'deal_title' => $deal["email"]["html"]["title"],
+					'deal_expiry_date' => 'EXPIRES '.$deal["coupon"]["validupto"],
+					'deal_details' => $deal["email"]["html"]["rawtext"],
+					'deal_publisher_id' => $deal_id_count,
+					'deal_publisher' => ucwords( $deal["coupon"]["retailer"]["name"] ),
+					'deal_publisher_logo' => 'http://www1.macys.com/img/nav/co_macysLogo3.gif',
+					'deal_publisher_url' => $deal["coupon"]["retailer"]["domain"],
+					'deal_discount' => $deal["coupon"]["salespercentage"],
+					'deal_expiry_date_formatted' => $deal["coupon"]["validupto"],
+					'deal_categories' => array( array(1, $deal["email"]["category"] ) )
+
+				);
+			}
+		}
+		
+		return $DEALS;
+	}
 }

@@ -1,7 +1,7 @@
 /******************************** Basic Structure ********************************/
 html{font-size:100%;height:100%;margin-bottom:1px;/* Always show a scrollbar to avoid jumping when the scrollbar appears */}
 body{font-family: "Lucida Grande", Arial, Helvetica,sans-serif;color:#555;background:#f0f0f0 fixed 230px top no-repeat;font-size:12px;}
-#body-wrapper{min-width:1025px;}
+#body-wrapper{min-width: 975px; max-width: 1025px; margin: 0 auto; }
 /******************************** Elements styling ********************************/
 h1,h2,h3,h4,h5,h6{font-family:Helvetica,Arial,sans-serif;color:#222;font-weight:bold;}
 h1{font-family:Calibri,Helvetica,Arial,sans-serif;font-size:31px;font-weight:bold;color:#fff;}
@@ -56,7 +56,7 @@ a.remove-link:hover{color:#000;}
 #messages textarea{margin:0 0 15px 0;}
 /******************************** Main Content ********************************/
 /************ Layout ************/
-#main-content{margin:0 30px; padding: 20px 0 0 0;}
+#main-content{margin:0; padding: 20px 0 0 0;}
 .column-left{ width: 48%; float: left; }
 .column-right{ width: 48%; float: right; }
 #page-intro { color: #CCC; font-size: 13px; padding: 0 0 10px 20px; }
@@ -166,7 +166,7 @@ body#login{color:#fff;background:#222 url('../images/bg-login.gif');}
 .deal-logo { float: right; padding: 10px 10px 0 0; }
 .deal-content { margin: 0 10px; }
 .deal-details { line-height: 20px; }
-.deal-expiry-date { color: #FF8C41; margin: 10px 0; }
+.deal-expiry-date { color: #FF8C41; line-height: 18px; margin: 10px 0; }
 .deal-facebook-like { margin: 20px 0 0; }
 #deals-filter-overlay {
 	background: #EEE;

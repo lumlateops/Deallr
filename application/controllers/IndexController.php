@@ -29,7 +29,7 @@ class IndexController extends Zend_Controller_Action
 			if( isset( self::$users[$username] ) && self::$users[$username] == sha1(self::SALT.$password) )
 			{
 				$_SESSION["user"] = base64_encode( $username );
-				$this->_redirector->gotoSimple('index', 'u', null, array('u'=>$username));
+				$this->_redirector->gotoSimple('index', 'home', null, array());
 				exit("Good logged in");
 			}
 			else

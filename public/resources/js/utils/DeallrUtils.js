@@ -9,8 +9,8 @@ DeallrUtil.replaceTokens = function(template, tokens) {
 };
 
 DeallrUtil.stringSortCallback = function(a,b) {
-	var str1 = a.name.toLowerCase();
-	var str2 = b.name.toLowerCase();
+	var str1 = a.name ? a.name.toLowerCase() : '';
+	var str2 = b.name ? b.name.toLowerCase() : '';
 	var ret_value = str1 == str2 ? 0 : ( str1 > str2 ? 1 : -1 );
 	return ret_value;
 };
