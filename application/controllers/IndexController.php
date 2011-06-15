@@ -3,10 +3,10 @@
 class IndexController extends Zend_Controller_Action
 {
 	static $users = array(
-		'vipul' => 'd32861dda286bd6ff0e3df08b0a15d842b04162b',
-		'prachi' => 'fa6933d1c84c32c9a6679bf86ae6096b5ba5eaf9',
-		'rrani' => 'a266937bba22d1ac0119477ffa345ad44f1ce678',
-		'swasthi' => '08faf07f4d1a4192da554e098a819951637b8db4',
+		'vipul' => '24824d7dbfa63ebcbed9fbb17d49c988dd2714a8',
+		'prachi' => '3f61f0ff5daf1be35ed5d83174d858187554035c',
+		'rrani' => '4af96a592299b4792aae3187bc0aa8cdd9c0879a',
+		'swasthi' => '4b85fec39f6d955ebe468d3349f012afeab53852',
 	);
 	
 	const SALT = 'maRd9x50xQLs6uDM-';

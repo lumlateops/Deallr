@@ -24,9 +24,9 @@ Deals = function() {
 			</div>\
 			<h3>{deal_title}</h3>\
 			<div class="deal-content">\
-				<div class="deal-expiry-date">\
-					EXPIRES {deal_expiry_date_formatted}<br/>\
-					Discount {deal_discount}%\
+				<div class="deal-expiry-date" style="display:none;">\
+					{deal_expiry_date_formatted}<br/>\
+					{deal_discount}%\
 				</div>\
 				<div class="deal-details">\
 					{deal_details}\

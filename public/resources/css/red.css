@@ -2,13 +2,13 @@
 a              { color: #bb0000; }
                 
 .button {
-                background: #950000 url('../images/bg-button-red.gif') top left repeat-x !important;
+                background: #950000 url('../images/bg-button-orange.gif') top left repeat-x !important;
                 border-color: #940000 !important;
 
                 }
 
 #sidebar #main-filter li a.filter-group {
-                background: transparent url('../images/bg-menu-item-red.gif') right center no-repeat;
+                background: transparent url('../images/bg-menu-item-orange.gif') right center no-repeat;
                 }
 
 ul.content-box-tabs li a:hover {
@@ -16,7 +16,7 @@ ul.content-box-tabs li a:hover {
                 }              
                 
 .pagination a.current {
-                background: #950000 url('../images/bg-button-red.gif') top left repeat-x !important;
+                background: #950000 url('../images/bg-button-orange.gif') top left repeat-x !important;
                 border-color: #940000 !important;
                 }
 				

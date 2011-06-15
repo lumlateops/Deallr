@@ -1,6 +1,6 @@
 /******************************** Basic Structure ********************************/
 html{font-size:100%;height:100%;margin-bottom:1px;/* Always show a scrollbar to avoid jumping when the scrollbar appears */}
-body{font-family: "Lucida Grande", Arial, Helvetica,sans-serif;color:#555;background:#f0f0f0 fixed 230px top no-repeat;font-size:12px;}
+body{font-family: "Lucida Grande", Arial, Helvetica,sans-serif;color:#555;background:#fff fixed 230px top no-repeat;font-size:12px;}
 #body-wrapper{min-width: 975px; max-width: 1025px; margin: 0 auto; }
 /******************************** Elements styling ********************************/
 h1,h2,h3,h4,h5,h6{font-family:Helvetica,Arial,sans-serif;color:#222;font-weight:bold;}
@@ -30,7 +30,7 @@ a.remove-link{color:#bb0000;}
 a.remove-link:hover{color:#000;}
 /******************************** Sidebar ********************************/
 #sidebar{ float: left; width:230px;height:100%;color:#888;font-size:11px;}
-#page-header{ background:url('../images/bg-login.gif') top left repeat;color:#888;padding: 4px 0px 0px 20px; }
+#page-header{ background: #FFF;color:#888;padding: 4px 0px 0px 20px; }
 #page-header h1{font-family:"Lucida Grande","Helvetica","Arial","sans-serif";font-weight:normal;}
 #sidebar #sidebar-wrapper{margin:0 0 0 9px;}
 #sidebar a,
@@ -161,11 +161,12 @@ body#login{color:#fff;background:#222 url('../images/bg-login.gif');}
 .facebox_overlayBG{background-color:#000;z-index:99;}
 /*********************Custom Styles**********************/
 #deals-container { margin-left: 245px; }
+#deals-container h3 { color: #395A9A; }
 .tab-content { background: #FFFFFF; padding: 20px; }
 .deal-container { border: 1px solid #EEE; box-shadow: 5px 5px 20px #EEE; -webkit-box-shadow: 5px 5px 20px #EEE; -moz-box-shadow: 5px 5px 20px #EEE; margin: 10px 0; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; padding: 10px; }
 .deal-logo { float: right; padding: 10px 10px 0 0; }
 .deal-content { margin: 0 10px; }
-.deal-details { line-height: 20px; }
+.deal-details { max-height: 40px; overflow:hidden; text-overflow: ellipsis; line-height: 20px; }
 .deal-expiry-date { color: #FF8C41; line-height: 18px; margin: 10px 0; }
 .deal-facebook-like { margin: 20px 0 0; }
 #deals-filter-overlay {

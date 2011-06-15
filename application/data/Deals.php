@@ -97,6 +97,7 @@ class Application_Data_Deals
 		if( file_exists( $deal_file ) )
 		{
 			$deals = file( $deal_file );
+			$deals = array_reverse($deals);
 			foreach($deals as $deal)
 			{
 				if( $deal_id_count == 100 )
@@ -107,23 +108,38 @@ class Application_Data_Deals
 				$deal = rtrim($deal, "\n");
 				$deal = json_decode($deal, true);
 				
+/*
 				if( !$deal["email"]["html"]["title"] || !$deal["coupon"]["retailer"]["name"] )
 				{
 					continue;
 				}
+*/
+				$notSet = 'NotSet';
+				
+				if( $deal["email"]["category"] != "deal" ) { continue; }
 				
 				$DEALS[] = array(
 					'deal_id' => $deal_id_count++,
-					'deal_title' => $deal["email"]["html"]["title"],
-					'deal_expiry_date' => 'EXPIRES '.$deal["coupon"]["validupto"],
-					'deal_details' => $deal["email"]["html"]["rawtext"],
+					
+					'deal_title' => isset( $deal["email"]["subject"] ) ? $deal["email"]["subject"] : $notSet,
+					
+					'deal_expiry_date' => isset( $deal["coupon"]["expiration"] ) ? 'EXPIRES '. $deal["coupon"]["expiration"] : '',
+					
+					'deal_details' => isset( $deal["email"]["html"]["rawtext"] ) ? $deal["email"]["html"]["rawtext"] : $notSet,
+					
 					'deal_publisher_id' => $deal_id_count,
-					'deal_publisher' => ucwords( $deal["coupon"]["retailer"]["name"] ),
+					
+					'deal_publisher' => isset( $deal["coupon"]["retailer"]["name"] ) ? ucwords( $deal["coupon"]["retailer"]["name"] ) : $notSet,
+					
 					'deal_publisher_logo' => 'http://www1.macys.com/img/nav/co_macysLogo3.gif',
-					'deal_publisher_url' => $deal["coupon"]["retailer"]["domain"],
-					'deal_discount' => $deal["coupon"]["salespercentage"],
-					'deal_expiry_date_formatted' => $deal["coupon"]["validupto"],
-					'deal_categories' => array( array(1, $deal["email"]["category"] ) )
+					
+					'deal_publisher_url' => isset( $deal["coupon"]["retailer"]["domain"] ) ? $deal["coupon"]["retailer"]["domain"] : $notSet,
+					
+					'deal_discount' => isset( $deal["coupon"]["salepercentage"] ) && $deal["coupon"]["salepercentage"] != 0 ? 'Discount '.$deal["coupon"]["salepercentage"] : '',
+					
+					'deal_expiry_date_formatted' => isset( $deal["coupon"]["expiration"] ) ? "EXPIRES ".$deal["coupon"]["expiration"] : '',
+					
+					'deal_categories' => array( array(1, $deal["email"]["category"] ? $deal["email"]["category"] : $notSet ) )
 
 				);
 			}
