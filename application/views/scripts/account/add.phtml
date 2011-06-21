@@ -1,0 +1,19 @@
+<br /><br />
+
+<?php 
+
+echo '<ul id="providers">';
+
+foreach( $this->providers as $provider )
+{
+	if( $provider['logoUrl'] )
+	{
+		echo '<li>';
+		echo '<div class="provider-image"><img src="'.$provider['logoUrl'].'" alt="Provider Image" /></div>';
+		echo '</li>';
+	}
+}
+
+echo '</ul>';
+
+?>
