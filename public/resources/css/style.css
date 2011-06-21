@@ -1,9 +1,9 @@
 /******************************** Basic Structure ********************************/
 html{font-size:100%;height:100%;margin-bottom:1px;/* Always show a scrollbar to avoid jumping when the scrollbar appears */}
-body{font-family: "Lucida Grande", Arial, Helvetica,sans-serif;color:#555;background:#fff fixed 230px top no-repeat;font-size:12px;}
+body{font-family: "Lucida Grande", Arial, Helvetica,sans-serif;color:#555;background: #fefefe; background:transparent -webkit-gradient(linear, 0% 0%, 100% 100%, from(#FFF), to(#f8f8f8)) fixed top no-repeat; color: #333; font-size:12px;}
 #body-wrapper{min-width: 975px; max-width: 1025px; margin: 0 auto; }
 /******************************** Elements styling ********************************/
-h1,h2,h3,h4,h5,h6{font-family:Helvetica,Arial,sans-serif;color:#222;font-weight:bold;}
+h1,h2,h3,h4,h5,h6{font-family:'Helvetica Neue', Arial, Helvetica, 'Liberation Sans', FreeSans, sans-serif;color:#333;font-weight:bold;}
 h1{font-family:Calibri,Helvetica,Arial,sans-serif;font-size:31px;font-weight:bold;color:#fff;}
 h2{font-size:26px;padding:0 0 10px 0;}
 h3{font-size:17px;padding:0 0 10px 0;}
@@ -30,7 +30,7 @@ a.remove-link{color:#bb0000;}
 a.remove-link:hover{color:#000;}
 /******************************** Sidebar ********************************/
 #sidebar{ float: left; width:230px;height:100%;color:#888;font-size:11px;}
-#page-header{ background: #FFF;color:#888;padding: 4px 0px 0px 20px; }
+#page-header{ color:#888;padding: 4px 0px 0px 20px; }
 #page-header h1{font-family:"Lucida Grande","Helvetica","Arial","sans-serif";font-weight:normal;}
 #sidebar #sidebar-wrapper{margin:0 0 0 9px;}
 #sidebar a,
@@ -56,28 +56,28 @@ a.remove-link:hover{color:#000;}
 #messages textarea{margin:0 0 15px 0;}
 /******************************** Main Content ********************************/
 /************ Layout ************/
-#main-content{margin:0; padding: 20px 0 0 0;}
+#main-content{margin:0; padding: 0;}
 .column-left{ width: 48%; float: left; }
 .column-right{ width: 48%; float: right; }
 #page-intro { color: #CCC; font-size: 13px; padding: 0 0 10px 20px; }
-#footer{border-top:1px solid #ccc;margin:40px 0 0 0;padding:20px 0;font-size:12px;}
+#footer{border-top:1px solid #ccc;margin:40px 0 0 0;padding: 10px 0;font-size:12px;}
 /************ Lists ************/
 #main-content ul,
 #main-content ol{padding:10px 0;}
 /* Unordered List */
-#main-content ul li{padding:0}
+/* #main-content ul li{padding:0} */
 /* Ordered List */
 #main-content ol{padding:0 0 0 24px;}
 #main-content ol li{list-style:none;padding:4px 0;}
 /*************** Content Box ***************/
 .content-box{ margin:0 0 20px 0; }
 .content-box-header h3{ padding: 12px 15px 10px; float:left; }
-ul.content-box-tabs{ padding: 0px 15px 0 0 !important; margin:0 !important; }
+ul.content-box-tabs{ float: right; padding: 0px 15px 0 0 !important; margin:0 !important; }
 ul.content-box-tabs li{ float:left;margin:0;padding:0 !important;background-image:none !important;}
 ul.content-box-tabs li a{ color: #333; font-size: 13px; padding: 8px 10px; display: block; margin: 1px; border-bottom: 0; }
 ul.content-box-tabs li a:hover{color:#57a000;}
 ul.content-box-tabs li a.current{background:#fff;border:1px solid #ccc;border-bottom:0;margin:0;}
-.content-box-content{ margin-top: -2px; font-size:13px; border:1px solid #ccc;}
+.content-box-content{ border-radius:3px; -moz-border-radius: 3px; margin-top: -2px; font-size:13px; border:1px solid #ccc;}
 /************ Table ************/
 #main-content table{width:100%;border-collapse:collapse;}
 #main-content table thead th{font-weight:bold;font-size:15px;border-bottom:1px solid #ddd;}
@@ -161,7 +161,7 @@ body#login{color:#fff;background:#222 url('../images/bg-login.gif');}
 .facebox_overlayBG{background-color:#000;z-index:99;}
 /*********************Custom Styles**********************/
 #deals-container { margin-left: 245px; }
-#deals-container h3 { color: #395A9A; }
+#deals-container h3 { color: #08C; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tab-content { background: #FFFFFF; padding: 20px; }
 .deal-container { border: 1px solid #EEE; box-shadow: 5px 5px 20px #EEE; -webkit-box-shadow: 5px 5px 20px #EEE; -moz-box-shadow: 5px 5px 20px #EEE; margin: 10px 0; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; padding: 10px; }
 .deal-logo { float: right; padding: 10px 10px 0 0; }
@@ -193,3 +193,12 @@ body#login{color:#fff;background:#222 url('../images/bg-login.gif');}
 #deals-loading img { vertical-align: middle; margin-right: 10px; }
 #filter-no-results { font-size: 15px; margin: 80px auto; width: 400px; }
 #discount-slider-values { margin-top: 15px; font-weight: bold; }
+/**************************Account Add***************************/
+#providers {  }
+#providers li { opacity: 0.5; padding: 40px 15px; }
+#providers li:hover { cursor: pointer; /* background: #EEE; */ opacity: 1; }
+/************************* Footer ******************************/
+#footer-links { display: inline; }
+#footer-links li { display: inline; margin-right: 10px; }
+#footer-links li a:hover { cursor: pointer; }
+

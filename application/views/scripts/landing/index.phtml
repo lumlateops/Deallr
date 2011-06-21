@@ -1,0 +1,60 @@
+<br /><br />
+<div id="signin-container">
+	<form id="main-page-signin-form">
+		<p>
+			<label for="username"></label>
+			<input placeholder="Username or email" type="text" autocomplete="off" name="username" />
+		</p>
+		<p>
+			<label for="password"></label>
+			<input placeholder="Password" type="password" autocomplete="off" name="password" />
+		</p>
+		<p>
+			<input type="button" value="Sign in" />
+		</p>
+	</form>
+</div>
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<script>
+  FB.init({
+    appId  : '<?php echo $this->fb_app_id; ?>',
+    status : true, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true  // parse XFBML
+  });
+</script>
+<div id="signup-container">
+	<strong>New to Deallr?</strong> Join today!<br/>
+	<fb:registration 
+	  fields="[ 
+	  	{'name':'name'},
+	  	{'name':'email'},
+	  	{'name':'username', type:'text','description':'Username (for @deallr.com email)'},
+	  	{'name':'password'},
+	  	{'name':'gender'},
+	  	{'name':'location'}
+	  ]" 
+	  redirect-uri="http://deallr.local/signup/index/" 
+	  fb_only="true" 
+	  width="444">
+	</fb:registration>
+</div>
+<div id="tag-lines-container">
+	<div class="tag-line-container">
+		<h2>Start loving deals again!</h2>
+		<p>Lorem ipsum dolor sit amet, ligula suspendisse nulla pretium, rhoncus tempor placerat fermentum, enim integer ad vestibulum volutpat. Nisl rhoncus turpis est, vel elit, congue wisi enim nunc ultricies sit, magna tincidunt. Maecenas aliquam maecenas ligula nostra, accumsan taciti. Sociis mauris in integer, a dolor netus non dui aliquet, sagittis felis sodales, dolor sociis mauris, vel eu libero cras. Interdum at. Eget habitasse elementum est, ipsum purus pede porttitor class, ut adipiscing, aliquet sed auctor, imperdiet arcu per diam dapibus libero duis. Enim eros in vel, volutpat nec pellentesque leo, temporibus scelerisque nec.</p>
+	</div>
+	<div class="tag-line-container" style="display:none;">
+		<h2>Get deals when you want them!</h2>
+		<p>Lorem ipsum dolor sit amet, ligula suspendisse nulla pretium, rhoncus tempor placerat fermentum, enim integer ad vestibulum volutpat. Nisl rhoncus turpis est, vel elit, congue wisi enim nunc ultricies sit, magna tincidunt. Maecenas aliquam maecenas ligula nostra, accumsan taciti. Sociis mauris in integer, a dolor netus non dui aliquet, sagittis felis sodales, dolor sociis mauris, vel eu libero cras. Interdum at. Eget habitasse elementum est, ipsum purus pede porttitor class, ut adipiscing, aliquet sed auctor, imperdiet arcu per diam dapibus libero duis. Enim eros in vel, volutpat nec pellentesque leo, temporibus scelerisque nec.</p>
+	</div>
+	<div class="tag-line-container" style="display:none;">
+		<h2>Manage all your deals from one place!</h2>
+		<p>Lorem ipsum dolor sit amet, ligula suspendisse nulla pretium, rhoncus tempor placerat fermentum, enim integer ad vestibulum volutpat. Nisl rhoncus turpis est, vel elit, congue wisi enim nunc ultricies sit, magna tincidunt. Maecenas aliquam maecenas ligula nostra, accumsan taciti. Sociis mauris in integer, a dolor netus non dui aliquet, sagittis felis sodales, dolor sociis mauris, vel eu libero cras. Interdum at. Eget habitasse elementum est, ipsum purus pede porttitor class, ut adipiscing, aliquet sed auctor, imperdiet arcu per diam dapibus libero duis. Enim eros in vel, volutpat nec pellentesque leo, temporibus scelerisque nec.</p>
+	</div>
+	<div class="tag-line-container" style="display:none;">
+		<h2>Get personalized deals!</h2>
+		<p>Lorem ipsum dolor sit amet, ligula suspendisse nulla pretium, rhoncus tempor placerat fermentum, enim integer ad vestibulum volutpat. Nisl rhoncus turpis est, vel elit, congue wisi enim nunc ultricies sit, magna tincidunt. Maecenas aliquam maecenas ligula nostra, accumsan taciti. Sociis mauris in integer, a dolor netus non dui aliquet, sagittis felis sodales, dolor sociis mauris, vel eu libero cras. Interdum at. Eget habitasse elementum est, ipsum purus pede porttitor class, ut adipiscing, aliquet sed auctor, imperdiet arcu per diam dapibus libero duis. Enim eros in vel, volutpat nec pellentesque leo, temporibus scelerisque nec.</p>
+	</div>
+</div>

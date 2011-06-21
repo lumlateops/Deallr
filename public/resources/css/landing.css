@@ -1,0 +1,14 @@
+/****** Sign in form ******/
+#signin-container { float: right; margin: -80px 0 0 0; }
+#main-page-signin-form {}
+#main-page-signin-form p { display: inline-block; *display: inline-block; zoom: 1; }
+#main-page-signin-form input[name] { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border: 1px solid #CCC; font-size: 13px; margin-right: 10px; opacity:0.8; padding: 5px; width: 160px; }
+#main-page-signin-form input:hover { box-shadow: 0 0 2px rgba(120,120,120,0.3); -moz-box-shadow: 0 0 2px rgba(120,120,120,0.3); -webkit-box-shadow: 0 0 2px rgba(120,120,120,0.3); opacity: 1; }
+
+#main-page-signin-form input[type="button"] { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; background: #EEE; background: -webkit-gradient(linear,0% 0%, 0% 100%, from(#FFF), to(#DDD)); border: 1px solid #CCC; font-size: 13px; font-weight: bold; padding: 5px 10px; }
+#main-page-signin-form input[type="button"]:active { background: #CCC; background: -webkit-gradient(linear,0% 0%, 0% 100%, from(#DDD), to(#CCC)); }
+
+#tag-lines-container { float: left; margin-top: 67px; max-width: 550px; }
+#tag-lines-container h2 { color: #FE9424; font-weight: normal; font-size: 25px; }
+
+#signup-container { float: right; font-size: 15px; line-height: 25px; margin-top: 40px; }
