@@ -11,6 +11,9 @@ class Application_Model_APIRequest
 	private $_secret_key;
 	private $_method;
 	
+	public $request_url;
+	public $response;
+	
 	/**
 	 * Initializes the api request object
 	 *
@@ -58,28 +61,36 @@ class Application_Model_APIRequest
 	{
 		$end_point_url = $this->_getEndPointURL();
 		$service_params = $this->_params;
-		$get_params = array();
-		$get_params_url = '';
+		$formatted_params_arr = array();
+		$final_params_str = '';
 		$request_url = '';
 		
         // action body
 		$ch = curl_init();
 		
+		$request_url = $this->_host.$end_point_url;
+		
 		if( $this->_method == self::METHOD_POST )
 		{
-			curl_setopt( $ch, CURLOPT_POSTFIELDS, $service_params );
+			foreach( $service_params as $key => $value )
+			{
+				$formatted_params_arr[] = $key.'='.$value;
+			}
+
+			$final_params_str = implode('&', $formatted_params_arr);
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $final_params_str );
 			curl_setopt( $ch, CURLOPT_POST, TRUE );
 		}
 		else
 		{
 			foreach( $service_params as $key => $value )
 			{
-				$get_params[] = $key.'='.$value;
+				$formatted_params_arr[] = $value;
 			}
-			$get_params_url = implode( '&', $get_params );
+
+			$final_params_str = implode( '/', $formatted_params_arr );
+			$request_url .= ( $final_params_str ? '/' : '' ).$final_params_str;
 		}
-		
-		$request_url = $this->_host.$end_point_url. ( $get_params_url ? '?' : '' ).$get_params_url;
 		
 		// set URL and other appropriate options
 		curl_setopt( $ch, CURLOPT_URL, $request_url );
@@ -90,6 +101,7 @@ class Application_Model_APIRequest
 		$response = curl_exec( $ch );
 		
 		// close CURL resource, and free up system resources
+		$this->request_url = curl_getinfo( $ch, CURLINFO_EFFECTIVE_URL);// $request_url;
 		curl_close( $ch );
 		
 		if( !trim( $response ) )
@@ -97,32 +109,33 @@ class Application_Model_APIRequest
 			throw new Exception( 'No response received from the web service. Server seems down. Request URL '.$request_url );
 		}
 		
+		$this->response = $response;
 		$response = json_decode( $response, true );
 		
 		$framework_err_messages = array();
 		$service_err_messages = array();
 		$final_response = '';
 		
-		if( !$response["Service"]["Request"]["iValid"] )
+		if( !$response["service"]["request"]["isValid"] )
 		{
-			foreach( $response["Service"]["Request"]["Errors"] as $error )
+			foreach( $response["service"]["request"]["errors"] as $error )
 			{
 				$framework_err_messages[] = $error["message"];
 			}
 			
 			throw new Exception( implode( ' ', $framework_err_messages ) );
 		}
-		else if( isset( $response["Service"]["Response"]["Errors"] ) ) //Request was valid if the code reaches here. Check for service level errors.
+		else if( isset( $response["service"]["response"]["errors"] ) ) //Request was valid if the code reaches here. Check for service level errors.
 		{
-			foreach( $response["Service"]["Response"]["Errors"] as $error )
+			foreach( $response["service"]["response"]["errors"] as $error )
 			{
 				$service_err_messages[] = $error["message"];
 			}
 		}
 		else //Everything is valid and we have received the data back
 		{
-			$final_response = $response["Service"]["Response"];
-		}
+			$final_response = $response["service"]["response"];
+ 		} 
 		
 		return $final_response;
 	}
@@ -134,7 +147,7 @@ class Application_Model_APIRequest
 	 */
 	private function _getEndPointURL()
 	{
-		return implode( "/", $this->_end_point ).'/';
+		return implode( "/", $this->_end_point );
 	}
 }
 
