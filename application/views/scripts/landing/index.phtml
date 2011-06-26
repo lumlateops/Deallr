@@ -1,5 +1,5 @@
 <br /><br />
-<div id="signin-container">
+<!-- <div id="signin-container">
 	<form id="main-page-signin-form">
 		<p>
 			<label for="username"></label>
@@ -13,17 +13,19 @@
 			<input type="button" value="Sign in" />
 		</p>
 	</form>
-</div>
+</div> -->
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
-<script>
-  FB.init({
-    appId  : '<?php echo $this->fb_app_id; ?>',
-    status : true, // check login status
-    cookie : true, // enable cookies to allow the server to access the session
-    xfbml  : true  // parse XFBML
-  });
+<script type="text/javascript">
+	FB.init({
+		appId  : '<?php echo $this->fb_app_id; ?>',
+		status : true, // check login status
+		cookie : true, // enable cookies to allow the server to access the session
+		xfbml  : true  // parse XFBML
+	});
+	FB.getLoginStatus(UserAuth.onLogin);
 </script>
+<?php if( $this->show_signup ) : ?>
 <div id="signup-container">
 	<strong>New to Deallr?</strong> Join today!<br/>
 	<fb:registration 
@@ -36,10 +38,15 @@
 	  	{'name':'location'}
 	  ]" 
 	  redirect-uri="http://dev.deallr.com/signup/index/" 
-	  fb_only="false" 
+	  fb_only="true" 
 	  width="444">
 	</fb:registration>
 </div>
+<?php else: ?>
+	<div id="signup-container">
+		<fb:login-button registration-url="http://dev.deallr.com/landing/index/ss/1" on-login="UserAuth.onLogin"></fb:login-button>
+	</div>
+<?php endif; ?>
 <div id="tag-lines-container">
 	<div class="tag-line-container">
 		<h2>Start loving deals again!</h2>

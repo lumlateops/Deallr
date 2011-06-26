@@ -13,6 +13,7 @@ class LandingController extends Zend_Controller_Action
         // action body
         $config = Zend_Registry::get('config');
         $this->view->fb_app_id = $config->fb->appID;
+		$this->view->show_signup = $this->_hasParam('ss');
     }
 }
 

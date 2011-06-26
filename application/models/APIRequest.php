@@ -80,6 +80,7 @@ class Application_Model_APIRequest
 			$final_params_str = implode('&', $formatted_params_arr);
 			curl_setopt( $ch, CURLOPT_POSTFIELDS, $final_params_str );
 			curl_setopt( $ch, CURLOPT_POST, TRUE );
+			error_log('POST Params = '.$final_params_str);
 		}
 		else
 		{
@@ -89,6 +90,7 @@ class Application_Model_APIRequest
 			}
 
 			$final_params_str = implode( '/', $formatted_params_arr );
+			error_log('GET Params = '.$final_params_str);
 			$request_url .= ( $final_params_str ? '/' : '' ).$final_params_str;
 		}
 		
@@ -102,6 +104,7 @@ class Application_Model_APIRequest
 		
 		// close CURL resource, and free up system resources
 		$this->request_url = curl_getinfo( $ch, CURLINFO_EFFECTIVE_URL);// $request_url;
+		error_log( $this->request_url );
 		curl_close( $ch );
 		
 		if( !trim( $response ) )
@@ -110,6 +113,7 @@ class Application_Model_APIRequest
 		}
 		
 		$this->response = $response;
+		error_log( $this->response );
 		$response = json_decode( $response, true );
 		
 		$framework_err_messages = array();
@@ -125,8 +129,9 @@ class Application_Model_APIRequest
 			
 			throw new Exception( implode( ' ', $framework_err_messages ) );
 		}
-		else if( isset( $response["service"]["response"]["errors"] ) ) //Request was valid if the code reaches here. Check for service level errors.
+		else if( isset( $response["service"]["response"]["errors"] ) ) 
 		{
+			//Request was valid if the code reaches here. Check for service level errors.
 			foreach( $response["service"]["response"]["errors"] as $error )
 			{
 				$service_err_messages[] = $error["message"];

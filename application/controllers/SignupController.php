@@ -18,8 +18,8 @@ class SignupController extends Zend_Controller_Action
         	$data = $parser->parse();
         	
         	//Synchronous Call - Add user
-        	
-        	if( true ) //Check success
+			$response = Application_Model_User::add( $data['registration'] );
+        	if( isset( $response ) && $response['user']['id'] ) //Check success
         	{
         		$this->_redirector->gotoSimple( 'add', 'account', null, array() );
 				exit("Good logged in");
