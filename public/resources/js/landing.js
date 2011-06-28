@@ -1,9 +1,24 @@
 UserAuth = {};
 
-UserAuth.onLogin = function(response) {
-	if( response.status == "connected" ) {
-		alert("Need to sign in the user UID = " + response.session.uid );
-	}
+UserAuth.onLogin = function() {
+	console.log( "coming here" );
+	FB.getLoginStatus(function(response) {
+		if( response.status == "connected" 
+			&& response.session && response.session.uid ) {
+			$.ajax({
+				type: "POST",
+				url: "/signin/",
+				data: "uid="+response.session.uid+"&format=json",
+				dataType: "json",
+				success: function(response) {
+					if(response.url) {
+						window.location.href = response.url;
+						return;
+					}
+				}
+			});
+		}
+	});
 };
 
 $(document).ready(function(){

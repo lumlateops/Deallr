@@ -15,7 +15,7 @@ class Application_Model_FacebookResponseParser
 
 	public function parse()
 	{
-		list( $encoded_sig, $payload ) = explode( '.', $signed_request, 2 );
+		list( $encoded_sig, $payload ) = explode( '.', $this->_response, 2 );
 		
 		// decode the data
 		$signature = $this->_base64_url_decode( $encoded_sig );
@@ -29,11 +29,12 @@ class Application_Model_FacebookResponseParser
 		// check sigature
 		$expected_sig = hash_hmac( 'sha256', $payload, $this->_secret_key, true );
 		
-		if( $signature !== $expected_sig ) {
+		if( $signature !== $expected_sig )
+		{
 			throw new Exception( 'Bad Signed JSON signature!' );
 		}
 		
-		return $data
+		return $data;
 	}
 	
 	private function _base64_url_decode($input)

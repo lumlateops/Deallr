@@ -17,7 +17,8 @@ class AccountController extends Zend_Controller_Action
     {
         // action body
         $api_request = new Application_Model_APIRequest( array('providers', 'active') );
-		$this->view->providers = $api_request->call();
+		$response = $api_request->call();
+		$this->view->providers = $response['Providers'];
     }
 }
 

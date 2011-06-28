@@ -23,7 +23,7 @@
 		cookie : true, // enable cookies to allow the server to access the session
 		xfbml  : true  // parse XFBML
 	});
-	FB.getLoginStatus(UserAuth.onLogin);
+	UserAuth.onLogin();
 </script>
 <?php if( $this->show_signup ) : ?>
 <div id="signup-container">
