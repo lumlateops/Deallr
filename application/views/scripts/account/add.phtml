@@ -1,17 +1,41 @@
+<h2>Authorize an email account</h2>
+<p id="add-email-intro">You are one step away from managing your deals in Deallr. Please add an email account from which Deallr should fetch deals.</p>
+<br/><br/><br/>
+<div><h4>Choose a provider:</h4></div>
 <?php 
-
 echo '<ul id="providers">';
 
+$has_providers = false;
 foreach( $this->providers as $provider )
 {
 	if( isset( $provider['logoUrl'] ) )
 	{
+		$has_providers = true;	
 		echo '<li>';
 		echo '<div class="provider-image"><img src="'.$provider['logoUrl'].'" alt="Provider Image" /></div>';
+		echo '<div class="provider-email-input-container"><input type="text" name="email" placeholder="'.$provider['name'].' email address" /></div>';
+		echo '<div class="clear"></div>';
 		echo '</li>';
 	}
 }
 
 echo '</ul>';
 
+if( !$has_providers )
+{
+	echo '<h3>Error: No active providers found.</h3>';
+}
+else
+{//disabled="true"
+	echo '<div id="add-email-button-container"><input type="button" disabled="true" id="add-email" value="Add Email" /></div>';
+}
+
 ?>
+
+<div id="email-add-disclaimer">
+	<strong>DISCLAIMER:</strong>
+	<p>
+		Deallr would never read any personal info from your emails. Our engine only reads deal and promotion emails from known retailer addresses. 
+		<br/>We take consumer privacy very seriously.
+	</p>
+</div>

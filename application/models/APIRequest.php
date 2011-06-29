@@ -136,10 +136,11 @@ class Application_Model_APIRequest
 			{
 				$service_err_messages[] = $error["message"];
 			}
+			throw new Exception( implode( ' ', $service_err_messages ) );			
 		}
 		else //Everything is valid and we have received the data back
 		{
-			$final_response = $response["service"]["response"];
+			$final_response = isset( $response["service"]["response"] ) ? $response["service"]["response"] : array();
  		} 
 		
 		return $final_response;

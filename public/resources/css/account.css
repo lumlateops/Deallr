@@ -1,0 +1,22 @@
+/**************************Account Add***************************/
+#providers {  }
+#providers li { opacity: 0.5; padding: 20px 15px; }
+#providers li:hover { cursor: pointer; background: #EFEFEF; opacity: 1; }
+#providers li.selected { background: #EFEFEF; opacity: 1; }
+
+#main-content { padding: 30px 40px; width: 800px; }
+#add-email-intro { font-size: 13px; }
+#email-add-disclaimer { margin-top: 40px; font-size: 11px; }
+#add-email-button-container { text-align: center; }
+#add-email-button-container input { width: 200px; }
+
+input[type="button"] { background: #FEFEFE; background: -webkit-linear-gradient(#FEFEFE,#DDD); border: 1px solid #CCC; -webkit-border-radius: 25px; -moz-border-radius: 25px; font-size: 14px; font-weight: bold; padding: 10px; }
+input[type="button"]:hover { background: #FEFEFE; background: -webkit-linear-gradient(#F8F8F8, #DDD); }
+input[type="button"]:active { background: #DDD; }
+
+.provider-email-input-container input[type="text"] { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border: 1px solid #CCC; font-size: 15px; margin-right: 10px; opacity:0.8; padding: 6px; width: 260px; }
+.provider-email-input-container input[type="text"]:hover { box-shadow: 0 0 2px rgba(120,120,120,0.3); -moz-box-shadow: 0 0 2px rgba(120,120,120,0.3); -webkit-box-shadow: 0 0 2px rgba(120,120,120,0.3); opacity: 1; }
+
+.provider-image { float: left; width: 300px; }
+.provider-email-input-container { float: right; margin-top: 10px; }
+.provider-image img { vertical-align: middle; }

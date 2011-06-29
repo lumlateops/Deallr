@@ -10,7 +10,9 @@ class AccountController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body        
+		$redirector = $this->_helper->getHelper('Redirector');
+		$redirector->gotoSimple('add', 'account', null, array());
+        // action body
     }
 
     public function addAction()
@@ -18,7 +20,7 @@ class AccountController extends Zend_Controller_Action
         // action body
         $api_request = new Application_Model_APIRequest( array('providers', 'active') );
 		$response = $api_request->call();
-		$this->view->providers = $response['Providers'];
+		$this->view->providers = $response['providers'];
     }
 }
 
