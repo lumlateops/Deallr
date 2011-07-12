@@ -3,54 +3,197 @@
 class Application_Model_User
 {
 	const PASS_SECRET = 'mvSOo8GveYKoO4YRfz7j';
+	const TIMEOUT_INTERVAL = 300; //in seconds
 	
-	private $_hasAuthorizedEmailAccounts;
-	private $_username;
+	private $_session;
+	
+	public function __construct()
+	{
+		$auth_session = Zend_Registry::get('auth_session');
+		$this->_session = $auth_session;
+	}
+	
+	public static function isAuthenticated()
+	{
+		$auth_session = Zend_Registry::get('auth_session');
+		if( isset($auth_session->auth_user) && isset( $auth_session->auth_user['fbUserId'] ) )
+		{
+			error_log('User is in the session');
+			if( (time() - $auth_session->lastAuthCheck) < self::TIMEOUT_INTERVAL )
+			{
+				return true;
+			}
+		}
+		
+		error_log('Either session does not exist or it has timed out..Going to Facebook to check authentication');
+		$config = Zend_Registry::get('config');
+		
+		//Go to Facebook to authenticate
+		include_once(APPLICATION_PATH.'/../library/Facebook/facebook.php');
+		$facebook = new Facebook(array( 
+			'appId' => $config->fb->appID, 
+			'secret' => $config->fb->appSecretKey, 
+			'cookie' => true 
+		));
+		
+		$uid = $facebook->getUser();
+		error_log('User ID = '.$uid);
+		
+		if(!empty($uid))
+		{
+			//Has active session...try to fetch the user and his profile info
+			try
+			{
+				$user = $facebook->api('/me');
+			}
+			catch(Exception $e)
+			{
+				//Tie tie fish
+			}
+			
+			if(!empty($user))
+			{
+				error_log('User is authenticated and authorized..Sign in user');
+				$user_obj = new Application_Model_User();
+				$user_obj->initWithFbUserId($user['id']);
+				$auth_session->auth_user = array_merge( $auth_session->auth_user, array(
+					'gender' => $user['gender'],
+					'fbFullName' => $user['name'],
+					'fbEmailAddress' => $user['email'],
+					'fbUserId' => $user['id'],
+					'fbLocationName' => isset( $user['location']['name'] ) ? $user['location']['name'] : '',
+					'fbLocationId' => isset( $user['location']['id'] ) ? $user['location']['id'] : '',
+					'fbAccessToken' => $facebook->getAccessToken()
+					
+				) );
+				$auth_session->lastAuthCheck = time();
+				error_log(json_encode( $auth_session->auth_user ));
+				return true;
+			}
+			else
+			{
+				error_log('User has not authorized us');
+				//User hasn't authorized the app
+				return false;
+			}
+		}
+		else
+		{
+			//No active session...user is not logged in to Facebook.
+			//So, we don't know her status. Return false
+			error_log('User is not logged in Facebook');
+			header('Location: '.$facebook->getLoginUrl());
+			die();
+		}
+				
+		return false;
+	}
+	
+	//TODO:Token
+	public static function signupUserFromFB($fb_access_code, $redirect_url)
+	{
+		$config = Zend_Registry::get('config');
+		
+		$app_id = $config->fb->appID;
+		$app_secret = $config->fb->appSecretKey;
+
+		$token_url = "https://graph.facebook.com/oauth/access_token?"
+		. "client_id=" . $app_id . "&redirect_uri=" . urlencode($redirect_url)
+		. "&client_secret=" . $app_secret . "&code=" . $fb_access_code;
+
+		$response = file_get_contents($token_url);
+		$params = null;
+		parse_str($response, $params);
+
+		$graph_url = "https://graph.facebook.com/me?access_token=".$params['access_token'];
+		
+		$user = json_decode( file_get_contents($graph_url), true );
+		$user['auth_token'] = $params['access_token'];
+		
+		/*
+			Try signing in the user...
+				if signin successful, 
+					check access token, 
+					update token if it is not the same.
+					redirect to deals or account add
+				else
+					add user
+					redirect to deals or account add
+		*/
+		try
+		{
+			$user_obj = new Application_Model_User();
+			$user_obj->initWithFbUserId($user['id']);
+		}
+		catch(Exception $e)
+		{
+			$messages = $e->getMessage();
+			$messages = explode(' ', $messages);
+			if( in_array('NO_SUCH_USER', $messages) )
+			{
+				$data = $user;
+				$response = Application_Model_User::add( $data );
+			}
+		}
+		
+		return true;
+	}
 	
 	public static function add($params)
 	{
-		$reg_params = $params['registration'];
-		$password = hash_hmac("sha256", $reg_params['password'], self::PASS_SECRET, true);
+		$auth_session = Zend_Registry::get('auth_session');
 		$service_params = array(
-			'username' => $reg_params['username'],
-			'password' => $password,
-			'gender' => $reg_params['gender'],
-			'fbFullName' => $reg_params['name'],
-			'fbEmailAddress' => $reg_params['email'],
-			'fbUserId' => $params['user_id'],
-			'fbLocationName' => isset( $reg_params['location']['name'] ) ? $reg_params['location']['name'] : '',
-			'fbLocationId' => isset( $reg_params['location']['id'] ) ? $reg_params['location']['id'] : ''
+			'gender' => $params['gender'],
+			'fbFullName' => $params['name'],
+			'fbEmailAddress' => $params['email'],
+			'fbUserId' => $params['id'],
+			'fbLocationName' => isset( $params['location']['name'] ) ? $params['location']['name'] : '',
+			'fbLocationId' => isset( $params['location']['id'] ) ? $params['location']['id'] : '',
+			'fbAuthToken' => $params['auth_token']
 		);
 		$api_request = new Application_Model_APIRequest( array('user', 'add'), $service_params );
 		$api_request->setMethod( Application_Model_APIRequest::METHOD_POST );
-		return $api_request->call();
+		$api_response = $api_request->call();
+		if( isset( $api_response ) && $api_response['user'][0]['id'] )
+		{
+			$auth_session->auth_user = $service_params;
+			$auth_session->auth_user['id'] = $api_response['user'][0]['id'];
+			$auth_session->auth_user['email'] = $api_response['user'][0]['emailAddress'];
+			$auth_session->auth_user['hasSetupEmailAccounts'] = 0;
+			$auth_session->lastAuthCheck = time();
+			return $api_response['user'][0];
+		}
+		
+		return array();
 	}
-	
+
+	//TODO:			//Capture FB Auth Token And email address	
 	public function initWithFbUserId($fbUserId)
 	{
         $api_request = new Application_Model_APIRequest( array('login'), array( 'fbUserId' => $fbUserId ) );
-		$response = $api_request->call();
-		$response = $response['user'][0];
-		if( isset( $response['username'] ) && trim( $response['username'] ) )
+		$api_response = $api_request->call();
+		$api_response = $api_response['user'][0];
+		
+		$auth_session = Zend_Registry::get('auth_session');
+		
+		if( isset( $api_response['id'] ) && trim( $api_response['id'] ) )
 		{
-			$this->_username = $response['username'];
-			$this->_id = $response['id'];
-			$this->_hasAuthorizedEmailAccounts = isset( $response['hasSetupEmailAccounts'] ) ? !!$response['hasSetupEmailAccounts'] : false;
+			$auth_session->auth_user['id'] = $api_response['id'];
+			$auth_session->auth_user['fbUserId'] = $fbUserId;
+			$auth_session->auth_user['hasSetupEmailAccounts'] = isset( $api_response['hasSetupEmailAccounts'] ) ? 1 : 0;
+			$this->_id = $api_response['id'];
+			$auth_session->lastAuthCheck = time();
 		}
 		
 		return $this;
 	}
 	
-	public function hasAuthorizedEmailAccounts()
+	public static function hasAuthorizedEmailAccounts()
 	{
-		return !!$this->_hasAuthorizedEmailAccounts;
+		$auth_session = Zend_Registry::get('auth_session');	
+		return isset( $auth_session->auth_user['hasAuthorizedEmailAccounts'] ) ? $auth_session->auth_user['hasAuthorizedEmailAccounts'] == 1 : 0;
 	}
-	
-	public function username()
-	{
-		return $this->_username;
-	}
-	
+		
 	public function id()
 	{
 		return $this->_id;

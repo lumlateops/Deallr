@@ -1,22 +1,8 @@
 <br /><br />
-<!-- <div id="signin-container">
-	<form id="main-page-signin-form">
-		<p>
-			<label for="username"></label>
-			<input placeholder="Username or email" type="text" autocomplete="off" name="username" />
-		</p>
-		<p>
-			<label for="password"></label>
-			<input placeholder="Password" type="password" autocomplete="off" name="password" />
-		</p>
-		<p>
-			<input type="button" value="Sign in" />
-		</p>
-	</form>
-</div> -->
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript">
+/*
 	FB.init({
 		appId  : '<?php echo $this->fb_app_id; ?>',
 		status : true, // check login status
@@ -24,29 +10,13 @@
 		xfbml  : true  // parse XFBML
 	});
 	UserAuth.onLogin();
+*/
 </script>
-<?php if( $this->show_signup ) : ?>
 <div id="signup-container">
 	<strong>New to Deallr?</strong> Join today!<br/>
-	<fb:registration 
-	  fields="[ 
-	  	{'name':'name'},
-	  	{'name':'email'},
-	  	{'name':'username', type:'text','description':'Username (for @deallr.com email)'},
-	  	{'name':'password'},
-	  	{'name':'gender'},
-	  	{'name':'location'}
-	  ]" 
-	  redirect-uri="http://dev.deallr.com/signup/index/" 
-	  fb_only="true" 
-	  width="444">
-	</fb:registration>
+<!-- 	<fb:login-button size="large" length="long" perms="email,offline_access" onlogin="UserAuth.onLogin">Login with Facebook</fb:login-button> -->
+	<button id="fb-login">Login with Facebook</button>
 </div>
-<?php else: ?>
-	<div id="signup-container">
-		<fb:login-button registration-url="http://dev.deallr.com/landing/index/ss/1" on-login="UserAuth.onLogin"></fb:login-button>
-	</div>
-<?php endif; ?>
 <div id="tag-lines-container">
 	<div class="tag-line-container">
 		<h2>Start loving deals again!</h2>

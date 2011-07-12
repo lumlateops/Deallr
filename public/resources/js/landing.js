@@ -3,8 +3,10 @@ UserAuth = {};
 UserAuth.onLogin = function() {
 	console.log( "coming here" );
 	FB.getLoginStatus(function(response) {
+		console.log( response );
 		if( response.status == "connected" 
 			&& response.session && response.session.uid ) {
+
 			$.ajax({
 				type: "POST",
 				url: "/signin/",
@@ -36,4 +38,8 @@ $(document).ready(function(){
 		setTimeout(roll_tag_lines, 10000);
 	};
 	setTimeout(roll_tag_lines, 10000);
+	
+	$("#fb-login").click(function(){
+		window.location.href = '/signup';
+	});
 });

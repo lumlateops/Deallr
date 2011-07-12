@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_FacebookResponseParser
+class Application_Model_Facebook
 {
 	private $_response;
 	private $_secret_key;
@@ -40,6 +40,14 @@ class Application_Model_FacebookResponseParser
 	private function _base64_url_decode($input)
 	{
 		return base64_decode(strtr($input, '-_', '+/'));
+	}
+	
+	public static function getFacebookSignupUrl($redirect_uri, $csrf_state)
+	{
+		$config = Zend_Registry::get('config');
+		return 	"https://www.facebook.com/dialog/oauth?client_id=" 
+			. $config->fb->appID . "&scope=offline_access,email&redirect_uri=" . urlencode($redirect_uri) . "&state="
+			. $csrf_state;
 	}
 }
 

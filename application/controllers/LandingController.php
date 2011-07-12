@@ -6,14 +6,23 @@ class LandingController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+        $this->_redirector = $this->_helper->getHelper('Redirector');
     }
 
     public function indexAction()
     {
-        // action body
-        $config = Zend_Registry::get('config');
-        $this->view->fb_app_id = $config->fb->appID;
-		$this->view->show_signup = $this->_hasParam('ss');
+        $is_authenticated = Application_Model_User::isAuthenticated();
+        if( $is_authenticated )
+        {
+			if( Application_Model_User::hasAuthorizedEmailAccounts() )
+			{
+				$this->_redirector->gotoSimple( '', 'home', null, array() );
+			}
+			else
+			{
+				$this->_redirector->gotoSimple( 'add', 'account', null, array() );
+			}
+        }
     }
 }
 

@@ -11,20 +11,47 @@ class SignupController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
-        if( $signed_request = $this->_getParam( 'signed_request' ) )
-        {
-        	$parser = new Application_Model_FacebookResponseParser( $signed_request );
-        	$data = $parser->parse();
-        	
-        	//Synchronous Call - Add user
-			$response = Application_Model_User::add( $data );
-        	if( isset( $response ) && $response['user'][0]['id'] ) //Check success
-        	{
-        		$this->_redirector->gotoSimple( 'add', 'account', null, array() );
-				exit("Good logged in");
-        	}
-        }
+		$auth_session = Zend_Registry::get('auth_session');
+/*
+        $router = $this->getFrontController()->getRouter();
+        $redirect_url = $router->assemble(array('controller' => 'signup', 'action' => 'index'), 'default', true);
+*/
+		$redirect_url = 'http://dev.deallr.com/signup/index';
+		
+		$fbcode = $this->_getParam( 'code' );		
+		if(empty($fbcode))
+		{
+			$csrf_state = md5(uniqid(rand(), TRUE)); //CSRF protection
+			$auth_session->state = $csrf_state;
+			$login_url = Application_Model_Facebook::getFacebookSignupUrl($redirect_url, $csrf_state);
+			header('Location: '. $login_url);
+			die();
+		}
+		
+		$fbstate = $this->_getParam( 'state' );
+		if( isset($auth_session->state) )
+		{
+			if( $fbstate == $auth_session->state )
+			{
+				Application_Model_User::signupUserFromFB( $fbcode, $redirect_url );
+		        $is_authenticated = Application_Model_User::isAuthenticated();
+		        if( $is_authenticated )
+		        {
+					if( Application_Model_User::hasAuthorizedEmailAccounts() )
+					{
+						$this->_redirector->gotoSimple( '', 'home', null, array() );
+					}
+					else
+					{
+						$this->_redirector->gotoSimple( 'add', 'account', null, array() );
+					}
+		        }
+			}
+			else
+			{
+				echo("The state does not match. You may be a victim of CSRF.");
+			}
+		}
     }
 }
 
