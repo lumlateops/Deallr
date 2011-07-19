@@ -61,6 +61,7 @@ a.remove-link:hover{color:#000;}
 .column-right{ width: 48%; float: right; }
 #page-intro { color: #CCC; font-size: 13px; padding: 0 0 10px 20px; }
 #footer{border-top:1px solid #ccc;margin:40px 0 0 0;padding: 10px 0;font-size:12px;}
+.user-info{float:right;margin-right: 195px; margin-top: 16px; font-size: 13px; color: #333;}
 /************ Lists ************/
 #main-content ul,
 #main-content ol{padding:10px 0;}

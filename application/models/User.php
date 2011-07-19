@@ -191,7 +191,8 @@ class Application_Model_User
 	public static function hasAuthorizedEmailAccounts()
 	{
 		$auth_session = Zend_Registry::get('auth_session');	
-		return isset( $auth_session->auth_user['hasAuthorizedEmailAccounts'] ) ? $auth_session->auth_user['hasAuthorizedEmailAccounts'] == 1 : 0;
+		error_log("hasSetupEmailAccounts = ". $auth_session->auth_user['hasSetupEmailAccounts']);
+		return isset( $auth_session->auth_user['hasSetupEmailAccounts'] ) ? $auth_session->auth_user['hasSetupEmailAccounts'] == 1 : 0;
 	}
 		
 	public function id()

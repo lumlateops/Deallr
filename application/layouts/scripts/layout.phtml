@@ -105,6 +105,12 @@
   
 	<body>
 		<div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+
+		<?php
+			if($this->user) {
+				echo '<div class="user-info">'.$this->user['fbFullName'].'</div>';
+			}
+		?>
 		
 		<div id="page-header">
 			<h1 style="display:none;">Deallr</h1>
@@ -122,13 +128,6 @@
 				</div>
 			</noscript>
 			
-			<?php
-/*
-				if($this->user) {
-					echo json_encode( $this->user );
-				}
-*/
-			?>
 			<div class="clear"></div> <!-- End .clear -->
 			
 			<?php 

@@ -100,7 +100,7 @@ class Application_Data_Deals
 			$deals = array_reverse($deals);
 			foreach($deals as $deal)
 			{
-				if( $deal_id_count == 100 )
+				if( $deal_id_count == 25 )
 				{
 					break;
 				}

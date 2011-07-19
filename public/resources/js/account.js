@@ -48,12 +48,18 @@ $(document).ready(function(){
 				data: "email="+email+"&provider="+provider+"&format=json",
 				dataType: "json",
 				success: function(response) {
-					if(response.provider_url) {
-						window.location.href = response.url;
-						return;
+					if( response.err ) {
+						providers_form_err_obj.html("This email address has already been added. Please enter a different address.");
+						providers_form_err_obj.fadeIn();
+					} else {					
+						alert(response.provider_url);
+						if(response.provider_url) {
+							window.location.href = response.provider_url;
+							return;
+						}
 					}
 				}
-			});			
+			});
 		}
 	});
 });

@@ -13,6 +13,10 @@ class HomeController extends Zend_Controller_Action
 			$this->_redirector->gotoUrl('/index');
 			exit();
 		}
+/*
+        $auth_session = Zend_Registry::get('auth_session');
+        $this->view->user = $auth_session->auth_user;		
+*/
     }
 
     public function indexAction()
