@@ -54,20 +54,39 @@ class Application_Model_User
 			if(!empty($user))
 			{
 				error_log('User is authenticated and authorized..Sign in user');
-				$user_obj = new Application_Model_User();
-				$user_obj->initWithFbUserId($user['id']);
-				$auth_session->auth_user = array_merge( $auth_session->auth_user, array(
-					'gender' => $user['gender'],
-					'fbFullName' => $user['name'],
-					'fbEmailAddress' => $user['email'],
-					'fbUserId' => $user['id'],
-					'fbLocationName' => isset( $user['location']['name'] ) ? $user['location']['name'] : '',
-					'fbLocationId' => isset( $user['location']['id'] ) ? $user['location']['id'] : '',
-					'fbAccessToken' => $facebook->getAccessToken()
-					
-				) );
-				$auth_session->lastAuthCheck = time();
-				error_log(json_encode( $auth_session->auth_user ));
+				error_log( $facebook->getAccessToken() );
+
+				try
+				{
+					$user_obj = new Application_Model_User();
+					$user_obj->initWithFbUserId($user['id']);
+					$auth_session->auth_user = array_merge( $auth_session->auth_user, array(
+						'gender' => $user['gender'],
+						'fbFullName' => $user['name'],
+						'fbEmailAddress' => $user['email'],
+						'fbUserId' => $user['id'],
+						'fbLocationName' => isset( $user['location']['name'] ) ? $user['location']['name'] : '',
+						'fbLocationId' => isset( $user['location']['id'] ) ? $user['location']['id'] : '',
+						'fbAccessToken' => $facebook->getAccessToken()
+						
+					) );
+					$auth_session->lastAuthCheck = time();
+					error_log(json_encode( $auth_session->auth_user ));
+				}
+				catch(Exception $e)
+				{
+					error_log("Wow guys, you removed accounts directly from the database.");
+					$messages = $e->getMessage();
+					$messages = explode(' ', $messages);
+					if( in_array('NO_SUCH_USER', $messages) )
+					{
+						$redirect_url = 'http://'.$_SERVER['HTTP_HOST'];
+						$fb_access_code = $_REQUEST['code'];
+						
+						error_log( $redirect_url.' '.$fb_access_code );
+						self::signupUserFromFB($fb_access_code, $redirect_url);
+					}
+				}
 				return true;
 			}
 			else

@@ -107,7 +107,7 @@
 		<div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
 
 		<?php
-			if($this->user) {
+			if($this->user && isset($this->user['fbFullName']) ) {
 				echo '<div class="user-info">'.$this->user['fbFullName'].'</div>';
 			}
 		?>
