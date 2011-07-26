@@ -11,6 +11,7 @@ class LandingController extends Zend_Controller_Action
 
     public function indexAction()
     {
+		$this->_helper->layout->setLayout('landing');
         $is_authenticated = Application_Model_User::isAuthenticated();
         if( $is_authenticated )
         {

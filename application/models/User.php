@@ -82,8 +82,9 @@ class Application_Model_User
 			//No active session...user is not logged in to Facebook.
 			//So, we don't know her status. Return false
 			error_log('User is not logged in Facebook');
-			header('Location: '.$facebook->getLoginUrl());
-			die();
+			//Turn off auto-login to Facebook
+			//header('Location: '.$facebook->getLoginUrl());
+			//die();
 		}
 				
 		return false;

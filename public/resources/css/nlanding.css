@@ -1,0 +1,20 @@
+body { font-size:10px; color:#333; font-family:'Helvetica Neue','Helvetica',Arial,sans-serif; }
+#logo { width:200px; margin:-42px 0 0; height:164px; }
+#main-tag-line { color: #212121; font-size: 46px; text-align: center; }
+#top-features-container { font-size: 18px; margin-top: 250px; }
+.top-feature-container { background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0.87, rgb(255,255,255)),
+    color-stop(1, rgb(250,250,250))
+);
+background-image: -moz-linear-gradient(
+    left center,
+    rgb(255,255,255) 87%,
+    rgb(250,250,250) 100%
+);
+line-height: 20px; padding: 20px 0; }
+.top-feature-container:last-child { background-image:none; }
+.top-feature-container h3 { color:#1C1C1C; font-weight:bold; text-align:center; text-transform:uppercase; }
+.top-feature-container p { color:#333; font-size:14px; margin-top:10px; }
