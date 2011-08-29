@@ -4,7 +4,6 @@
 #providers li:hover { cursor: pointer; background: #EFEFEF; opacity: 1; }
 #providers li.selected { background: #EFEFEF; opacity: 1; }
 
-#main-content { padding: 30px 40px; width: 800px; }
 #add-email-intro { font-size: 13px; }
 #email-add-disclaimer { margin-top: 40px; font-size: 11px; }
 #add-email-button-container { text-align: center; }
@@ -17,10 +16,10 @@ input[type="button"],
 input[disabled]:active,
 input[disabled]:hover { background: #FEFEFE; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE),to(#DDD)); background: -webkit-linear-gradient(#FEFEFE,#DDD); border: 1px solid #CCC; color: #333; -webkit-border-radius: 25px; -moz-border-radius: 25px; font-size: 14px; font-weight: bold; padding: 10px; }
 
-.provider-email-input-container input[type="text"] { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border: 1px solid #CCC; font-size: 15px; margin-right: 10px; opacity:0.8; padding: 6px; width: 260px; }
+.provider-email-input-container input[type="text"] { background: #FFF; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border: 1px solid #CCC; font-size: 15px; margin-right: 10px; opacity:0.8; padding: 6px; width: 260px; }
 .provider-email-input-container input[type="text"]:hover { box-shadow: 0 0 2px rgba(120,120,120,0.3); -moz-box-shadow: 0 0 2px rgba(120,120,120,0.3); -webkit-box-shadow: 0 0 2px rgba(120,120,120,0.3); opacity: 1; }
 
-.provider-image { float: left; width: 300px; }
+.provider-image { float: left; margin-left: 20px; width: 300px; }
 .provider-email-input-container { float: right; margin-top: 10px; }
 .provider-image img { vertical-align: middle; }
 

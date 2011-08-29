@@ -1,17 +1,6 @@
-
-a              { color: #FE9424; }
-                
-.button {
-                background: #950000 url('../images/bg-button-orange.gif') top left repeat-x !important;
-                border-color: #940000 !important;
-
-                }
-
 #sidebar #main-filter li a.filter-group {
                 background: transparent url('../images/bg-menu-item-orange.gif') right center no-repeat;
                 }
-
-a:hover { color: #FE9424; text-decoration: underline; }
                 
 .pagination a.current {
                 background: #950000 url('../images/bg-button-orange.gif') top left repeat-x !important;

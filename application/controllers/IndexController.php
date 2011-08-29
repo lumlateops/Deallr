@@ -1,6 +1,8 @@
 <?php
 
-class IndexController extends Zend_Controller_Action
+require_once APPLICATION_PATH . '/controllers/DeallrBaseController.php';
+
+class IndexController extends DeallrBaseController
 {
 	static $users = array(
 		'vipul' => '24824d7dbfa63ebcbed9fbb17d49c988dd2714a8',

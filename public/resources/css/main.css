@@ -4,7 +4,7 @@ url('qlassik_tb-webfont.woff') format('woff'),
 url('qlassik_tb-webfont.ttf') format('truetype'),
 url('qlassik_tb-webfont.svg#webfontuwnssiuM') format('svg');font-weight:normal;font-style:normal;}
 body{margin:0px;padding:0px;overflow-x:hidden !important;background-color:#f9f9f9;}
-img{border:none;-webkit-box-shadow:0 0 5px rgba(150,150,150,.6);-moz-box-shadow:0 0 5px rgba(0,0,0,0.6);box-shadow:0 0 5px rgba(150,150,150,.6);}
+img{border:none;/* -webkit-box-shadow:0 0 5px rgba(150,150,150,.6);-moz-box-shadow:0 0 5px rgba(0,0,0,0.6);box-shadow:0 0 5px rgba(150,150,150,.6); */}
 img.left{border:none;-webkit-box-shadow:0 0 5px rgba(0,0,0,.6);-moz-box-shadow:0 0 5px rgba(0,0,0,0.6);box-shadow:0 0 5px rgba(0,0,0,.6);float:left;margin-right:20px;}
 img.right{border:none;-webkit-box-shadow:0 0 5px rgba(0,0,0,.6);-moz-box-shadow:0 0 5px rgba(0,0,0,0.6);box-shadow:0 0 5px rgba(0,0,0,.6);float:right;margin-left:20px;}
 p{font-family:Georgia,"Times New Roman",Times,serif;font-size:13px;color:#838397;line-height:18px;font-weight:normal;}

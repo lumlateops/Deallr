@@ -1,21 +1,13 @@
 <?php
 
-class SignupController extends Zend_Controller_Action
-{
+require_once APPLICATION_PATH . '/controllers/DeallrBaseController.php';
 
-    public function init()
-    {
-        /* Initialize action controller here */
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-    }
+class SignupController extends DeallrBaseController
+{
 
     public function indexAction()
     {
 		$auth_session = Zend_Registry::get('auth_session');
-/*
-        $router = $this->getFrontController()->getRouter();
-        $redirect_url = $router->assemble(array('controller' => 'signup', 'action' => 'index'), 'default', true);
-*/
 		$redirect_url = 'http://dev.deallr.com/signup/index';
 		
 		$fbcode = $this->_getParam( 'code' );		
@@ -39,7 +31,7 @@ class SignupController extends Zend_Controller_Action
 		        {
 					if( Application_Model_User::hasAuthorizedEmailAccounts() )
 					{
-						$this->_redirector->gotoSimple( '', 'home', null, array() );
+						$this->_redirector->gotoSimple( '', 'deals', null, array() );
 					}
 					else
 					{

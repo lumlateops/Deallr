@@ -1,12 +1,52 @@
-<div id="footer">
-	<ul id="footer-links">
-		<li><a>About</a></li>
-		<li><a href="http://blog.deallr.com/" target="_blank">Blog</a></li>
-		<li><a>Help</a></li>
-		<li><a>Media</a></li>
-		<li><a>Jobs</a></li>
-		<li><a>Privacy</a></li>
-		<li><a>Terms &amp; Conditions</a></li>
-	</ul>
-	&#169; Copyright <?= date('Y') ?> Deallr
-</div><!-- End #footer -->
+    <div id="footer">
+		<noscript> <!-- Show a notification if the user has disabled javascript -->
+			<div class="notification error png_bg">
+				<div>
+					Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+				</div>
+			</div>
+		</noscript>      
+    	<div id="footer_inner">
+			<div class="footer_one_third"><!-- Start of one_third -->
+				<h4>About Deallr</h4>
+				<p>Deallr is a personalized deal management app. <br/>It fetches all your deals and presents them in a single concise view. Deallr also gives each user an email address dedicated for deals allowing you to free your inbox from deals.</p>
+				<p>It enables you to get deals when you want them rather than the reverse.</p>
+				<p><a href="#">Continue reading...</a></p>
+	        </div><!-- End of one_third -->
+
+			<div class="footer_one_third"><!-- Start of one_third -->
+				<ul>
+					<li><a href="http://blog.deallr.com/" target="_blank">Blog</a></li>
+					<li><a>Help</a></li>
+					<li><a>Media</a></li>
+					<li><a>Jobs</a></li>
+					<li><a>Privacy</a></li>
+					<li><a>Terms &amp; Conditions</a></li>
+				</ul>
+	        </div><!-- End of one_third -->
+
+			<div class="footer_one_third_last"><!-- Start of one_third_last -->
+				<h4>Get news and updates from Deallr</h4>
+				<!-- start of newsletter signup wrapper -->
+				<div class="contact_wrapper">
+					<form action="#" method="post">
+						<input name="search" id="search" type="text" class="default-value input-textarea" value="Your email address"  onblur="if (this.value=='') {this.value='Your email address'; }" onfocus="if (this.value=='Your email address') {this.value=''; }" />
+						<input style="margin: 10px 0 25px;" name="Submit" id="submit" type="submit" value="Sign me up for the newsletter" class="button highlight" />
+					</form>
+				</div><!-- end of newsletter signup wrapper -->
+			
+				<div class="clear"></div>
+			
+				<h4>Follow Us</h4>
+				<ul class="social">
+					<li><a href="#" class='fade' title="twitter"><img src="/resources/images/twitter.png" width="35" height="35" alt="twitter" /></a></li>
+					<li><a href="#" class='fade' title="linkedin"><img src="/resources/images/linkedin.png" width="35" height="35" alt="linkedin" /></a></li>
+					<li><a href="#" class='fade' title="stumbleupon"><img src="/resources/images/stumbleupon.png" width="35" height="35" alt="stumbleupon" /></a></li>
+					<li><a href="#" class='fade' title="facebook"><img src="/resources/images/facebook.png" width="35" height="35" alt="facebook" /></a></li>
+				</ul>
+			</div><!-- End of one_third_last -->   
+			<div class="clear">&nbsp;&nbsp;&nbsp;</div>
+		</div><!-- End of footer_inner -->
+	</div><!-- End of footer -->
+</body>
+</html>	

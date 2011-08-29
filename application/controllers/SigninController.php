@@ -1,10 +1,13 @@
 <?php
 
-class SigninController extends Zend_Controller_Action
+require_once APPLICATION_PATH . '/controllers/DeallrBaseController.php';
+
+class SigninController extends DeallrBaseController
 {
 
     public function init()
     {
+    	parent::init();
         /* Initialize action controller here */
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
         $ajaxContext->addActionContext('index', 'json');
@@ -20,7 +23,7 @@ class SigninController extends Zend_Controller_Action
         	{
         		$user_obj = new Application_Model_User();
         		$user_obj->initWithFbUserId($id);
-				$this->view->url = $user_obj->hasAuthorizedEmailAccounts() ? '/home' : '/account/add';
+				$this->view->url = $user_obj->hasAuthorizedEmailAccounts() ? '/deals' : '/account/add';
 			}
 			catch( Exception $e )
 			{

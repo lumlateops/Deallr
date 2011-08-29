@@ -1,29 +1,25 @@
 <?php
 
-class LandingController extends Zend_Controller_Action
+require_once APPLICATION_PATH . '/controllers/DeallrBaseController.php';
+
+class LandingController extends DeallrBaseController
 {
-
-    public function init()
-    {
-        /* Initialize action controller here */
-        $this->_redirector = $this->_helper->getHelper('Redirector');
-    }
-
     public function indexAction()
     {
 		$this->_helper->layout->setLayout('landing');
-        $is_authenticated = Application_Model_User::isAuthenticated();
-        if( $is_authenticated )
-        {
+		if( $this->is_authenticated )
+		{
 			if( Application_Model_User::hasAuthorizedEmailAccounts() )
 			{
-				$this->_redirector->gotoSimple( '', 'home', null, array() );
+				$this->_redirector->gotoSimple( '', 'deals', null, array() );
 			}
 			else
 			{
 				$this->_redirector->gotoSimple( 'add', 'account', null, array() );
 			}
-        }
+		}
     }
 }
+
+?>
 

@@ -1,0 +1,23 @@
+<?php 
+	if( $this->user )
+	{
+		//echo '<h3>'.json_encode($this->user).'</h3>';
+	}
+	
+	if(isset($this->controller) && in_array($this->controller, array('deals', 'account'))): ?>
+			<ul class="sf-menu">
+				<li><a class="<?= $this->controller == "deals" ? "active" : "" ?>">Deals</a></li>
+				<li><a class="<?= $this->controller == "account" ? "active" : "" ?>">Account</a></li>
+				<li><a><?= $this->user['fbFullName'] ?></a>
+					<ul>
+					<li><a>Settings</a></li>
+					</ul>
+				</li>
+	  		</ul><!-- this is the end of the unordered list -->
+<?php else: ?>
+			<ul class="sf-menu">
+				<li><a class="active" href="/landing">Home</a></li>
+				<li><a href="http://blog.deallr.com/" target="_blank">Blog</a></li>
+				<li><a href="#">Contact</a></li>
+	  		</ul><!-- this is the end of the unordered list -->
+<?php endif; ?>

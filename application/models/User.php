@@ -3,7 +3,7 @@
 class Application_Model_User
 {
 	const PASS_SECRET = 'mvSOo8GveYKoO4YRfz7j';
-	const TIMEOUT_INTERVAL = 300; //in seconds
+	const TIMEOUT_INTERVAL = 600; //in seconds
 	
 	private $_session;
 	
@@ -13,17 +13,79 @@ class Application_Model_User
 		$this->_session = $auth_session;
 	}
 	
+	private static function _fillSessionInfoFromFacebook()
+	{
+		$config = Zend_Registry::get('config');
+		
+		//Go to Facebook to authenticate
+		include_once(APPLICATION_PATH.'/../library/Facebook/facebook.php');
+		$facebook = new Facebook(array( 
+			'appId' => $config->fb->appID, 
+			'secret' => $config->fb->appSecretKey
+		));
+		
+		$uid = $facebook->getUser();
+		error_log('FillSessionInfo - User ID = '.$uid);
+		
+		if($uid)
+		{
+			//Has active session...try to fetch the user and his profile info
+			try
+			{
+				$user = $facebook->api('/me');
+			}
+			catch(Exception $e)
+			{
+				//Tie tie fish
+			}
+			
+			if(!empty($user))
+			{
+				error_log('FillSessionInfo - User is authenticated and authorized..Sign in user');
+				error_log( $facebook->getAccessToken() );
+				$auth_session->auth_user = array_merge( $auth_session->auth_user, array(
+					'gender' => $user['gender'],
+					'fbFullName' => $user['name'],
+					'fbEmailAddress' => $user['email'],
+					'fbUserId' => $user['id'],
+					'fbLocationName' => isset( $user['location']['name'] ) ? $user['location']['name'] : '',
+					'fbLocationId' => isset( $user['location']['id'] ) ? $user['location']['id'] : '',
+					'fbAccessToken' => $facebook->getAccessToken()
+				) );
+				error_log(json_encode( $auth_session->auth_user ));
+			}
+			else
+			{
+				error_log('FillSessionInfo - User has not authorized us');
+				//User hasn't authorized the app
+				return false;
+			}
+		}
+		else
+		{
+			error_log('FillSessionInfo - User is not logged in Facebook');
+		}
+
+		return false;	
+	}
+	
 	public static function isAuthenticated()
 	{
 		$auth_session = Zend_Registry::get('auth_session');
 		if( isset($auth_session->auth_user) && isset( $auth_session->auth_user['fbUserId'] ) )
 		{
-			error_log('User is in the session');
 			if( (time() - $auth_session->lastAuthCheck) < self::TIMEOUT_INTERVAL )
 			{
+				error_log('User is in the session');
 				return true;
 			}
+			else
+			{
+				error_log('Session exists but it timed out. Current Time = '.time().' LastAuthCheck = '.$auth_session->lastAuthCheck.' Difference = '.(time() - $auth_session->lastAuthCheck));
+			}
 		}
+		
+		$auth_session->auth_user = array();
 		
 		error_log('Either session does not exist or it has timed out..Going to Facebook to check authentication');
 		$config = Zend_Registry::get('config');
@@ -32,14 +94,13 @@ class Application_Model_User
 		include_once(APPLICATION_PATH.'/../library/Facebook/facebook.php');
 		$facebook = new Facebook(array( 
 			'appId' => $config->fb->appID, 
-			'secret' => $config->fb->appSecretKey, 
-			'cookie' => true 
+			'secret' => $config->fb->appSecretKey
 		));
 		
 		$uid = $facebook->getUser();
 		error_log('User ID = '.$uid);
 		
-		if(!empty($uid))
+		if($uid)
 		{
 			//Has active session...try to fetch the user and his profile info
 			try
@@ -68,7 +129,6 @@ class Application_Model_User
 						'fbLocationName' => isset( $user['location']['name'] ) ? $user['location']['name'] : '',
 						'fbLocationId' => isset( $user['location']['id'] ) ? $user['location']['id'] : '',
 						'fbAccessToken' => $facebook->getAccessToken()
-						
 					) );
 					$auth_session->lastAuthCheck = time();
 					error_log(json_encode( $auth_session->auth_user ));
@@ -144,6 +204,7 @@ class Application_Model_User
 		{
 			$user_obj = new Application_Model_User();
 			$user_obj->initWithFbUserId($user['id']);
+			//self::_fillSessionInfoFromFacebook($user['fbAuthToken']);
 		}
 		catch(Exception $e)
 		{
@@ -201,6 +262,7 @@ class Application_Model_User
 			$auth_session->auth_user['id'] = $api_response['id'];
 			$auth_session->auth_user['fbUserId'] = $fbUserId;
 			$auth_session->auth_user['hasSetupEmailAccounts'] = isset( $api_response['hasSetupEmailAccounts'] ) ? 1 : 0;
+			$auth_session->auth_user['fbFullName'] = $api_response['name'];
 			$this->_id = $api_response['id'];
 			$auth_session->lastAuthCheck = time();
 		}

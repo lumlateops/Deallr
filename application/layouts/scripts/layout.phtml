@@ -1,147 +1,25 @@
-<?php 
-	$request = Zend_Controller_Front::getInstance()->getRequest(); 
-	$this->controller = $request->getControllerName(); 
+<?php	
+	$css = array(
+		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/style.css" type="text/css" media="screen" />',
+		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/invalid.css" type="text/css" media="screen" />',
+		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/orange.css" type="text/css" media="screen" />',
+		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" />',
+		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/'.$this->controller.'.css" type="text/css" media="screen" />'
+	);
+	
+	$js = array(
+		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/simpla.jquery.configuration.js"></script>',
+		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/facebox.js"></script>',
+		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/'.$this->controller.'.js"></script>'
+	);
+	
+	echo $this->partial('_header.phtml', array('css' => $css, 'js' => $js));
+	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'user' => $this->user));
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
- 
-	<head>
-		
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		
-		<title>Deallr - Start Loving Deals Again</title>
-		
-		<!--                       CSS                       -->
-	  
-		<!-- Reset Stylesheet -->
-		<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/reset.css" type="text/css" media="screen" />
-	  
-		<!-- Main Stylesheet -->
-		<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/style.css" type="text/css" media="screen" />
-		
-		<!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
-		<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/invalid.css" type="text/css" media="screen" />	
-		
-		<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/orange.css" type="text/css" media="screen" />  
-
-		<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" />  
-
-		<!-- Colour Schemes
-	  
-		Default colour scheme is green. Uncomment prefered stylesheet to use it.
-		
-		<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/blue.css" type="text/css" media="screen" />
-		
-	 
-		-->
-		
-		<!-- Internet Explorer Fixes Stylesheet -->
-		
-		<!--[if lte IE 7]>
-			<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/ie.css" type="text/css" media="screen" />
-		<![endif]-->
-		
-		<!-- Page Specific Styles -->
-		<?php
-		
-/*
-			if( file_exists( $this->baseUrl().'/resources/css/'.$this->controller.'.css' ) )
-			{
-*/
-				echo '<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/'.$this->controller.'.css" type="text/css" media="screen" />';
-/* 			} */
+	<div class="wrapper"> <!-- Wrapper for the radial gradient background -->
+		<?php 
+			echo $this->layout()->content;					
 		?>
-
-		<!--                       Javascripts                       -->
-  
-		<!-- jQuery -->
-		<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/jquery-1.6.1.min.js"></script>
-		
-		<!-- jQuery UI -->
-		<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/jquery-ui-1.8.13.custom.min.js"></script>
-		
-		<!-- jQuery Configuration -->
-		<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/simpla.jquery.configuration.js"></script>
-		
-		<!-- Facebox jQuery Plugin -->
-		<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/facebox.js"></script>
-		
-		<!-- jQuery WYSIWYG Plugin -->
-		<!-- <script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/jquery.wysiwyg.js"></script> -->
-
-		<!-- Site JS -->
-		<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/utils/DeallrUtils.js"></script>		
-		<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/Deals.js"></script>
-		
-		<?php
-		
-/*
-			if( file_exists( $this->baseUrl().'/resources/css/'.$this->controller.'.css' ) )
-			{
-*/
-				echo '<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/'.$this->controller.'.js"></script>';
-/* 			} */
-		?>
-
-		<script type="text/javascript">
-			Application = {};
-			Application.__user_deals = {};
-		</script>
-		
-		
-		<!-- Internet Explorer .png-fix -->
-		
-		<!--[if IE 6]>
-			<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/DD_belatedPNG_0.0.7a.js"></script>
-			<script type="text/javascript">
-				DD_belatedPNG.fix('.png_bg, img, li');
-			</script>
-		<![endif]-->
-		
-	</head>
-  
-	<body>
-		<div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
-
-		<?php
-			if($this->user && isset($this->user['fbFullName']) ) {
-				echo '<div class="user-info">'.$this->user['fbFullName'].'</div>';
-			}
-		?>
-		
-		<div id="page-header">
-			<h1 style="display:none;">Deallr</h1>
-			<a href="#"><img id="logo" src="<?= $this->baseUrl(); ?>/resources/images/logo.png" alt="Deallr logo" /></a>
-			<!-- <p id="page-intro">Start Loving Deals Again!</p> -->
-		</div>
-	
-		<div id="main-content"> <!-- Main Content Section with everything -->
-			
-			<noscript> <!-- Show a notification if the user has disabled javascript -->
-				<div class="notification error png_bg">
-					<div>
-						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
-					</div>
-				</div>
-			</noscript>
-			
-			<div class="clear"></div> <!-- End .clear -->
-			
-			<?php 
-				echo $this->layout()->content;					
-			?>
-			
-			
-			<div class="clear"></div>
-			
-			<?php echo $this->partial('_footer.phtml'); ?>			
-		</div> <!-- End #main-content -->
-		
+		<div class="clear"></div>
 	</div>
-	
-	</body>
-  
-</html>
+<?php echo $this->partial('_footer.phtml'); ?>

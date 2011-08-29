@@ -1,17 +1,17 @@
 <?php
 
-class AccountController extends Zend_Controller_Action
+require_once APPLICATION_PATH . '/controllers/DeallrBaseController.php';
+
+class AccountController extends DeallrBaseController
 {
 
     public function init()
     {
+    	parent::init();
         /* Initialize action controller here */
-        $this->_redirector = $this->_helper->getHelper('Redirector');
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
         $ajaxContext->addActionContext('add', 'json');
         $ajaxContext->initContext();
-        $auth_session = Zend_Registry::get('auth_session');
-        $this->view->user = $auth_session->auth_user;        
     }
 
     public function indexAction()
@@ -40,13 +40,7 @@ class AccountController extends Zend_Controller_Action
     		}
     	}
     	else
-    	{
-	        $is_authenticated = Application_Model_User::isAuthenticated();
-	        if( !$is_authenticated )
-	        {
-	        	$this->_redirector->gotoSimple( '', 'landing', null, array() );
-	        }
-	    	
+    	{	    	
 	        // action body
 	        $api_request = new Application_Model_APIRequest( array('providers', 'active') );
 			$response = $api_request->call();
