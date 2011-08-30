@@ -7,8 +7,8 @@
 	<!-- Reset Stylesheet -->
 	<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/reset.css" type="text/css" media="screen" />
 	<!-- Stylesheet Files -->
-	<link href="/resources/css/main.css" rel="stylesheet" type="text/css" />
-	<link href="/resources/css/superfish.css" rel="stylesheet" type="text/css" />
+	<link href="<?= $this->baseUrl(); ?>/resources/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="<?= $this->baseUrl(); ?>/resources/css/superfish.css" rel="stylesheet" type="text/css" />
 	
 	<?php 
 		if( isset($this->css) && is_array($this->css) )
@@ -22,8 +22,11 @@
 	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/jquery-1.6.1.min.js"></script>
 	<!-- jQuery UI -->
 	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/jquery-ui-1.8.13.custom.min.js"></script>
-	<script type="text/javascript" src="/resources/js/scrolltopcontrol.js"></script>
-	<script type="text/javascript" src="/resources/js/jquery.easing.1.3.js" charset="utf-8"></script>
+	<!-- jQuery Plugins -->
+	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/supersubs.js"></script>
+	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/superfish.js"></script>
+	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/scrolltopcontrol.js"></script>
+	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/jquery.easing.1.3.js" charset="utf-8"></script>
 	<!-- Internet Explorer .png-fix -->
 	<!--[if IE 6]>
 		<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/library/DD_belatedPNG_0.0.7a.js"></script>
@@ -33,7 +36,7 @@
 	<![endif]-->	
 	<!-- Site JS -->
 	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/landing.js"></script>
-	<script type="text/javascript" src="/resources/js/custom.js"></script>
+	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/custom.js"></script>
 	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/utils/DeallrUtils.js"></script>		
 	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/Deals.js"></script>
 	<?php 
@@ -42,6 +45,18 @@
 			echo implode("\n", $this->js);
 		}
 	?>
+	<script type="text/javascript"> 
+	    $(document).ready(function(){ 
+	        $("ul.sf-menu").supersubs({ 
+	            minWidth:    12,   // minimum width of sub-menus in em units 
+	            maxWidth:    45,   // maximum width of sub-menus in em units 
+	            extraWidth:  1     // extra width can ensure lines don't sometimes turn over 
+	                               // due to slight rounding differences and font-family 
+	        }).superfish();  // call supersubs first, then superfish, so that subs are 
+	                         // not display:none when measuring. Call before initialising 
+	                         // containing tabs for same reason. 
+	    }); 
+	</script>	
 	<script type="text/javascript">
 		Application = {};
 		Application.__user_deals = {};

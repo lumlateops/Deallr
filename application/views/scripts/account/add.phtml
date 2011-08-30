@@ -1,23 +1,26 @@
 <h2>Authorize an email account</h2>
 <p id="add-email-intro">You are one step away from managing your deals in Deallr. Please add an email account from which Deallr should fetch deals.</p>
-<br/>
-<div><h3>Choose a provider:</h3></div>
+<br/><br/><br/>
+<h3>Choose a provider:</h3>
 
 <div id="providers-form-errors" class="error" style="display:none;"></div>
 <ul id="providers">
 <?php
 
 $has_providers = false;
+$count = 1;
 foreach( $this->providers as $provider )
 {
 	if( isset( $provider['logoUrl'] ) )
 	{
 		$has_providers = true;	
-		echo '<li name="'.strtolower($provider['name']).'">';
+		echo '<li '.($count == 1 ? 'class="selected"' : '').' name="'.strtolower($provider['name']).'">';
 		echo '<div class="provider-image"><img src="'.$provider['logoUrl'].'" alt="Provider Image" /></div>';
-		echo '<div class="provider-email-input-container"><input type="text" name="email" placeholder="'.$provider['name'].' email address" /></div>';
+		echo '<div class="provider-email-input-container"><input type="text" name="email" '.($count == 1 ? 'autofocus="true"' : '').' autocomplete="off" placeholder="'.$provider['name'].' email address" /></div>';
 		echo '<div class="clear"></div>';
 		echo '</li>';
+		
+		$count++;
 	}
 }
 
@@ -29,15 +32,18 @@ if( !$has_providers )
 }
 else
 {//disabled="true"
-	echo '<div id="add-email-button-container"><input type="button" disabled="true" id="add-email" value="Add Email" /></div>';
+	echo '<div id="add-email-button-container">
+			<div class="buttonbackground">
+				<a class="button white bigrounded" href="#" id="add-email">Add Email</a>
+			</div>
+		 </div>';
 }
 
 ?>
 
-<div id="email-add-disclaimer">
-	<strong>DISCLAIMER:</strong>
-	<p>
-		Deallr would never read any personal info from your emails. Our engine only reads deal and promotion emails from known retailer addresses. 
-		<br/>We take consumer privacy very seriously.
-	</p>
-</div>
+<p id="email-add-disclaimer">
+	DISCLAIMER:
+	<br/>
+	Deallr would never read any personal info from your emails. Our engine only reads deal and promotion emails from known retailer addresses. 
+	<br/>We take consumer privacy very seriously.
+</p>

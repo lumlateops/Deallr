@@ -3,7 +3,7 @@
 class Application_Model_User
 {
 	const PASS_SECRET = 'mvSOo8GveYKoO4YRfz7j';
-	const TIMEOUT_INTERVAL = 600; //in seconds
+	const TIMEOUT_INTERVAL = 1800; //in seconds - 30 mins
 	
 	private $_session;
 	
@@ -12,61 +12,17 @@ class Application_Model_User
 		$auth_session = Zend_Registry::get('auth_session');
 		$this->_session = $auth_session;
 	}
-	
-	private static function _fillSessionInfoFromFacebook()
-	{
-		$config = Zend_Registry::get('config');
-		
-		//Go to Facebook to authenticate
-		include_once(APPLICATION_PATH.'/../library/Facebook/facebook.php');
-		$facebook = new Facebook(array( 
-			'appId' => $config->fb->appID, 
-			'secret' => $config->fb->appSecretKey
-		));
-		
-		$uid = $facebook->getUser();
-		error_log('FillSessionInfo - User ID = '.$uid);
-		
-		if($uid)
-		{
-			//Has active session...try to fetch the user and his profile info
-			try
-			{
-				$user = $facebook->api('/me');
-			}
-			catch(Exception $e)
-			{
-				//Tie tie fish
-			}
-			
-			if(!empty($user))
-			{
-				error_log('FillSessionInfo - User is authenticated and authorized..Sign in user');
-				error_log( $facebook->getAccessToken() );
-				$auth_session->auth_user = array_merge( $auth_session->auth_user, array(
-					'gender' => $user['gender'],
-					'fbFullName' => $user['name'],
-					'fbEmailAddress' => $user['email'],
-					'fbUserId' => $user['id'],
-					'fbLocationName' => isset( $user['location']['name'] ) ? $user['location']['name'] : '',
-					'fbLocationId' => isset( $user['location']['id'] ) ? $user['location']['id'] : '',
-					'fbAccessToken' => $facebook->getAccessToken()
-				) );
-				error_log(json_encode( $auth_session->auth_user ));
-			}
-			else
-			{
-				error_log('FillSessionInfo - User has not authorized us');
-				//User hasn't authorized the app
-				return false;
-			}
-		}
-		else
-		{
-			error_log('FillSessionInfo - User is not logged in Facebook');
-		}
 
-		return false;	
+	public static function logOut()
+	{
+		$auth_session = Zend_Registry::get('auth_session');
+		
+		if( isset($auth_session->auth_user) )
+		{
+			unset($auth_session->auth_user);
+		}
+		
+		return true;
 	}
 	
 	public static function isAuthenticated()
@@ -189,6 +145,7 @@ class Application_Model_User
 		
 		$user = json_decode( file_get_contents($graph_url), true );
 		$user['auth_token'] = $params['access_token'];
+		error_log( json_encode($user) );
 		
 		/*
 			Try signing in the user...
@@ -204,7 +161,6 @@ class Application_Model_User
 		{
 			$user_obj = new Application_Model_User();
 			$user_obj->initWithFbUserId($user['id']);
-			//self::_fillSessionInfoFromFacebook($user['fbAuthToken']);
 		}
 		catch(Exception $e)
 		{

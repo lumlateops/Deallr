@@ -38,6 +38,7 @@ div.hr{height:30px;background:url(../images/hr.png) no-repeat scroll center;clea
 #footer a{color:#4aaadb;font-style:italic;font-size:12px;font-weight:normal;text-decoration:none;}
 #footer a:hover{color:#4aaadb;font-style:italic;font-size:12px;font-weight:normal;text-decoration:underline;}
 /*CustomRR*/
+.profile-pic { width: 26px; height: 26px; margin: -3px 5px 0 -4px !important; float: left; }
 #footer ul li a{font-size:16px;font-family:QlassikMediumRegular;font-style:normal;color:#AAAAB1;text-decoration:none;}
 #footer ul li a:hover{color:#FFF;text-decoration:none;font-style:normal;font-size:16px;}
 ul{margin:20px 0 0 0;padding:0;list-style:none;list-style-position:inside;line-height:1.8em;list-style-type:disc;}
@@ -149,7 +150,7 @@ STYLES FOR CONTACT FORM
 ************************************************************************************************************************/
 .contact_wrapper{float:left;}
 .input-submit{background-image:url(../images/subscribe.png);width:87px;height:35px;background-repeat:no-repeat;border:none;cursor:pointer;background-color:transparent;line-height:42px;}
-input[type=text]{background-color:#2D2E36;border:none;font-family:Georgia,"Times New Roman",Times,serif;color:#aaaab1;font-size:12px;width:150px;padding:8px;-webkit-border-radius:0.5em 0.5em 0.5em 0.5em;-moz-border-radius:0.5em 0.5em 0.5em 0.5em;border-radius:0.5em 0.5em 0.5em 0.5em;float:left;margin-right:10px;-webkit-box-shadow:0 2px 3px rgba(0,0,0,.7) inset;-moz-box-shadow:0 2px 3px rgba(0,0,0,0.7) inset;box-shadow:0 2px 3px rgba(0,0,0,.7) inset;}
+input[type=text]{background-color:#2D2E36;border:none;font-family:Helvetica,Arial,Georgia,"Times New Roman",Times,serif;color:#aaaab1;font-size:12px;width:150px;padding:8px;-webkit-border-radius:0.5em 0.5em 0.5em 0.5em;-moz-border-radius:0.5em 0.5em 0.5em 0.5em;border-radius:0.5em 0.5em 0.5em 0.5em;float:left;margin-right:10px;-webkit-box-shadow:0 2px 3px rgba(0,0,0,.7) inset;-moz-box-shadow:0 2px 3px rgba(0,0,0,0.7) inset;box-shadow:0 2px 3px rgba(0,0,0,.7) inset;}
 input[type=text]:focus{border:none;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px 3px 3px 3px;}
 .form_error{border:1px solid #406a27;}
 #thanks{border:1px solid #bcbcbc;width:400px;padding:0px 10px 0px 0px;background-color:#f2f3ea;text-align:left;}
@@ -171,7 +172,7 @@ START OF CONTACT PAGE CONTACT FORM
 #form_wrapper{width:600px;min-height:150px;margin-bottom:30px;padding-left:20px;}
 #contact_form{margin:0px;float:left;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px 3px 3px 3px;padding:25px 0 30px 0;width:420px;}
 .success{padding:15px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px 3px 3px 3px;margin-top:25px;color:#333333;border:1px solid #E7E7E9;background-color:#f2f2f2;font-family:QlassikMediumRegular;font-size:16px;}
-.error{color:#A14933;font-size:12px;position:absolute;top:0px;right:0px;}
+/* .error{color:#A14933;font-size:12px;position:absolute;top:0px;right:0px;} */
 #contact_form ul{margin:0;padding:0px;}
 #contact_form li{float:left;margin-bottom:20px;position:relative;list-style-type:none;color:#1F242F;font-family:QlassikMediumRegular;}
 #contact_form label{width:420px;height:30px;display:block;color:#5F5F6E;font-family:QlassikMediumRegular;font-size:18px;}

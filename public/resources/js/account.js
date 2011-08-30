@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	var email_add_button = $("#add-email-button-container input");
+	var email_add_button = $("#add-email-button-container a");
 	var providers_form_err_obj = $("#providers-form-errors");
 	$("#providers li").click(function(){
 		$("#providers li.selected").removeClass("selected");
@@ -16,23 +16,10 @@ $(document).ready(function(){
 			}
 		}
 	});
-
-	$("#providers li input").keyup(function(evt){
-/*
-		if(evt.keyCode != undefined && evt.keyCode == 19) {
-		}
-*/
-		if($(this).val()) {
-			email_add_button.removeAttr('disabled');
-		} else {
-			email_add_button.attr('disabled','true');		
-		}
-	});
 	
 	email_add_button.click(function() {
 		var email = $("#providers li.selected input[name='email']").val();
 		var provider = $("#providers li.selected").attr('name');
-		console.log( email );
 		if( email.trim != undefined && !email.trim() ) {
 			providers_form_err_obj.html("Email is mandatory");
 			providers_form_err_obj.fadeIn();

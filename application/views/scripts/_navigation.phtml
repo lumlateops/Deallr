@@ -1,16 +1,12 @@
 <?php 
-	if( $this->user )
-	{
-		//echo '<h3>'.json_encode($this->user).'</h3>';
-	}
-	
 	if(isset($this->controller) && in_array($this->controller, array('deals', 'account'))): ?>
 			<ul class="sf-menu">
-				<li><a class="<?= $this->controller == "deals" ? "active" : "" ?>">Deals</a></li>
-				<li><a class="<?= $this->controller == "account" ? "active" : "" ?>">Account</a></li>
-				<li><a><?= $this->user['fbFullName'] ?></a>
+				<li><a href="<?= $this->controller == 'deals' ? '' : $this->baseUrl().'/deals' ?>" class="<?= $this->controller == 'deals' ? 'active' : '' ?>">Deals</a></li>
+				<li><a href="<?= $this->controller == 'account' ? '' : $this->baseUrl().'/account/add' ?>" class="<?= $this->controller == 'account' ? 'active' : '' ?>">Account</a></li>
+				<li><a><img height="26px" width="26px" class="profile-pic" src="<?= 'https://graph.facebook.com/'.$this->user['fbUserId'].'/picture' ?>" alt="Profile Picture" /><?= $this->user['fbFullName'] ?></a>
 					<ul>
-					<li><a>Settings</a></li>
+					<li><a href="/account/add">Settings</a></li>
+					<li><a href="/sign-out">Log Out</a></li>
 					</ul>
 				</li>
 	  		</ul><!-- this is the end of the unordered list -->
