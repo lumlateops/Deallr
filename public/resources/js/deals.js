@@ -33,7 +33,7 @@ Deals = function() {
 					{deal_details}\
 				</div>\
 				<div class="deal-facebook-like">\
-					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fdeallr.com%2Fdeals%2F{deal_id}%2F{deal_title}&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>\
+					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fdev.deallr.com%2Fdeals%2F{deal_id}&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>\
 				</div>\
 			</div>\
 		</div>\

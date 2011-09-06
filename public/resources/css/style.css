@@ -51,7 +51,8 @@ a.remove-link:hover{color:#000;}
 .content-box-header h3{ padding: 12px 15px 10px; float:left; }
 ul.content-box-tabs{ float: right; padding: 0px 15px 0 0 !important; margin:0 !important; }
 ul.content-box-tabs li{ float:left;margin:0;padding:0 !important;background-image:none !important;}
-ul.content-box-tabs li a{ color: #333; font-size: 13px; padding: 8px 10px; display: block; margin: 1px; border-bottom: 0; }
+ul.content-box-tabs li a{ color: #333; font-size: 17px; padding: 8px 10px; display: block; margin: 1px; border-bottom: 0; }
+ul.content-box-tabs li a.current:hover {color:#333;text-decoration:none;}
 ul.content-box-tabs li a:hover{color:#57a000;}
 ul.content-box-tabs li a.current{background:#fff;border:1px solid #ccc;border-bottom:0;margin:0;}
 .content-box-content{ border-radius:3px; -moz-border-radius: 3px; margin-top: -2px; font-size:13px; border:1px solid #ccc;}

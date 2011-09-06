@@ -24,7 +24,7 @@ ul.sf-menu li li li.sfHover ul{left:10em;/* match ul width */
 top:0;}
 /*** DEMO SKIN ***/
 .sf-menu{float:right;margin-bottom:1em;margin-top:22px;}
-.sf-menu a{padding:5px 1em;text-decoration:none;}
+.sf-menu a{padding:5px 1.5em;text-decoration:none;}
 .sf-menu a,.sf-menu a:visited{/* visited pseudo selector so IE6 applies text colour*/
 color:#aaaab1;}
 .sf-menu a:active{/* visited pseudo selector so IE6 applies text colour*/

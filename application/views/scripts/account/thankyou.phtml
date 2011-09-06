@@ -1,13 +1,20 @@
-<div class="thankyou-text">
-
-Your email account <strong><?= $this->email ?></strong> has been added successfully. 
-
-<br/>
-
-Deallr is now fetching deals from your email account and they should start appearing in your account shortly.
-
-<br/><br/>
-
-<input type="button" onclick="window.location.href='/account/add';" value="Add more email accounts" />
-
+<div id="thankyou-text-container">
+	<p class="thankyou-text">
+	
+	Your email account <strong><?= $this->email ?></strong> has been added successfully. 
+	
+	<br/>
+	
+	Deallr is now fetching deals from your email account and they should start appearing in your account shortly.
+	
+	<br/><br/>
+	
+	</p>
+	
+	
+	<div id="add-email-button-container">
+		<div class="buttonbackground">
+			<a class="add-more button white bigrounded" href="<?= $this->baseUrl(); ?>/account/add">Add more email accounts</a>
+		</div>
+	</div>
 </div>

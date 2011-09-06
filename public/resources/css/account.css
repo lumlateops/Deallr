@@ -1,6 +1,4 @@
 /**************************Account Add***************************/
-.wrapper { padding-top: 40px; }
-
 #providers {  }
 #providers li { opacity: 0.5; padding: 20px 15px; }
 #providers li:hover { cursor: pointer; background: #EFEFEF; opacity: 1; }
@@ -21,5 +19,6 @@
 .error { font-size: 15px; margin: 10px 0px; padding: 10px; }
 
 /******** ThankYou Page ************/
-.thankyou-text { font-size: 16px; line-height: 30px; text-align: center; margin: 22px auto; width: 600px; }
-.thankyou-text input[type="button"] { width: 250px; }
+#thankyou-text-container { margin: 40px auto 150px; }
+.thankyou-text { font-size: 18px; line-height: 30px; margin: 0 auto; text-align: center; width: 600px; }
+#add-email-button-container a.add-more { width: 250px; }

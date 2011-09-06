@@ -38,13 +38,13 @@ div.hr{height:30px;background:url(../images/hr.png) no-repeat scroll center;clea
 #footer a{color:#4aaadb;font-style:italic;font-size:12px;font-weight:normal;text-decoration:none;}
 #footer a:hover{color:#4aaadb;font-style:italic;font-size:12px;font-weight:normal;text-decoration:underline;}
 /*CustomRR*/
-.profile-pic { width: 26px; height: 26px; margin: -3px 5px 0 -4px !important; float: left; }
+.profile-pic { width: 26px; height: 26px; margin: -3px 10px 0 -4px !important; float: left; }
 #footer ul li a{font-size:16px;font-family:QlassikMediumRegular;font-style:normal;color:#AAAAB1;text-decoration:none;}
 #footer ul li a:hover{color:#FFF;text-decoration:none;font-style:normal;font-size:16px;}
 ul{margin:20px 0 0 0;padding:0;list-style:none;list-style-position:inside;line-height:1.8em;list-style-type:disc;}
 li{padding:0 0 0 0;margin:0;list-style:none;font-family:QlassikMediumRegular;font-size:12px;}
 .message_bar{background-image:url("../images/light_bground.jpg");background-repeat:repeat-x;height:90px;padding-top:15px;width:100%;clear:both;}
-.wrapper{width:960px;margin:0 auto;padding-bottom:40px;}
+.wrapper{width:960px;margin:0 auto;padding-bottom:40px;padding-top:40px;}
 .portfolio_title{font-family:QlassikMediumRegular;font-size:20px;color:#5F5F6E;margin:0;padding:10px 0 0 0;display:block;font-weight:normal;}
 .message_content{color:#5F5F6E;float:left;font-family:QlassikMediumRegular;font-size:24px;padding-top:23px;text-align:left;width:700px;}
 .message_button{float:right;}
@@ -213,6 +213,18 @@ ALERT BOX STYLING
 .alert_green h4{color:#4F5F39;padding:0px 0px 0px 0px;}
 .alert_green p{color:#4F5F39;}
 .alert_green a{color:#4F5F39;text-decoration:underline;}
+/***********************************************************************************************************************
+ STYLES FOR Tipsy Rollovers
+************************************************************************************************************************/
+.tipsy { padding: 5px; font-size: 11px; opacity: 1.0; filter: alpha(opacity=100); background-repeat: no-repeat;  background-image: url(../img/tipsy.gif); margin-top: 10px; 	color:#1F242F; font-family: Helvetica, Arial, sans-serif; }
+.tipsy-inner { padding: 5px 8px 4px 8px; background-color: #0969a6; color: white; max-width: 500px; text-align: center; }
+.tipsy-inner { -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px 3px 3px 3px;}
+.tipsy-north { background-position: top center; }
+.tipsy-south { background-position: bottom center;}
+.tipsy-east { background-position: right center; }
+.tipsy-west { background-position: left center; }  
+.pp_nav p { font-family:QlassikMediumRegular; font-size:20px; color: #8d8e92; letter-spacing:-.05em; margin:10px 0 5px 15px; z-index:9999; text-shadow: none; }
+.pp_description { font-family:QlassikMediumRegular; font-size:20px; color: #8d8e92; letter-spacing:-.05em; margin:10px 0 5px 15px; z-index:9999; text-shadow: none; }
 /***************************************************
 RETAILER LOGOS
 ***************************************************/

@@ -1,8 +1,8 @@
 <?php 
-	if(isset($this->controller) && in_array($this->controller, array('deals', 'account'))): ?>
+	if(isset($this->controller) && in_array($this->controller, array('deals', 'account', 'wallet'))): ?>
 			<ul class="sf-menu">
-				<li><a href="<?= $this->controller == 'deals' ? '' : $this->baseUrl().'/deals' ?>" class="<?= $this->controller == 'deals' ? 'active' : '' ?>">Deals</a></li>
-				<li><a href="<?= $this->controller == 'account' ? '' : $this->baseUrl().'/account/add' ?>" class="<?= $this->controller == 'account' ? 'active' : '' ?>">Account</a></li>
+				<li><a href="<?= $this->controller == 'deals' ? '' : $this->baseUrl().'/deals' ?>" class="<?= $this->controller == 'deals' ? 'active' : '' ?>"><div style="position:relative;" id="deals-nav">Deals</div></a></li>
+				<li><a href="<?= $this->controller == 'wallet' ? '' : $this->baseUrl().'/wallet' ?>" class="<?= $this->controller == 'wallet' ? 'active' : '' ?>">Wallet</a></li>
 				<li><a><img height="26px" width="26px" class="profile-pic" src="<?= 'https://graph.facebook.com/'.$this->user['fbUserId'].'/picture' ?>" alt="Profile Picture" /><?= $this->user['fbFullName'] ?></a>
 					<ul>
 					<li><a href="/account/add">Settings</a></li>

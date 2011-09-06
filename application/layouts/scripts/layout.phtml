@@ -4,16 +4,19 @@
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/invalid.css" type="text/css" media="screen" />',
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/orange.css" type="text/css" media="screen" />',
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" />',
+		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/badger.min.css" type="text/css" media="screen" />',
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/'.$this->controller.'.css" type="text/css" media="screen" />'
+		
 	);
 	
 	$js = array(
 		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/simpla.jquery.configuration.js"></script>',
 		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/facebox.js"></script>',
+		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/badger.min.js"></script>',
 		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/'.$this->controller.'.js"></script>'
 	);
 	
-	echo $this->partial('_header.phtml', array('css' => $css, 'js' => $js));
+	echo $this->partial('_header.phtml', array('css' => $css, 'js' => $js, 'page_title' => $this->page_title));
 	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'user' => $this->user));
 ?>
 	<div class="wrapper"> <!-- Wrapper for the radial gradient background -->

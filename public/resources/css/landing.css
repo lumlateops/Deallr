@@ -12,3 +12,5 @@
 #tag-lines-container h2 { color: #FE9424; font-weight: normal; font-size: 25px; }
 
 #signup-container { float: right; font-size: 15px; line-height: 25px; margin-top: 40px; }
+
+.wrapper { padding-top: 0; }

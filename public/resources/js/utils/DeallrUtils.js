@@ -1,9 +1,10 @@
 DeallrUtil = {};
 
 DeallrUtil.replaceTokens = function(template, tokens) {
-	var data = template;
+	var data = template, pattern = '';
 	$.each( tokens, function(key, val) {
-		data = data.replace('{'+key+'}',val);
+		pattern = new RegExp('{'+key+'}','ig');
+		data = data.replace(pattern, val);
 	});
 	return data;
 };

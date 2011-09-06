@@ -88,6 +88,18 @@ class Application_Data_Deals
 		return $DEALS;
 	}
 	
+	static function getTitle($deal_id)
+	{
+		$deals = self::getParsedDeals();
+		foreach( $deals as $deal ) {
+			if( $deal['deal_id'] == intval($deal_id,10) ) {
+				return $deal['deal_title'];
+			}
+		}
+		
+		return '';
+	}
+	
 	static function getParsedDeals()
 	{
 		$deal_id_count = 1;
