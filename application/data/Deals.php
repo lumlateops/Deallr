@@ -1,6 +1,15 @@
 <?php
 class Application_Data_Deals
 {
+	static function getUnreadDealsCount()
+	{
+		$current_user = Application_Model_User::id();
+		$api_request = new Application_Model_APIRequest( array('deal', 'unread', 'count'), array('userId' => $current_user) );
+		$api_response = $api_request->call();
+		
+		return $api_response['count'][0] ? $api_response['count'][0] : 0;
+	}
+	
 	static function getDeals() {
 		$company = array(
 			array(

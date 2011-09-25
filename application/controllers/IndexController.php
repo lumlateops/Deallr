@@ -24,7 +24,9 @@ class IndexController extends DeallrBaseController
 
     public function indexAction()
     {
+    	$this->_redirector->gotoSimple( '', 'landing', null, array() );
         // action body
+/*
 		$username = $this->_getParam('u');
 		if( trim( $username ) )
 		{
@@ -40,6 +42,7 @@ class IndexController extends DeallrBaseController
 				$this->view->error = 'Invalid username/password combination';
 			}
 		}
+*/
     }
 }
 

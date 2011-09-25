@@ -24,15 +24,16 @@ class AccountController extends DeallrBaseController
     {
     	$email =  $this->_getParam('email');
     	$provider = $this->_getParam('provider');
+    	$email_password = $this->_getParam('email_password');
     	
-    	error_log("Email ".$email.' Provider = '.$provider);
-    	if( $email && $provider )
+    	error_log("Email ".$email.' Password = '.$email_password.' Provider = '.$provider);
+    	if( $email && $provider && $email_password )
     	{
     		$this->view->err = '';
     		try
     		{
-    			$account_obj = new Application_Model_Account($email, $provider);
-    			$this->view->provider_url = $account_obj->add();
+    			$account_obj = new Application_Model_Account($email, $email_password, $provider);
+    			$this->view->status = $account_obj->add() ? 1 : 0;
     		}
     		catch( Exception $e )
     		{

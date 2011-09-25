@@ -1,3 +1,8 @@
+AuthType Basic
+AuthName "Developers Only"
+AuthUserFile /home/rrani/www/dev/public/.htpasswd
+Require valid-user
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]

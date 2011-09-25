@@ -217,7 +217,7 @@ class Application_Model_User
 		{
 			$auth_session->auth_user['id'] = $api_response['id'];
 			$auth_session->auth_user['fbUserId'] = $fbUserId;
-			$auth_session->auth_user['hasSetupEmailAccounts'] = isset( $api_response['hasSetupEmailAccounts'] ) ? 1 : 0;
+			$auth_session->auth_user['hasSetupEmailAccounts'] = isset( $api_response['hasSetupEmailAccounts'] ) && $api_response['hasSetupEmailAccounts'] ? 1 : 0;
 			$auth_session->auth_user['fbFullName'] = $api_response['name'];
 			$this->_id = $api_response['id'];
 			$auth_session->lastAuthCheck = time();
@@ -233,9 +233,10 @@ class Application_Model_User
 		return isset( $auth_session->auth_user['hasSetupEmailAccounts'] ) ? $auth_session->auth_user['hasSetupEmailAccounts'] == 1 : 0;
 	}
 		
-	public function id()
+	public static function id()
 	{
-		return $this->_id;
+		$auth_session = Zend_Registry::get('auth_session');
+		return $auth_session->auth_user['id'];
 	}
 }
 

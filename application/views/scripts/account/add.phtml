@@ -17,6 +17,7 @@ foreach( $this->providers as $provider )
 		echo '<li '.($count == 1 ? 'class="selected"' : '').' name="'.strtolower($provider['name']).'">';
 		echo '<div class="provider-image"><img src="'.$provider['logoUrl'].'" alt="Provider Image" /></div>';
 		echo '<div class="provider-email-input-container"><input type="text" name="email" '.($count == 1 ? 'autofocus="true"' : '').' autocomplete="off" placeholder="'.$provider['name'].' email address" /></div>';
+		echo '<div class="provider-email-input-container clear"><input type="password" name="email_password" autocomplete="off" placeholder="'.$provider['name'].' email password" /></div>';
 		echo '<div class="clear"></div>';
 		echo '</li>';
 		

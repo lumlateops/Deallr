@@ -16,7 +16,7 @@
 		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/'.$this->controller.'.js"></script>'
 	);
 	
-	echo $this->partial('_header.phtml', array('css' => $css, 'js' => $js, 'page_title' => $this->page_title));
+	echo $this->partial('_header.phtml', array('css' => $css, 'js' => $js, 'page_title' => $this->page_title, 'unread_deals_count' => $this->unread_deals_count));
 	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'user' => $this->user));
 ?>
 	<div class="wrapper"> <!-- Wrapper for the radial gradient background -->

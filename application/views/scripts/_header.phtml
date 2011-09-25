@@ -84,7 +84,7 @@
 			$('#example-html').tipsy({html: true });
 			
 			if($('#deals-nav').length) {
-				$('#deals-nav').badger('40');
+				$('#deals-nav').badger("<?= isset( $this->unread_deals_count ) && $this->unread_deals_count ? $this->unread_deals_count : '' ?>");
 			}
 		});
 	</script>	

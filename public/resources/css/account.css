@@ -9,8 +9,10 @@
 #add-email-button-container { margin-top:30px; margin-bottom:20px;text-align:center; }
 #add-email-button-container a { width: 130px; }
 
-.provider-email-input-container input[type="text"] { background: #FFF; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border: 1px solid #AAA; font-size: 16px; margin-right: 100px; opacity:0.8; padding: 6px; width: 260px; -moz-box-shadow: none; -webkit-box-shadow: none; color: #000; }
-.provider-email-input-container input[type="text"]:hover { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; opacity: 1; }
+.provider-email-input-container input[type="text"],
+.provider-email-input-container input[type="password"] { background: #FFF; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border: 1px solid #AAA; font-size: 16px; margin-right: 100px; opacity:0.8; padding: 6px; width: 260px; -moz-box-shadow: none; -webkit-box-shadow: none; color: #000; }
+.provider-email-input-container input[type="text"]:hover,
+.provider-email-input-container input[type="password"]:hover { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; opacity: 1; }
 
 .provider-image { float: left; margin-left: 20px; width: 300px; }
 .provider-email-input-container { float: right; margin-top: 10px; }
