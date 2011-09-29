@@ -20,11 +20,11 @@ a.remove-link:hover{color:#000;}
 #sidebar #profile-links{padding:0 15px 20px 15px;text-align:right;line-height:1.5em;}
 /************ Sidebar Accordion Menu ************/
 #sidebar #main-filter { width: 206px; padding:0; margin: 0; font-family:Helvetica,Arial,sans-serif; }
-#sidebar #main-filter li { list-style: none; }
+#sidebar #main-filter li { list-style: none; font-family:Helvetica,Arial,sans-serif; }
 #sidebar #main-filter li a.filter-group{ background: #EFEFEF url('../images/bg-menu-item-green.gif') right center no-repeat; padding: 10px 15px; color:#fff; font-size:14px; cursor:pointer; display:block; text-decoration:none;}
 #sidebar #main-filter li a.current { background: #EFEFEF !important; color:#333; font-weight:bold; }
 #sidebar #main-filter li a.current:hover{ color:#333; }
-#sidebar #main-filter ul { padding: 10px 0; font-size:13px; margin:0; }
+#sidebar #main-filter ul { padding: 10px 0; font-size:13px; margin:0 0 0 10px; }
 #sidebar #main-filter ul li { list-style: none; padding: 8px 15px 8px 5px; display: block; color: #666; font-size: 13px; line-height: 1.2em; }
 #sidebar #main-filter ul li input { margin-right: 5px; }
 /************ Messages ************/
@@ -121,38 +121,4 @@ body#login{color:#fff;background:#222 url('../images/bg-login.gif');}
 #facebox_overlay{position:fixed;top:0px;left:0px;height:100%;width:100%;}
 .facebox_hide{z-index:-100;}
 .facebox_overlayBG{background-color:#000;z-index:99;}
-/*********************Custom Styles**********************/
-#deals-container { margin-left: 245px; }
-#deals-container h3 { color: #08C; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tab-content { background: #FFFFFF; padding: 20px; }
-.deal-container { border: 1px solid #EEE; box-shadow: 5px 5px 20px #EEE; -webkit-box-shadow: 5px 5px 20px #EEE; -moz-box-shadow: 5px 5px 20px #EEE; margin: 10px 0; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; padding: 10px; }
-.deal-logo { float: right; padding: 10px 10px 0 0; }
-.deal-content { margin: 0 10px; }
-.deal-details { max-height: 40px; overflow:hidden; text-overflow: ellipsis; line-height: 20px; }
-.deal-expiry-date { color: #FF8C41; line-height: 18px; margin: 10px 0; }
-.deal-facebook-like { margin: 20px 0 0; }
-#deals-filter-overlay {
-	background: #EEE;
-	background: #EEE -moz-linear-gradient(center top , #EEE, #CCC) repeat scroll 0 0;
-	background: #EEE -webkit-gradient(linear,0% 0%,0% 100%, from(#EEE), to(#CCC)) repeat scroll 0 0;
-    border: 1px solid #DDD;
-    border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-    box-shadow: 1px 7px 8px #888;
-	-moz-box-shadow: 1px 7px 8px #888;
-	-webkit-box-shadow: 1px 7px 8px #888;
-    color: #333;
-    font-size: 14px;
-    left: 45%;
-    padding: 15px;
-    position: absolute;
-    top: 320px;
-    width: 20%;
-}
-#deals-loading { color: #000; text-align: center; font-size: 16px; }
-#deals-filter-overlay img,
-#deals-loading img { vertical-align: middle; margin-right: 10px; }
-#filter-no-results { font-size: 15px; margin: 80px auto; width: 400px; }
-#discount-slider-values { margin-top: 15px; font-weight: bold; }
 /************************* Footer ******************************/

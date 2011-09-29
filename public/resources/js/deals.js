@@ -11,6 +11,7 @@ Deals = function() {
 	var _publishers_list = [];
 	var _uniq_category_names = [];
 	var _uniq_publishers_names = [];
+	var _publisher_counts = [];
 	var _categories_list = [];
 	var _discount_range_min = 100;
 	var _discount_range_max = 0;
@@ -40,7 +41,7 @@ Deals = function() {
 	';
 
 	var PUBLISHER_ID_PREFIX = 'publisher-';
-	var PUBLISHER_TEMPLATE = '<li><input type="checkbox" checked="checked" name="deal-publisher" id="'+PUBLISHER_ID_PREFIX+'{id}" />{name}</li>';
+	var PUBLISHER_TEMPLATE = '<li><input type="checkbox" checked="checked" name="deal-publisher" id="'+PUBLISHER_ID_PREFIX+'{id}" />{name} ({count})</li>';
 	var CATEGORY_ID_PREFIX = 'category-';
 	var CATEGORY_TEMPLATE = '<li><input type="checkbox" checked="checked" name="deal-category" id="'+CATEGORY_ID_PREFIX+'{id}" />{name}</li>';
 	
@@ -82,10 +83,13 @@ Deals = function() {
 		var i = 0, imax = 0;
 		
 		if( _uniq_publishers_names.indexOf( deal_obj.deal_publisher ) === -1 ) {
+			_publisher_counts[deal_obj.deal_publisher_id] = 1;
 			_publishers_list.push( {id: deal_obj.deal_publisher_id, name: deal_obj.deal_publisher} );
 			_uniq_publishers_names.push( deal_obj.deal_publisher );
+		} else {
+			_publisher_counts[deal_obj.deal_publisher_id]++;
 		}
-		
+/*
 		for( i = 0, imax = deal_obj.deal_categories.length; i < imax; i++ ) {
 			if( _uniq_category_names.indexOf( deal_obj.deal_categories[i][1] ) === -1 ) {
 				_categories_list.push( { id: deal_obj.deal_categories[i][0], name: deal_obj.deal_categories[i][1] } );
@@ -102,12 +106,13 @@ Deals = function() {
 		if( _discount_range_max < deal_obj.deal_discount ) {
 			_discount_range_max = deal_obj.deal_discount;
 		}
+*/
 	};
 	
 	var _buildFilters = function() {
 		_buildPublishersFilter();
-		_buildDiscountRateFilter();
-		_buildCategoriesFilter();
+		//_buildDiscountRateFilter();
+		//_buildCategoriesFilter();
 		$("#main-filter input[type='checkbox']").change(_applyFilters);
 	};
 	
@@ -117,6 +122,7 @@ Deals = function() {
 						
 			var publisher_html = '';
 			$.each( _publishers_list, function(index, publisher) {
+				publisher.count = _publisher_counts[publisher.id];
 				publisher_html = DeallrUtil.replaceTokens(PUBLISHER_TEMPLATE, publisher);
 				_publishers_filter_container.append(publisher_html);
 			});
@@ -171,10 +177,14 @@ Deals = function() {
 			});
 
 			$.each(_deals,function(index, deal) {
-				if( 	selected_publisher_ids.indexOf( deal.deal_publisher_id ) !== -1 
+				if(    selected_publisher_ids.indexOf( deal.deal_publisher_id ) !== -1 
+/*
 					&& deal.deal_discount >= discount_min 
 					&& deal.deal_discount <= discount_max
-					&& $.grep(deal.deal_categories, function(category,index) { return selected_category_ids.indexOf(category[0]) !== -1; }).length
+					&& $.grep(deal.deal_categories, function(category,index) { 
+					   		return selected_category_ids.indexOf(category[0]) !== -1; 
+					   }).length
+*/
 				) {
 					$("#" + DEAL_ID_PREFIX + deal.deal_id).show();
 				} else {

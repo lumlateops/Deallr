@@ -129,10 +129,10 @@ class Application_Model_APIRequest
 			
 			throw new Exception( implode( ' ', $framework_err_messages ) );
 		}
-		else if( isset( $response["service"]["response"]["errors"] ) ) 
+		else if( isset( $response["service"]["errors"] ) ) 
 		{
 			//Request was valid if the code reaches here. Check for service level errors.
-			foreach( $response["service"]["response"]["errors"] as $error )
+			foreach( $response["service"]["errors"] as $error )
 			{
 				$service_err_messages[] = $error["error"]["code"];
 			}

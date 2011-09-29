@@ -7,13 +7,15 @@ class DealsController extends DeallrBaseController
     public function indexAction()
     {
         // action body
-		include_once(APPLICATION_PATH.'/data/Deals.php');
 		$deal_id = 0;
 		if($deal_id = $this->_getParam('deal_id')) {
 			$this->view->page_title = Application_Data_Deals::getTitle($deal_id);
+		} else {
+			$this->view->page_title = 'Deals for ' . $this->view->user['fbFullName'];
 		}
-		$this->view->user_deals = Application_Data_Deals::getParsedDeals();
-		$this->view->unread_deals_count = Application_Data_Deals::getUnreadDealsCount();
+		
+		$deals = Application_Model_Deals::getDeals();
+		$this->view->user_deals = $deals['deals'];
     }
 }
 

@@ -1,1 +1,36 @@
+#deals-container { margin-left: 245px; }
+#deals-container h3 { color: #08C; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tab-content { background: #FFFFFF; padding: 20px; }
+.deal-container { border: 1px solid #EEE; box-shadow: 5px 5px 20px #EEE; -webkit-box-shadow: 5px 5px 20px #EEE; -moz-box-shadow: 5px 5px 20px #EEE; margin: 10px 0; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; padding: 10px; }
+.deal-logo { float: right; padding: 10px 10px 0 0; }
+.deal-logo img { max-height: 100px; max-width: 350px; }
+.deal-content { margin: 0 10px; }
+.deal-details { max-height: 40px; overflow:hidden; text-overflow: ellipsis; line-height: 20px; font-family: Helvetica, Arial, sans-serif; }
+.deal-expiry-date { color: #FF8C41; line-height: 18px; margin: 10px 0; }
+.deal-facebook-like { margin: 20px 0 0; }
+#deals-filter-overlay {
+	background: #EEE;
+	background: #EEE -moz-linear-gradient(center top , #EEE, #CCC) repeat scroll 0 0;
+	background: #EEE -webkit-gradient(linear,0% 0%,0% 100%, from(#EEE), to(#CCC)) repeat scroll 0 0;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+    box-shadow: 1px 7px 8px #888;
+	-moz-box-shadow: 1px 7px 8px #888;
+	-webkit-box-shadow: 1px 7px 8px #888;
+    color: #333;
+    font-size: 14px;
+    left: 45%;
+    padding: 15px;
+    position: absolute;
+    top: 320px;
+    width: 20%;
+}
+#deals-loading { color: #000; text-align: center; font-size: 16px; }
+#deals-filter-overlay img,
+#deals-loading img { vertical-align: middle; margin-right: 10px; }
+#filter-no-results { font-size: 15px; margin: 80px auto; width: 400px; }
+#discount-slider-values { margin-top: 15px; font-weight: bold; }
+
 .add-to-wallet { background: url(/resources/images/wallet.png) no-repeat 0 0; float: left; height: 90px; width: 65px; margin-top: -8px; }

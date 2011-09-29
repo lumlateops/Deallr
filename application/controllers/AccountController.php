@@ -11,6 +11,7 @@ class AccountController extends DeallrBaseController
         /* Initialize action controller here */
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
         $ajaxContext->addActionContext('add', 'json');
+        $ajaxContext->addActionContext('add', 'xml');
         $ajaxContext->initContext();
     }
 

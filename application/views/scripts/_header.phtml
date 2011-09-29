@@ -81,11 +81,7 @@
 			$('#example-callback').tipsy({title: function() { return this.getAttribute('original-title').toUpperCase(); } });
 			$('#example-fallback').tipsy({fallback: "?" });
 			
-			$('#example-html').tipsy({html: true });
-			
-			if($('#deals-nav').length) {
-				$('#deals-nav').badger("<?= isset( $this->unread_deals_count ) && $this->unread_deals_count ? $this->unread_deals_count : '' ?>");
-			}
+			$('#example-html').tipsy({html: true });			
 		});
 	</script>	
 	<script type="text/javascript">
