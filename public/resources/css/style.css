@@ -16,7 +16,7 @@ a.remove-link:hover{color:#000;}
 #sidebar a,
 #sidebar a:active{color:#ccc;}
 #sidebar a:hover{color:#fff;}
-#sidebar #sidebar-title{ margin: 20px 0 0 0;}
+#sidebar #sidebar-title{ margin: 10px 0 0 0;}
 #sidebar #profile-links{padding:0 15px 20px 15px;text-align:right;line-height:1.5em;}
 /************ Sidebar Accordion Menu ************/
 #sidebar #main-filter { width: 206px; padding:0; margin: 0; font-family:Helvetica,Arial,sans-serif; }

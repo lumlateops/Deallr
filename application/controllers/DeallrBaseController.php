@@ -13,10 +13,10 @@ class DeallrBaseController extends Zend_Controller_Action
         $this->_redirector = $this->_helper->getHelper('Redirector');
         $this->is_authenticated = Application_Model_User::isAuthenticated();
 
-        if( !$this->is_authenticated && !in_array($this->view->controller, array('landing', 'index', 'signup')) )
+        if( !$this->is_authenticated && !in_array($this->view->controller, array('index', 'signup')) )
         {
         	error_log("Redirecting");
-        	$this->_redirector->gotoSimple('', 'landing', null, array());
+        	$this->_redirector->gotoSimple('', '', null, array());
         	exit();
         }
 		

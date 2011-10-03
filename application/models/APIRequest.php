@@ -113,7 +113,7 @@ class Application_Model_APIRequest
 		}
 		
 		$this->response = $response;
-		error_log( $this->response );
+		//error_log( $this->response );
 		$response = json_decode( $response, true );
 		
 		$framework_err_messages = array();
@@ -122,6 +122,7 @@ class Application_Model_APIRequest
 		
 		if( !$response["service"]["request"]["isValid"] )
 		{
+			error_log( $this->response );
 			foreach( $response["service"]["errors"] as $error )
 			{
 				$framework_err_messages[] = $error["error"]["message"];
@@ -131,6 +132,7 @@ class Application_Model_APIRequest
 		}
 		else if( isset( $response["service"]["errors"] ) ) 
 		{
+			error_log( $this->response );
 			//Request was valid if the code reaches here. Check for service level errors.
 			foreach( $response["service"]["errors"] as $error )
 			{

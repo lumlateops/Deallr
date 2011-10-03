@@ -7,7 +7,7 @@ class SignOutController extends DeallrBaseController
     public function indexAction()
     {
         Application_Model_User::logOut();
-		$this->_redirector->gotoSimple( '', 'landing', null, array() );
+		$this->_redirector->gotoSimple( '', '', null, array() );
     }
 }
 

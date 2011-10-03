@@ -231,3 +231,13 @@ RETAILER LOGOS
 #retailers-logos{margin:18px;text-align:center;}
 #retailers-logos li{display:inline;padding:20px;}
 #retailers-logos li img{max-height:80px;max-width:200px;vertical-align:bottom;}
+
+.filter-name {
+	overflow: hidden;
+	max-width: 130px;
+	text-overflow: ellipsis;
+	display: inline-block;
+	*display: inline;
+	zoom:1;
+	white-space: nowrap;
+}
