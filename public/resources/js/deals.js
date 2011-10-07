@@ -18,8 +18,10 @@ Deals = function() {
 	var _uniq_publishers_names = [];
 	var _publisher_counts = [];
 	var _categories_list = [];
+	var _categories_count = [];
 	var _discount_range_min = 100;
 	var _discount_range_max = 0;
+	var _is_wallet = false;
 	var _filter_timeout_obj = '';
 	var FILTER_INTERVAL = 400;
 	var DEAL_ID_PREFIX = 'deal-';	
@@ -28,19 +30,17 @@ Deals = function() {
 			<div class="deal-logo">\
 				<img src="{deal_publisher_logo}" alt="{deal_publisher} Logo" />\
 			</div>\
-			<h3>{deal_title}</h3>\
+			<h3><a class="deal-title" name="{deal_id}" title="Click to see the original email">{deal_title}</a></h3>\
 			<div class="deal-content">\
 				<div class="add-to-wallet"></div>\
-				<div class="deal-expiry-date" style="display:none;">\
-					{deal_expiry_date_formatted}<br/>\
-					{deal_discount}%\
-				</div>\
-				<div class="deal-details">\
-					{deal_details}\
-				</div>\
+				<div class="add-to-wallet-button-container"><a class="button white add-to-wallet-button" name="{deal_id}" title="Add">Add</a></div>\
+				<div class="deal-details">{deal_details}</div>\
+				<div class="deal-tags">{deal_tags}</div>\
 				<div class="deal-facebook-like">\
 					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fdev.deallr.com%2Fdeals%2F{deal_id}&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>\
 				</div>\
+				<div class="deal-shipping" style="display:{deal_free_shipping};">FREE SHIPPING</div>\
+				<div class="deal-post-date">Posted: {deal_post_date}</div>\
 			</div>\
 		</div>\
 	';
@@ -49,25 +49,85 @@ Deals = function() {
 	var PUBLISHER_ID_PREFIX = 'publisher-';
 	var PUBLISHER_TEMPLATE = '<li><input type="checkbox" checked="checked" name="deal-publisher" id="'+PUBLISHER_ID_PREFIX+'{id}" /><span class="filter-name" title="{name}">{name}</span> ({count})</li>';
 	var CATEGORY_ID_PREFIX = 'category-';
-	var CATEGORY_TEMPLATE = '<li><input type="checkbox" checked="checked" name="deal-category" id="'+CATEGORY_ID_PREFIX+'{id}" />{name}</li>';
+	var CATEGORY_TEMPLATE = '<li><input type="checkbox" checked="checked" name="deal-category" id="'+CATEGORY_ID_PREFIX+'{id}" /><span class="filter-name" title="{name}">{name}</span> ({count})</li>';
 	
-	this.init = function(initial_deals) {
+	this.init = function(initial_deals, is_wallet) {
+		_is_wallet = is_wallet;
 		_loadDeals(initial_deals);
 		_load_more_deals_container.click(function() {
+			_no_filter_container.hide();
 			_getMoreDeals(true);
 		});
 		_deals_sort_selector.change(_organizeDeals);
 		_buildFilters();
+		if( !_is_wallet ) {
+			_initWalletHandlers();
+		}
+		_initDealEmailTriggerHandler();
 	};
-		
+	
+	var _initDealEmailTriggerHandler = function() {
+		$('.deal-title').live('click', function(){
+			$.colorbox({
+				iframe:true, 
+				scrolling: false,
+				innerWidth:800, 
+				innerHeight:800, 
+				href:"http://dev.deallr.com/deals/details/deal_id/" + $(this).attr('name')
+			});
+		});
+	};
+	
+	var _initWalletHandlers = function() {
+		// Add to Wallet
+		$('.add-to-wallet-button').live('click', function(){
+			$(this).html('Adding..').attr('disabled', 'disabled').addClass('wallet-adding-in-progress').removeClass('add-to-wallet-button');
+			$.ajax({
+				type: "POST",
+				url: "/wallet/add",
+				data: "format=json&deal_id=" + $(this).attr('name'),
+				dataType: "json",
+				success: function(response) {
+					if(response.status) {
+						$(this).removeClass('wallet-adding-in-progress').addClass('remove-from-wallet-button').removeAttr('disabled').html('Remove').attr('title','Remove deal from Wallet');
+						$(this).parents('.deal-content').addClass('deal-in-wallet');
+					} else {
+						$(this).removeClass('wallet-adding-in-progress').addClass('add-to-wallet-button').removeAttr('disabled').html('Add').attr('title','Add deal to Wallet');
+						$(this).parents('.deal-content').removeClass('deal-in-wallet');
+					}
+				}.bind(this)
+			});
+		});
+
+		// Remove from Wallet
+		$('.remove-from-wallet-button').live('click', function(){
+			$(this).html('Removing..').attr('disabled', 'disabled').addClass('wallet-removing-in-progress').removeClass('remove-from-wallet-button');
+			$.ajax({
+				type: "POST",
+				url: "/wallet/remove",
+				data: "format=json&deal_id=" + $(this).attr('name'),
+				dataType: "json",
+				success: function(response) {
+					if(response.status) {
+						$(this).removeClass('wallet-removing-in-progress').addClass('add-to-wallet-button').removeAttr('disabled').html('Add').attr('title','Add deal to Wallet');
+						$(this).parents('.deal-content').removeClass('deal-in-wallet');
+					} else {
+						$(this).removeClass('wallet-removing-in-progress').addClass('remove-from-wallet-button').removeAttr('disabled').html('Remove').attr('title','Remove deal from Wallet');
+						$(this).parents('.deal-content').addClass('deal-in-wallet');
+					}
+				}.bind(this)
+			});
+		});
+	};
+	
 	var _displayDeals = function(deals){
 		$.each(deals, function(key, value) {
 			
-			_displayDeal(value);
-			
-			_populateFilterValues(value);
-			
-			_deals[value.deal_id] = value;
+			if( !_deals[value.deal_id] ) {
+				_displayDeal(value);
+				_populateFilterValues(value);
+				_deals[value.deal_id] = value;
+			}
 		});
 		
 		_loading_container.hide();
@@ -92,6 +152,12 @@ Deals = function() {
 		_current_sort = sort_param_value;
 		_current_page = 1;
 		_deals = {};
+		_publishers_list = [];
+		_uniq_category_names = [];
+		_uniq_publishers_names = [];
+		_publisher_counts = [];
+		_categories_list = [];
+		_categories_count = [];		
 		_loading_container.show();
 		_load_more_deals_container.hide();
 		$("#deals-container .deal-container").remove();
@@ -107,7 +173,7 @@ Deals = function() {
 				
 		$.ajax({
 			type: "GET",
-			url: "/deals/index/page/" + (_current_page + (increment_current_page ? 1 : 0)) + "/sort/" + _current_sort,
+			url: (_is_wallet ? "/wallet" : "/deals") + "/index/page/" + (_current_page + (increment_current_page ? 1 : 0)) + "/sort/" + _current_sort,
 			data: "format=json",
 			dataType: "json",
 			success: function(response) {
@@ -134,6 +200,15 @@ Deals = function() {
 	var _displayDeal = function( deal_obj ) {
 		var deal_html = DeallrUtil.replaceTokens(DEALS_TEMPLATE, deal_obj);
 		_deals_container.append( deal_html );
+		if(!_is_wallet && deal_obj.deal_in_wallet === 1) {
+			var deal_container = $('#' + DEAL_ID_PREFIX + deal_obj.deal_id);
+			deal_container.children('.deal-content').addClass('deal-in-wallet');
+			deal_container.find('.add-to-wallet-button')
+						  .html('Remove')
+						  .addClass('remove-from-wallet-button')
+						  .removeClass('add-to-wallet-button')
+						  .attr('title','Remove deal from Wallet');
+		}
 	};
 	
 	var _populateFilterValues = function( deal_obj ) {
@@ -146,15 +221,27 @@ Deals = function() {
 		} else {
 			_publisher_counts[deal_obj.deal_publisher_id]++;
 		}
+		
+		for (i = 0, imax = deal_obj.deal_categories.length; i < imax; i++) {
+			if( _uniq_category_names.indexOf( deal_obj.deal_categories[i][1] ) === -1 ) {
+				_categories_list.push( { id: deal_obj.deal_categories[i][0], name: deal_obj.deal_categories[i][1] } );
+				_uniq_category_names.push( deal_obj.deal_categories[i][1] );
+				_categories_count[deal_obj.deal_categories[i][0]] = 1;
+			} else {
+				_categories_count[deal_obj.deal_categories[i][0]]++;
+			}
+		}		
 	};
 	
 	var _buildFilters = function() {
 		_buildPublishersFilter();
+		_buildCategoriesFilter();
 		$("#main-filter input[type='checkbox']").change(_applyFilters);
 	};
 	
 	var _rebuildFilters = function() {
 		_publishers_filter_container.html('');
+		_categories_filter_container.html('');
 		_buildFilters();
 	};
 	
@@ -177,6 +264,7 @@ Deals = function() {
 						
 			var category_html = '';
 			$.each( _categories_list, function(index, category) {
+				category.count = _categories_count[category.id];
 				category_html = DeallrUtil.replaceTokens(CATEGORY_TEMPLATE, category);
 				_categories_filter_container.append(category_html);
 			});
@@ -220,14 +308,17 @@ Deals = function() {
 			
 			$.each(_deals,function(index, deal) {
 				
-				if(selected_publisher_ids.indexOf( deal.deal_publisher_id ) !== -1) {
+				if(	   selected_publisher_ids.indexOf( deal.deal_publisher_id ) !== -1
+					&& $.grep(deal.deal_categories, function(category,index) { 
+				   		return selected_category_ids.indexOf(category[0]) !== -1; 
+				   }).length ) {
 					$("#" + DEAL_ID_PREFIX + deal.deal_id).show();
 				} else {
 					$("#" + DEAL_ID_PREFIX + deal.deal_id).hide();
 				}
 			});
 			
-			if( $(".deal-container:visible").length === 0 ) {
+			if($(".deal-container:visible").length === 0) {
 				_no_filter_container.show();
 			} else {
 				_no_filter_container.hide();

@@ -66,6 +66,7 @@
 
     if (data.ajax) fillFaceboxFromAjax(data.ajax)
     else if (data.image) fillFaceboxFromImage(data.image)
+    else if (data.iframe) fillFaceboxFromIFrame(data.iframe) 
     else if (data.div) fillFaceboxFromHref(data.div)
     else if ($.isFunction(data)) data.call($)
     else $.facebox.reveal(data, klass)
@@ -262,6 +263,27 @@
     }
   }
 
+	function fillFaceboxFromIFrame(href, klass) { 
+		console.log(href);
+		alert(href);
+	    var data = $('<iframe src="' + href + '" width="100%" height="100" scrolling="no" frameborder="0" />')
+	    .width(500)
+	    .height(500)
+	    .load(function () {
+	        var IFrame = this; 
+	        var height = $(this).height();
+	        if (IFrame && !window.opera) { 
+	            IFrame.style.display = "block";
+	            if (IFrame.contentDocument && IFrame.contentDocument.body.offsetHeight) { 
+	                height = IFrame.contentDocument.body.offsetHeight; 
+	            } else if (IFrame.Document && IFrame.Document.body.scrollHeight) { 
+	                height = IFrame.Document.body.scrollHeight; 
+	            }
+	        }
+	        $(this).height(height);
+	    });
+    }
+    
   function fillFaceboxFromImage(href, klass) {
     var image = new Image()
     image.onload = function() {

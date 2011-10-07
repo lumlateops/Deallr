@@ -8,7 +8,9 @@ class DealsController extends DeallrBaseController
 	{
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
         $ajaxContext->addActionContext('index', 'json');
+        //$ajaxContext->addActionContext('details', 'json');
         $ajaxContext->initContext();
+        $this->view->wallet = 0;
 		parent::init();
 	}
 	
@@ -17,7 +19,8 @@ class DealsController extends DeallrBaseController
         // action body
 		$deal_id = 0;
 		if ($deal_id = $this->_getParam('deal_id')) {
-			$this->view->page_title = Application_Data_Deals::getTitle($deal_id);
+			$details = Application_Model_Deals::getDetails($deal_id);
+			$this->view->page_title = $details['deal_title'];
 		} else {
 			$this->view->page_title = 'Deals for ' . $this->view->user['fbFullName'];
 		}
@@ -41,6 +44,16 @@ class DealsController extends DeallrBaseController
 		$this->view->show_load_more = $deals['max_pages'] > $page;
 		
 		$this->view->sort_params = Application_Model_Deals::$SORT_PARAMS;
+    }
+    
+    public function detailsAction()
+    {
+    	$details = array();
+    	if ($deal_id = $this->_getParam('deal_id')) {
+    		$details = Application_Model_Deals::getDetails($deal_id);
+    	}
+    	$this->_helper->layout->setLayout('dealdetails');
+    	$this->view->details = $details;
     }
 }
 

@@ -113,7 +113,7 @@ class Application_Model_APIRequest
 		}
 		
 		$this->response = $response;
-		//error_log( $this->response );
+		error_log( $this->response );
 		$response = json_decode( $response, true );
 		
 		$framework_err_messages = array();

@@ -227,14 +227,14 @@ AddType application/octet-stream       safariextz
   ExpiresByType image/x-icon              "access plus 1 week"
  
 # media: images, video, audio
-  ExpiresByType image/gif                 "access plus 1 month"
-  ExpiresByType image/png                 "access plus 1 month"
-  ExpiresByType image/jpg                 "access plus 1 month"
-  ExpiresByType image/jpeg                "access plus 1 month"
-  ExpiresByType video/ogg                 "access plus 1 month"
-  ExpiresByType audio/ogg                 "access plus 1 month"
-  ExpiresByType video/mp4                 "access plus 1 month"
-  ExpiresByType video/webm                "access plus 1 month"
+# ExpiresByType image/gif                 "access plus 1 month"
+# ExpiresByType image/png                 "access plus 1 month"
+#   ExpiresByType image/jpg                 "access plus 1 month"
+#   ExpiresByType image/jpeg                "access plus 1 month"
+#   ExpiresByType video/ogg                 "access plus 1 month"
+#   ExpiresByType audio/ogg                 "access plus 1 month"
+#   ExpiresByType video/mp4                 "access plus 1 month"
+#   ExpiresByType video/webm                "access plus 1 month"
    
 # htc files  (css3pie)
   ExpiresByType text/x-component          "access plus 1 month"
@@ -247,9 +247,9 @@ AddType application/octet-stream       safariextz
   ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
      
 # css and javascript
-  ExpiresByType text/css                  "access plus 2 months"
-  ExpiresByType application/javascript    "access plus 2 months"
-  ExpiresByType text/javascript           "access plus 2 months"
+#  ExpiresByType text/css                  "access plus 2 months"
+#  ExpiresByType application/javascript    "access plus 2 months"
+#  ExpiresByType text/javascript           "access plus 2 months"
    
   <IfModule mod_headers.c>
     Header append Cache-Control "public"

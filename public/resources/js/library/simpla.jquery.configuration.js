@@ -59,5 +59,5 @@ $(document).ready(function(){
 
     // Initialise Facebox Modal window:
 		
-		$('a[rel*=modal]').facebox(); // Applies modal window to any link with attribute rel="modal"
+		//$('a[rel*=modal]').facebox(); // Applies modal window to any link with attribute rel="modal"
 });

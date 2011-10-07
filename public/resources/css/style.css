@@ -16,16 +16,16 @@ a.remove-link:hover{color:#000;}
 #sidebar a,
 #sidebar a:active{color:#ccc;}
 #sidebar a:hover{color:#fff;}
-#sidebar #sidebar-title{ margin: 10px 0 0 0;}
+#sidebar #sidebar-title{ margin: 10px 0 0 0; font-family: Helvetica, Arial, sans-serif; font-size: 15px; }
 #sidebar #profile-links{padding:0 15px 20px 15px;text-align:right;line-height:1.5em;}
 /************ Sidebar Accordion Menu ************/
 #sidebar #main-filter { width: 206px; padding:0; margin: 0; font-family:Helvetica,Arial,sans-serif; }
 #sidebar #main-filter li { list-style: none; font-family:Helvetica,Arial,sans-serif; }
-#sidebar #main-filter li a.filter-group{ background: #EFEFEF url('../images/bg-menu-item-green.gif') right center no-repeat; padding: 10px 15px; color:#fff; font-size:14px; cursor:pointer; display:block; text-decoration:none;}
+#sidebar #main-filter li a.filter-group{ background: #EFEFEF url('../images/bg-menu-item-green.gif') right center no-repeat; padding: 5px 13px; color:#fff; font-size:14px; cursor:pointer; display:block; text-decoration:none;}
 #sidebar #main-filter li a.current { background: #EFEFEF !important; color:#333; font-weight:bold; }
 #sidebar #main-filter li a.current:hover{ color:#333; }
 #sidebar #main-filter ul { padding: 10px 0; font-size:13px; margin:0 0 0 10px; }
-#sidebar #main-filter ul li { list-style: none; padding: 8px 15px 8px 5px; display: block; color: #666; font-size: 13px; line-height: 1.2em; }
+#sidebar #main-filter ul li { list-style: none; padding: 4px 15px 4px 5px; display: block; color: #333; font-size: 13px; line-height: 1.2em; }
 #sidebar #main-filter ul li input { margin-right: 5px; }
 /************ Messages ************/
 #messages p,
