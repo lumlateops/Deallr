@@ -10,13 +10,20 @@
 	);
 	
 	$js = array(
-		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/simpla.jquery.configuration.js"></script>',
+		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/simpla.jquery.configuration.js?1"></script>',
 		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/jquery.colorbox-min.js"></script>',
 		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/'.$this->controller.'.js?'.date('U').'"></script>'
 	);
 	
-	echo $this->partial('_header.phtml', array('css' => $css, 'js' => $js, 'page_title' => $this->page_title));
-	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'user' => $this->user));
+	echo $this->partial('_header.phtml', array(
+		'css' => $css, 
+		'js' => $js, 
+		'page_title' => $this->page_title, 
+		'page_desc' => $this->page_desc,
+		'ga_id' => $this->ga_id
+	));
+	
+	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'user' => $this->user, 'action' => $this->action));
 ?>
 	<div class="wrapper"> <!-- Wrapper for the radial gradient background -->
 		<?php 

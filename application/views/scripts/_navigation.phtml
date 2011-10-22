@@ -1,5 +1,16 @@
 <?php 
-	if(isset($this->controller) && in_array($this->controller, array('deals', 'account', 'wallet'))): ?>
+
+	$user_navigation = false;
+	
+	if (isset($this->controller) && in_array($this->controller, array('deals', 'account', 'wallet'))) {
+		$user_navigation = true;
+	}
+	
+	if (isset($this->controller) && $this->controller === 'deals' && in_array($this->action, array('deal', 'details')) && !$this->user) {
+		$user_navigation = false;
+	}
+	
+	if ($user_navigation): ?>
 			<ul class="sf-menu">
 				<li><a href="<?= $this->controller == 'deals' ? '' : $this->baseUrl().'/deals' ?>" class="<?= $this->controller == 'deals' ? 'active' : '' ?>"><div style="position:relative;" id="deals-nav">Deals</div></a></li>
 				<li><a href="<?= $this->controller == 'wallet' ? '' : $this->baseUrl().'/wallet' ?>" class="<?= $this->controller == 'wallet' ? 'active' : '' ?>">Wallet</a></li>
@@ -12,8 +23,8 @@
 	  		</ul><!-- this is the end of the unordered list -->
 <?php else: ?>
 			<ul class="sf-menu">
-				<li><a class="active" href="/landing">Home</a></li>
-				<li><a href="" target="_blank">Blog</a></li>
+				<li><a class="<?= $this->controller == 'index' && $this->action == 'index' ? 'active' : '' ?> " href="/">Home</a></li>
+				<li><a href="http://blog.deallr.com" target="_blank">Blog</a></li>
 				<li><a href="#">Contact</a></li>
 	  		</ul><!-- this is the end of the unordered list -->
 <?php endif; ?>

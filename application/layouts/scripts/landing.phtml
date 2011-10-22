@@ -1,6 +1,9 @@
 <?php
-	echo $this->partial('_header.phtml', array('css'=> array('<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/landing.css" type="text/css" media="screen" />')) );
-	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller));
+	echo $this->partial('_header.phtml', array(
+		'css'=> array('<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/landing.css" type="text/css" media="screen" />'), 
+		'ga_id' => $this->ga_id
+	));
+	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'action' => $this->action));
 ?>
 	<h1 style="font-size:46px;text-align:center;">Deal management made easy and fun.</h1>
 	<div style="background:#F2F2F2;border:1px solid #EEE;border-radius:6px;margin:10px auto;width:600px;padding:125px 0;color:#AAA;text-align:center;">Video or Screenshot Here</div>
