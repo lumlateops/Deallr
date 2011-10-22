@@ -14,6 +14,44 @@ class Application_Model_APIRequest
 	public $request_url;
 	public $response;
 	
+	const ERR_ACCOUNT_NOT_FOUND                 = "ACCOUNT_NOT_FOUND";
+	const ERR_AUTHENTICATION_FAILED             = "AUTHENTICATION_FAILED";
+	const ERR_DUPLICATE_ACCOUNT                 = "DUPLICATE_ACCOUNT";
+	const ERR_DUPLICATE_USER                	= "DUPLICATE_USER";
+	const ERR_INVALID_REQUEST                   = "INVALID_REQUEST";
+	const ERR_MAX_ACCOUNT_LIMIT_REACHED         = "MAX_ACCOUNT_LIMIT_REACHED";
+	const ERR_MULTIPLE_ACCOUNTS_WITH_SAME_EMAIL = "MULTIPLE_ACCOUNTS_WITH_SAME_EMAIL";
+	const ERR_NO_SUCH_USER                      = "NO_SUCH_USER";
+	const ERR_OAUTH_EXCEPTION                   = "OAUTH_EXCEPTION";
+	const ERR_SERVER_EXCEPTION                  = "SERVER_EXCEPTION";
+	const ERR_UNSUPPORTED_PROVIDER              = "UNSUPPORTED_PROVIDER";
+
+	const ERR_CODE_ACCOUNT_NOT_FOUND                 = 1001;
+	const ERR_CODE_AUTHENTICATION_FAILED             = 1002;
+	const ERR_CODE_DUPLICATE_ACCOUNT                 = 1003;
+	const ERR_CODE_DUPLICATE_USER                    = 1004;
+	const ERR_CODE_INVALID_REQUEST                   = 1005;
+	const ERR_CODE_MAX_ACCOUNT_LIMIT_REACHED         = 1006;
+	const ERR_CODE_MULTIPLE_ACCOUNTS_WITH_SAME_EMAIL = 1007;
+	const ERR_CODE_NO_SUCH_USER                      = 1008;
+	const ERR_CODE_OAUTH_EXCEPTION                   = 1009;
+	const ERR_CODE_SERVER_EXCEPTION                  = 1010;
+	const ERR_CODE_UNSUPPORTED_PROVIDER              = 1011;
+
+	static $ERR_CODES = array(
+		self::ERR_ACCOUNT_NOT_FOUND                 => 1001,
+		self::ERR_AUTHENTICATION_FAILED             => 1002,
+		self::ERR_DUPLICATE_ACCOUNT                 => 1003,
+		self::ERR_DUPLICATE_USER                    => 1004,
+		self::ERR_INVALID_REQUEST                   => 1005,
+		self::ERR_MAX_ACCOUNT_LIMIT_REACHED         => 1006,
+		self::ERR_MULTIPLE_ACCOUNTS_WITH_SAME_EMAIL => 1007,
+		self::ERR_NO_SUCH_USER                      => 1008,
+		self::ERR_OAUTH_EXCEPTION                   => 1009,
+		self::ERR_SERVER_EXCEPTION                  => 1010,
+		self::ERR_UNSUPPORTED_PROVIDER              => 1011
+	);
+	
 	/**
 	 * Initializes the api request object
 	 *
@@ -118,6 +156,7 @@ class Application_Model_APIRequest
 		
 		$framework_err_messages = array();
 		$service_err_messages = array();
+		$service_err_code = 0;
 		$final_response = '';
 		
 		if( !$response["service"]["request"]["isValid"] )
@@ -136,9 +175,10 @@ class Application_Model_APIRequest
 			//Request was valid if the code reaches here. Check for service level errors.
 			foreach( $response["service"]["errors"] as $error )
 			{
-				$service_err_messages[] = $error["error"]["code"];
+				$service_err_messages[] = $error["error"]["message"];
+				$service_err_code = self::$ERR_CODES[$error["error"]["code"]];
 			}
-			throw new Exception( implode( ' ', $service_err_messages ) );			
+			throw new Exception( implode(' ', $service_err_messages), $service_err_code);
 		}
 		else //Everything is valid and we have received the data back
 		{
