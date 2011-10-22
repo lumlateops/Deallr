@@ -23,7 +23,7 @@ class Application_Model_Deals
 
 	private static function _getUser()
 	{
-		return 4;//Application_Model_User::id();
+		return Application_Model_User::id();
 	}
 	
 	static function getWalletDeals($page = 1, $sort = self::SORT_POST_DATE)
@@ -51,7 +51,18 @@ class Application_Model_Deals
 		
 		$service_request = $is_wallet ? array('deals', 'wallet') : array('deals');
 		$api_request = new Application_Model_APIRequest( $service_request, $service_params );
-		$api_response = $api_request->call();
+		try{
+			$api_response = $api_request->call();
+		} catch(Exception $e) {
+			$ret_arr = array(
+				'deal_count' => 0, 
+				'max_pages' => 0, 
+				'current_page' => $page,
+				'current_sort' => $sort,
+				'deals' =>  array()
+			);
+			return $ret_arr;
+		}
 		
 		$deal_count = intval($api_response['numberOfResults'][0], 10);
 		$max_pages = isset( $api_response['numberOfPages'] ) ? intval($api_response['numberOfPages'][0], 10) : 0;
@@ -88,9 +99,10 @@ class Application_Model_Deals
 				'deal_free_shipping' => $deal['freeShipping'] ? '' : 'none',
 				'deal_tags' => $tags,
 				'deal_in_wallet' => $is_wallet ? 1 : ($deal['isInWallet'] ? 1 : 0),
+				'deal_share_url' => isset($deal['shareUrl']) ? urlencode($deal['shareUrl']) : '',
 
 				'deal_publisher_id' => $deal['retailer']['id'],
-			 	'deal_publisher_logo' => $deal['retailer']['image'],
+			 	'deal_publisher_logo' => isset( $deal['retailer']['image'] ) ? $deal['retailer']['image'] : '',
 				'deal_publisher_url' => $deal['retailer']['domain'],
 				'deal_publisher' => $deal['retailer']['name'],
 				
@@ -119,7 +131,8 @@ class Application_Model_Deals
 		$deal_details = array(
 			'deal_email_content' => $api_response['deal'][0]['dealEmail']['content'],
 			'deal_email_subject' => $api_response['deal'][0]['dealEmail']['subject'],
-			'deal_title' => $api_response['deal'][0]['title']
+			'deal_title' => $api_response['deal'][0]['title'],
+			'deal_details' => $api_response['deal'][0]['dealEmail']['parsedContent']
 		);
 		
 		return $deal_details;
@@ -153,9 +166,25 @@ class Application_Model_Deals
 		return $api_response['status'][0] == 'ok';	
 	}
 	
-	static function getDealsFromWallet()
+	static function getDealDetailByShareURLHandle($share_url_handle)
 	{
-	
+		$service_params = array(
+			'shareUrl' => $share_url_handle
+		);
+		
+		$api_request = new Application_Model_APIRequest( array('deal', 'share', 'detail'), $service_params );
+		$api_request->setMethod( Application_Model_APIRequest::METHOD_POST );
+		$api_response = $api_request->call();
+		
+		$deal_details = array(
+			'deal_email_content' => $api_response['deal'][0]['dealEmail']['content'],
+			'deal_email_subject' => $api_response['deal'][0]['dealEmail']['subject'],
+			'deal_title' => $api_response['deal'][0]['title'],
+			'deal_details' => $api_response['deal'][0]['dealEmail']['parsedContent'],
+			'deal_id' => $api_response['deal'][0]['id']
+		);
+		
+		return $deal_details;
 	}
 }
 

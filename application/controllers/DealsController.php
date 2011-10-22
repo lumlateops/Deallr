@@ -17,14 +17,7 @@ class DealsController extends DeallrBaseController
     public function indexAction()
     {
         // action body
-		$deal_id = 0;
-		if ($deal_id = $this->_getParam('deal_id')) {
-			$details = Application_Model_Deals::getDetails($deal_id);
-			$this->view->page_title = $details['deal_title'];
-		} else {
-			$this->view->page_title = 'Deals for ' . $this->view->user['fbFullName'];
-		}
-		
+		$this->view->page_title = 'Deals for ' . $this->view->user['fbFullName'];
 		$page = 1;
 		if ($this->_hasParam('page')) {
 			$page = $this->_getParam('page');
@@ -54,6 +47,32 @@ class DealsController extends DeallrBaseController
     	}
     	$this->_helper->layout->setLayout('dealdetails');
     	$this->view->details = $details;
+    }
+    
+    public function dealAction()
+    {
+		$deal_share_handle = '';
+		$deal_share_handle_separator = '/';
+		
+		if ($this->_getParam('deal_year') 
+			&& $this->_getParam('deal_month') 
+			&& $this->_getParam('deal_day') 
+			&& $this->_getParam('deal_share_handle')) {
+			
+			$deal_share_handle = $this->_getParam('deal_year')
+								 . $deal_share_handle_separator
+								 . $this->_getParam('deal_month')
+								 . $deal_share_handle_separator
+								 . $this->_getParam('deal_day')
+								 . $deal_share_handle_separator
+								 . $this->_getParam('deal_share_handle');
+			
+			$details = Application_Model_Deals::getDealDetailByShareURLHandle($deal_share_handle);
+			$this->view->page_title = $details['deal_title'];
+			$this->view->page_desc = $details['deal_details'];
+			$this->view->deal_details = $details;
+			$this->view->deal_id = $details['deal_id'];
+		}
     }
 }
 

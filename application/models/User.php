@@ -92,9 +92,9 @@ class Application_Model_User
 				catch(Exception $e)
 				{
 					error_log("Wow guys, you removed accounts directly from the database.");
-					$messages = $e->getMessage();
+					$messages = $e->getCode();
 					$messages = explode(' ', $messages);
-					if( in_array('NO_SUCH_USER', $messages) )
+					if( in_array(Application_Model_APIRequest::ERR_CODE_NO_SUCH_USER, $messages) )
 					{
 						$redirect_url = 'http://'.$_SERVER['HTTP_HOST'];
 						$fb_access_code = $_REQUEST['code'];
@@ -164,9 +164,9 @@ class Application_Model_User
 		}
 		catch(Exception $e)
 		{
-			$messages = $e->getMessage();
+			$messages = $e->getCode();
 			$messages = explode(' ', $messages);
-			if( in_array('NO_SUCH_USER', $messages) )
+			if( in_array(Application_Model_APIRequest::ERR_CODE_NO_SUCH_USER, $messages) )
 			{
 				$data = $user;
 				$response = Application_Model_User::add( $data );
