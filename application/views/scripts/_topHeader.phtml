@@ -1,14 +1,12 @@
 <div id="header_bar"><!-- Start of header_bar -->
     <div id="header_content"><!-- Start of header_content -->
 		<div id="top_logo"><!-- Start of top_logo -->
-      		<img src="<?= $this->baseUrl(); ?>/resources/images/logo.png" alt="Deallr logo" width="200px" height="164px" alt="qop logo" />
+			<?php $url = $this->user ? 'deals' : ''; ?>
+      		<a href="<?= $this->baseUrl() . '/' . $url; ?>"><img src="<?= $this->baseUrl(); ?>/resources/images/logo.png" alt="Deallr logo" width="200px" height="164px" alt="qop logo" /></a>
 		</div><!-- End of top_logo -->
 
 		<div id="top_menu"><!-- Start of top_menu -->
-			<?php echo $this->partial('_navigation.phtml', array(
-				'controller' => isset($this->controller) ? $this->controller : '',
-				'user' => isset($this->user) ? $this->user : ''
-			)); ?>
+			<?php echo $this->partial('_navigation.phtml', $this); ?>
 		</div><!-- End of top_menu -->
 	</div><!-- End of header_content -->
 </div><!-- End of header_bar -->

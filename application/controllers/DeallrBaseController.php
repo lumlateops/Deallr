@@ -7,21 +7,30 @@ class DeallrBaseController extends Zend_Controller_Action
 
     public function init()
     {
+    	$config = Zend_Registry::get('config');
+    	$this->view->ga_id = $config->ga->id;
+    	
 		$request = Zend_Controller_Front::getInstance()->getRequest();
 		$this->view->controller = $request->getControllerName();
-    
+		$this->view->action = $request->getActionName();
+		    
         $this->_redirector = $this->_helper->getHelper('Redirector');
         $this->is_authenticated = Application_Model_User::isAuthenticated();
 
-        if( !$this->is_authenticated && !in_array($this->view->controller, array('index', 'signup')) )
+        if (!$this->is_authenticated && !in_array($this->view->controller, array('index', 'signup')))
         {
-        	error_log("Redirecting");
-        	$this->_redirector->gotoSimple('', '', null, array());
-        	exit();
+        	if ($this->view->controller == 'deals' && in_array($this->view->action, array('deal', 'details'))) {
+        	
+        	} else {
+        		$this->_redirector->gotoSimple('', '', null, array());
+        		exit();
+        	}
         }
 		
-		$auth_session = Zend_Registry::get('auth_session');
-        $this->view->user = $auth_session->auth_user;
+		if ($this->is_authenticated) {
+			$auth_session = Zend_Registry::get('auth_session');
+       		$this->view->user = $auth_session->auth_user;
+        }
 	}
 }
 
