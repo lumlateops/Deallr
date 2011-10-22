@@ -19,5 +19,13 @@ class IndexController extends DeallrBaseController
 			}
 		}
     }
+    
+    public function tosAction()
+    {
+    }
+
+    public function privacyAction()
+    {
+    }
 }
 
