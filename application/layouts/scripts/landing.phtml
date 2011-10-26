@@ -5,72 +5,38 @@
 	));
 	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'action' => $this->action));
 ?>
-	<h1 style="font-size:46px;text-align:center;">Deal management made easy and fun.</h1>
-	<div style="background:#F2F2F2;border:1px solid #EEE;border-radius:6px;margin:10px auto;width:600px;padding:125px 0;color:#AAA;text-align:center;">Video or Screenshot Here</div>
-	<div class="message_bar"><!-- Start of message_bar -->
-		<div class="wrapper">
-			<div class="message_content" style="text-align:right;float:none;">Join Deallr now. Its free.
-				<div class="message_button" style="margin-top: -26px; margin-left: 20px;">
-					<div class="buttonbackground"><a href="#" class="button blue bigrounded" id="fb-login">Login with Facebook</a></div>
-				</div>
-			</div>
-        </div>
-	</div><!-- End of message_bar -->
+	<div class="wrapper">
+		<h1 id="landing-tag-line-container">Start <img src="<?= $this->baseUrl(); ?>/resources/images/love.png" alt="love" />ing deals again.</h1>
+		<div id="landing-img-container"><img src="<?= $this->baseUrl(); ?>/resources/images/landing-final.png" alt="landing image" /></div>
+		<div id="landing-fb-login">
+			<span class="FBConnectButton FBConnectButton_Small">
+				<span id="fb-login" class="FBConnectButton_Text">Login with Facebook</span>
+			</span>
+		</div>
+	</div>
 	
 	<div class="wrapper">
 		<div class="shaded_bar"></div>
 		<div class="one_third_center"><!-- Start of one_third -->
-			<h3>All your Deals in one place</h3>
-			<p>Deallr allows you to manage all your deals from one place. Subscribe/unsubscribe to all major retailers and deal websites.</p>
+			<a href="#"><img src="<?= $this->baseUrl(); ?>/resources/images/badge1.jpg" width="280" height="172" alt="badge 1"></a>		
+			<h3>Discover deals like never before</h3>
+			<p>Don't miss a good deal again. Use advanced filters to zero in on the best deals. Forget searching through thousands of emails.</p>
 			<!-- <a href="#" class="button white big">Read More</a> -->
 		</div><!-- End of one_third -->
 
 		<div class="one_third_center"><!-- Start of one_third -->
+			<a href="#"><img src="<?= $this->baseUrl(); ?>/resources/images/badge4.jpg" width="280" height="172" alt="badge 2"></a>
 			<h3>Free your personal email inbox</h3>
-			<p>Deallr gives you an @deallr.com email address just for deals signup. You no longer have to give away your personal email address.</p>
+			<p>Deallr gives you an @deallr.com email address just for deals. You no longer have to give away your personal email address.</p>
 			<!-- <a href="#" class="button white big">Read More</a> -->
 		</div><!-- End of one_third -->
 
 
 		<div class="column-last_center"><!-- Start of one_third_last -->
-			<h3>Add Deals to Wallet</h3>
-			<p>Add deals to your digital wallet to access later. Deallr also learns your preferences based on your wallet deals.</p>
+			<a href="#"><img src="<?= $this->baseUrl(); ?>/resources/images/badge3.jpg" width="280" height="172" alt="badge 3"></a>
+			<h3>Deals from major retailers</h3>
+			<p>Deallr allows you to manage all your deals from one place. Subscribe/unsubscribe to all major retailers and deal websites.</p>			
 			<!-- <a href="#" class="button white big">Read More</a> -->
 		</div><!-- End of one_third_last -->
 	</div><!-- end of wrapper -->
-
-	<div class="wrapper" style="margin-top: 20px;">
-
-		<div class="one_third_center"><!-- Start of one_third -->
-			<h3>Get Personalized Deals</h3>
-			<p>Deallr shows you only the deals that you are interested in based on your preferences.</p>
-			<!-- <a href="#" class="button white big">Read More</a> -->
-		</div><!-- End of one_third -->
-
-		<div class="one_third_center"><!-- Start of one_third -->
-			<h3>Deal Ending Reminders</h3>
-			<p>Deallr reminds you when any of your favorite deals is about to expire, so you never miss them.</p>
-			<!-- <a href="#" class="button white big">Read More</a> -->
-		</div><!-- End of one_third -->
-
-		<div class="column-last_center"><!-- Start of one_third_last -->
-			<h3>Popular Deals</h3>
-			<p>Deallr shows you the popular deals each day along with your own personal list of deals.</p>
-			<!-- <a href="#" class="button white big">Read More</a> -->
-		</div><!-- End of one_third_last -->
-	</div>
-    
-    <div class="message_bar" style="background:#F1EFED; height:150px; border-top:1px solid #D5D5D7;"><!-- Start of menu_bar -->
-    	<div class="wrapper">
-			<div class="message_content" style="float: none; text-align: center; width: 100%; padding: 0;">Deallr supports deals from major retailers and deal web sites.</div>
-			<div id="retailers-logos">
-				<ul>
-					<li><a href="#"><img src="http://www1.macys.com/img/nav/co_macysLogo3.gif" alt="image 1" /></a><li>
-					<li><a href="#"><img src="http://www.pier1.com/Portals/0/logo.gif" alt="image 1" /></a><li>
-					<li><a href="#"><img src="http://www.apeainthepod.com/images/Site/pea_logo_052610.gif" alt="image 1" /></a><li>
-					<li><a href="#"><img src="http://shop.guess.com/content/guess/images/header/guessLogo.png" alt="image 1" /></a><li>
-				</ul>
-			</div>
-        </div>
-	</div><!-- Start of menu_bar -->
 <?php echo $this->partial('_footer.phtml'); ?>

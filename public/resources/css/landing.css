@@ -14,3 +14,59 @@
 #signup-container { float: right; font-size: 15px; line-height: 25px; margin-top: 40px; }
 
 .wrapper { padding-top: 0; }
+
+#landing-img-container { float:right; }
+#landing-tag-line-container { color:#222;font-family:HelveticaNeue, 'Helvetica Neue', HelveticaNeueRoman, HelveticaNeue-Roman, 'Helvetica Neue Roman', TeXGyreHerosRegular, Helvetica, Tahoma, Geneva, Arial, sans-serif;font-size:40px;font-weight:bold;float:left;text-align:center;clear:both;margin-top:126px; }
+#landing-fb-login {float:left;margin-top:90px;}
+#landing-tag-line-container, #landing-fb-login {margin-left:25px;}
+#fb-login { cursor:pointer; }
+a.FBConnectButton, .FBConnectButton {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.FBConnectButton {
+	background: #29447E url(/resources/images/connect_sprite.png);
+	background-repeat: no-repeat;
+	cursor: default;
+	display: inline-block;
+	padding: 0 0 0 1px;
+	text-decoration: none;
+	outline: none;
+}
+
+.FBConnectButton .FBConnectButton_Text {
+	background: #5F78AB url(/resources/images/connect_sprite.png);
+	border-top: solid 1px #879AC0;
+	border-bottom: solid 1px #1A356E;
+	color: white;
+	display: block;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	font-weight: bold;
+	padding: 12px 6px 14px;
+	margin: 1px 1px 0 0;
+	text-shadow: none;
+	margin-left: 37px;
+	font-size: 18px; 
+}
+
+.FBConnectButton_Small {
+	background-position: left -307px;
+	font-size: 10px;
+	line-height: 10px;
+}
+
+h3 { padding-top: 25px; }
+#top_menu { margin-top: 10px; }
+#top_menu a.active, #top_menu a, #top_menu a:visited { color: #4AAADB !important; }
+#top_menu a:hover { text-decoration: underline; color: #4AAADB !important; }
+#header_bar { background-image: none; }
+#top_logo {
+	float: left;
+	width: 200px;
+	height: 164px;
+	margin-top: 0;
+	margin-bottom: 0;
+	position: absolute;
+	top: -18px;
+}
