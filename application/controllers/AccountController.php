@@ -22,50 +22,45 @@ class AccountController extends DeallrBaseController
 
     public function addAction()
     {
-    	$email =  $this->_getParam('email');
     	$provider = $this->_getParam('provider');
-    	$email_password = $this->_getParam('email_password');
+    	error_log(' Provider = '.$provider);
+    	$this->view->err_msg = '';
     	
-    	error_log("Email ".$email.' Password = '.$email_password.' Provider = '.$provider);
-    	if( $email && $provider && $email_password )
-    	{
-    		$this->view->err = '';
-    		try
-    		{
-    			$account_obj = new Application_Model_Account($email, $email_password, $provider);
-    			$this->view->status = $account_obj->add() ? 1 : 0;
+    	if ($provider) {
+    		try {
+    			$account_obj = new Application_Model_Account($provider);
+    			$provider_url = $account_obj->add();
+    			if ($provider_url) {
+    				header('Location: ' . $provider_url);
+    				die();
+    			}
     		}
-    		catch( Exception $e )
-    		{
-    			$this->view->err = $e->getMessage();
+    		catch(Exception $e) {
+    			$this->view->err_msg = $e->getMessage();
     		}
     	}
-    	else
-    	{	    	
-	        // action body
-	        $api_request = new Application_Model_APIRequest( array('providers', 'active') );
-			$response = $api_request->call();
-			$this->view->providers = $response['providers'];
-		}
+    	
+    	// action body
+        $api_request = new Application_Model_APIRequest( array('providers', 'active') );
+		$response = $api_request->call();
+		$this->view->providers = $response['providers'];
     }
     
     public function upgradeAction()
     {
     	$userId = $this->_getParam('userId');
-    	$email = $this->_getParam('email');
     	$provider = $this->_getParam('provider');
     	$oauth_verifier = $this->_getParam('oauth_verifier');
     	$oauth_token = $this->_getParam('oauth_token');
     	
     	//Validate UserId
-		$account_obj = new Application_Model_Account($email, $provider);
+		$account_obj = new Application_Model_Account($provider);
 		$this->view->status = $account_obj->upgradeToken($oauth_verifier, $oauth_token);
-		if( $this->view->status )
-		{
+		$email = '';
+		if ($this->view->status) {
 			$this->_redirector->gotoSimple('thankyou', 'account', null, array('email' => $email));
 		}
-		else
-		{
+		else {
 			$this->_redirector->gotoSimple('add', 'account', null, array());
 		}    	
     }
@@ -73,12 +68,10 @@ class AccountController extends DeallrBaseController
     public function thankyouAction()
     {
     	$email = $this->_getParam('email');
-    	if( !$email )
-    	{
+    	if (!$email) {
     		$this->_redirector->gotoSimple('add', 'account', null, array());
     	}
-    	else
-    	{
+    	else {
     		$this->view->email = $this->_getParam('email');
     	}
     }

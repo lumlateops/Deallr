@@ -1,27 +1,30 @@
 <h2>Authorize an email account</h2>
 <p id="add-email-intro">You are one step away from managing your deals in Deallr. Please add an email account from which Deallr should fetch deals.</p>
 <br/><br/><br/>
-<h3>Choose a provider:</h3>
+<h3>Supported Providers:</h3>
 
-<div id="providers-form-errors" class="error" style="display:none;"></div>
+<div id="providers-form-errors" class="error" style="<?= trim($this->err_msg) ? "" : "display:none;" ?>">
+	<?= $this->err_msg ?>
+</div>
 <ul id="providers">
 <?php
 
 $has_providers = false;
-$count = 1;
-foreach( $this->providers as $provider )
+foreach ($this->providers as $provider)
 {
-	if( isset( $provider['logoUrl'] ) )
-	{
+	if (isset($provider['logoUrl'])) {
 		$has_providers = true;	
-		echo '<li '.($count == 1 ? 'class="selected"' : '').' name="'.strtolower($provider['name']).'">';
+		echo '<li name="'.strtolower($provider['name']).'">';
 		echo '<div class="provider-image"><img src="'.$provider['logoUrl'].'" alt="Provider Image" /></div>';
-		echo '<div class="provider-email-input-container"><input type="text" name="email" '.($count == 1 ? 'autofocus="true"' : '').' autocomplete="off" placeholder="'.$provider['name'].' email address" /></div>';
-		echo '<div class="provider-email-input-container clear"><input type="password" name="email_password" autocomplete="off" placeholder="'.$provider['name'].' email password" /></div>';
-		echo '<div class="clear"></div>';
+		echo '<div class="provider-email-input-container">
+				<div class="add-email-button-container">
+					<div class="buttonbackground">
+						<a class="button white bigrounded" href="' . $this->baseUrl() .'/account/add/provider/'.strtolower($provider['name']).'">Add Email</a>
+					</div>
+		 		</div>
+			</div>';
+		echo '<div class="clearboth"></div>';
 		echo '</li>';
-		
-		$count++;
 	}
 }
 
@@ -31,15 +34,6 @@ if( !$has_providers )
 {
 	echo '<h3>Error: No active providers found.</h3>';
 }
-else
-{//disabled="true"
-	echo '<div id="add-email-button-container">
-			<div class="buttonbackground">
-				<a class="button white bigrounded" href="#" id="add-email">Add Email</a>
-			</div>
-		 </div>';
-}
-
 ?>
 
 <p id="email-add-disclaimer">

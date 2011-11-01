@@ -1,21 +1,15 @@
 /**************************Account Add***************************/
 #providers {  }
-#providers li { opacity: 0.5; padding: 20px 15px; }
-#providers li:hover { cursor: pointer; background: #EFEFEF; opacity: 1; }
-#providers li.selected { background: #EFEFEF; opacity: 1; }
+#providers li { opacity: 0.5; padding: 10px 15px; }
+#providers li:hover { opacity: 1; }
 
 #add-email-intro { font-size: 15px; }
 #email-add-disclaimer { color: #5F5F6E; margin-top: 100px; font-size: 12px; line-height: 20px; }
-#add-email-button-container { margin-top:30px; margin-bottom:20px;text-align:center; }
-#add-email-button-container a { width: 130px; }
+.add-email-button-container { margin-top:30px; margin-bottom:20px;text-align:center; }
+.add-email-button-container a { width: 130px; }
 
-.provider-email-input-container input[type="text"],
-.provider-email-input-container input[type="password"] { background: #FFF; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border: 1px solid #AAA; font-size: 16px; margin-right: 100px; opacity:0.8; padding: 6px; width: 260px; -moz-box-shadow: none; -webkit-box-shadow: none; color: #000; }
-.provider-email-input-container input[type="text"]:hover,
-.provider-email-input-container input[type="password"]:hover { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; opacity: 1; }
-
-.provider-image { float: left; margin-left: 20px; width: 300px; }
-.provider-email-input-container { float: right; margin-top: 10px; }
+.provider-image { float: left; margin-left: 20px; width: 300px; position: relative; top: 30px; }
+.provider-email-input-container { float: left; }
 .provider-image img { vertical-align: middle; }
 
 .error { font-size: 15px; margin: 10px 0px; padding: 10px; }
@@ -23,4 +17,4 @@
 /******** ThankYou Page ************/
 #thankyou-text-container { margin: 40px auto 150px; }
 .thankyou-text { font-size: 18px; line-height: 30px; margin: 0 auto; text-align: center; width: 600px; }
-#add-email-button-container a.add-more { width: 250px; }
+.add-email-button-container a.add-more { width: 250px; }
