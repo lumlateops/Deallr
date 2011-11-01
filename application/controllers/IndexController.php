@@ -27,5 +27,13 @@ class IndexController extends DeallrBaseController
     public function privacyAction()
     {
     }
+
+    public function aboutAction()
+    {
+    }
+
+    public function contactAction()
+    {
+    }
 }
 
