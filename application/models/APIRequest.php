@@ -25,6 +25,9 @@ class Application_Model_APIRequest
 	const ERR_OAUTH_EXCEPTION                   = "OAUTH_EXCEPTION";
 	const ERR_SERVER_EXCEPTION                  = "SERVER_EXCEPTION";
 	const ERR_UNSUPPORTED_PROVIDER              = "UNSUPPORTED_PROVIDER";
+	const ERR_INVALID_BETA_TOKEN				= "INVALID_BETA_TOKEN";
+	const ERR_USED_BETA_TOKEN					= "USED_BETA_TOKEN";
+	const ERR_INACTIVE_BETA_TOKEN				= "INACTIVE_BETA_TOKEN";
 
 	const ERR_CODE_ACCOUNT_NOT_FOUND                 = 1001;
 	const ERR_CODE_AUTHENTICATION_FAILED             = 1002;
@@ -37,6 +40,10 @@ class Application_Model_APIRequest
 	const ERR_CODE_OAUTH_EXCEPTION                   = 1009;
 	const ERR_CODE_SERVER_EXCEPTION                  = 1010;
 	const ERR_CODE_UNSUPPORTED_PROVIDER              = 1011;
+	const ERR_CODE_INVALID_BETA_TOKEN				 = 1012;
+	const ERR_CODE_USED_BETA_TOKEN					 = 1013;
+	const ERR_CODE_INACTIVE_BETA_TOKEN				 = 1014;
+	
 
 	static $ERR_CODES = array(
 		self::ERR_ACCOUNT_NOT_FOUND                 => 1001,
@@ -49,7 +56,10 @@ class Application_Model_APIRequest
 		self::ERR_NO_SUCH_USER                      => 1008,
 		self::ERR_OAUTH_EXCEPTION                   => 1009,
 		self::ERR_SERVER_EXCEPTION                  => 1010,
-		self::ERR_UNSUPPORTED_PROVIDER              => 1011
+		self::ERR_UNSUPPORTED_PROVIDER              => 1011,
+		self::ERR_INVALID_BETA_TOKEN				=> 1012,
+		self::ERR_USED_BETA_TOKEN					=> 1013,
+		self::ERR_INACTIVE_BETA_TOKEN				=> 1014,
 	);
 	
 	/**
