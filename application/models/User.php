@@ -176,6 +176,20 @@ class Application_Model_User
 		return true;
 	}
 	
+	public static function getCurrentUserDeallrAddress()
+	{
+		$service_params = array(
+			'userId' => Application_Model_User::id()
+		);
+		$api_request = new Application_Model_APIRequest( array('account', 'deallr'), $service_params );
+		$api_response = $api_request->call();
+		if (isset($api_response) && isset($api_response['email'][0]) && $api_response['email'][0]) {
+			return $api_response['email'][0];
+		}
+		
+		return false;
+	}
+	
 	public static function add($params)
 	{
 		$auth_session = Zend_Registry::get('auth_session');

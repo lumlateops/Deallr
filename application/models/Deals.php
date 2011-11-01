@@ -65,14 +65,13 @@ class Application_Model_Deals
 		}
 		
 		$deal_count = intval($api_response['numberOfResults'][0], 10);
-		$max_pages = isset( $api_response['numberOfPages'] ) ? intval($api_response['numberOfPages'][0], 10) : 0;
+		$max_pages = isset($api_response['numberOfPages']) ? intval($api_response['numberOfPages'][0], 10) : 0;
+		$fetch_status = isset($api_response['fetchStatus']) ? $api_response['fetchStatus'][0] : '';
 		
-		if ($is_wallet)
-		{
+		if ($is_wallet) {
 			$deals = isset( $api_response['wallet'] ) ? $api_response['wallet'] : array();
 		}
-		else
-		{
+		else {
 			$deals = isset( $api_response['deals'] ) ? $api_response['deals'] : array();
 		}
 		$formatted_deals = array();
@@ -115,7 +114,8 @@ class Application_Model_Deals
 			'max_pages' => $max_pages, 
 			'current_page' => $page,
 			'current_sort' => $sort,
-			'deals' =>  $formatted_deals
+			'deals' =>  $formatted_deals,
+			'fetch_status' => $fetch_status
 		);
 		return $ret_arr;
 	}
