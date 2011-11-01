@@ -3,11 +3,11 @@
 url('qlassik_tb-webfont.woff') format('woff'),
 url('qlassik_tb-webfont.ttf') format('truetype'),
 url('qlassik_tb-webfont.svg#webfontuwnssiuM') format('svg');font-weight:normal;font-style:normal;}
-body{margin:0px;padding:0px;overflow-x:hidden !important;background-color:#fff;}
+body{background: #FFF; margin:0px;padding:0px;overflow-x:hidden !important;background-color:#fff;}
 img{border:none;/* -webkit-box-shadow:0 0 5px rgba(150,150,150,.6);-moz-box-shadow:0 0 5px rgba(0,0,0,0.6);box-shadow:0 0 5px rgba(150,150,150,.6); */}
 img.left{border:none;-webkit-box-shadow:0 0 5px rgba(0,0,0,.6);-moz-box-shadow:0 0 5px rgba(0,0,0,0.6);box-shadow:0 0 5px rgba(0,0,0,.6);float:left;margin-right:20px;}
 img.right{border:none;-webkit-box-shadow:0 0 5px rgba(0,0,0,.6);-moz-box-shadow:0 0 5px rgba(0,0,0,0.6);box-shadow:0 0 5px rgba(0,0,0,.6);float:right;margin-left:20px;}
-p{font-family:Georgia,"Times New Roman",Times,serif;font-size:13px;color:#838397;line-height:18px;font-weight:normal;}
+p{font-family:Georgia,"Times New Roman",Times,serif;font-size:13px;color:#555;line-height:18px;font-weight:normal;}
 a{color:#4aaadb;line-height:18px;font-weight:normal;text-decoration:none;}
 a:hover{color:#4aaadb;font-weight:normal;text-decoration:underline;}
 p.intro{font-family:Georgia,"Times New Roman",Times,serif;font-size:16px;color:#2d2d36;line-height:20px;font-weight:normal;clear:both;}
@@ -17,7 +17,9 @@ h3{font-family:QlassikMediumRegular;font-size:24px;color:#5F5F6E;margin:0;paddin
 h4{font-family:QlassikMediumRegular;font-size:22px;color:#ececea;margin:0;padding:0 0 20px 0;font-weight:normal;}
 h5{font-family:QlassikMediumRegular;font-size:22px;color:#4aaadb;margin:0;padding:0 0 15px 0;font-weight:normal;}
 h6{font-family:QlassikMediumRegular;font-size:20px;color:#5F5F6E;margin:0;padding:0 0 15px 0;font-weight:normal;}
+.aright{text-align:right;}
 .clear{clear:both;margin-top:50px;}
+.clearboth { clear: both; }
 hr{clear:both;border-top:0;height:3px;margin:40px 0 26px 0;border-top:1px solid #cccccc;border-bottom:1px solid #e2e2e2;border-right:none;border-left:none;}
 blockquote{margin:30px 0 30px 23px;padding:0 0 0 33px;text-align:left;width:90%;font-family:Georgia,"Times New Roman",Times,serif;font-size:22px;color:#2d2d36;font-style:oblique;clear:both;}
 .pullquoteleft{margin:10px 20px 10px 0px;padding:0px;text-align:left;font-family:Georgia,"Times New Roman",Times,serif;font-size:20px;color:#2d2d36;font-style:oblique;float:left;width:40%;}
@@ -32,25 +34,27 @@ div.hr{height:30px;background:url(../images/hr.png) no-repeat scroll center;clea
 #top_menu{float:right;width:700px;height:50px;font-family:QlassikMediumRegular;}
 #top_menu a{font-size:18px;font-family:QlassikMediumRegular;}
 #top_menu li ul li a{font-size:16px;font-family:QlassikMediumRegular;}
-#footer{clear:both;background-image:url(../images/footer_bground.jpg);background-repeat:repeat-x;min-height:186px;margin-top:0 auto;height:inherit;}
-#footer_inner{margin:0 auto;width:960px;height:inherit;}
+#footer{clear:both;background-repeat:repeat-x;margin-top:0 auto;height:inherit;}
+#footer_inner{margin:0 auto;padding: 20px 0; width:960px;height:inherit;border-top:1px solid #EEE;}
 #footer p{font-family:Georgia,"Times New Roman",Times,serif;font-size:12px;color:#aaaab1;line-height:18px;font-weight:normal;margin:0 0 20px 0;}
 #footer a{color:#4aaadb;font-style:italic;font-size:12px;font-weight:normal;text-decoration:none;}
 #footer a:hover{color:#4aaadb;font-style:italic;font-size:12px;font-weight:normal;text-decoration:underline;}
 /*CustomRR*/
 .profile-pic { width: 26px; height: 26px; margin: -3px 10px 0 -4px !important; float: left; }
-#footer ul li a{font-size:16px;font-family:QlassikMediumRegular;font-style:normal;color:#AAAAB1;text-decoration:none;}
-#footer ul li a:hover{color:#FFF;text-decoration:none;font-style:normal;font-size:16px;}
+#footer ul li, #footer ul li a{font-size:14px;font-family:QlassikMediumRegular;font-style:normal;text-decoration:none;}
+#footer ul li a:hover{text-decoration:underline;font-style:normal;font-size:14px;}
+#footer_links { margin-top: 0; }
+#footer_links li { display: inline; margin-right: 25px; }
 ul{margin:20px 0 0 0;padding:0;list-style:none;list-style-position:inside;line-height:1.8em;list-style-type:disc;}
 li{padding:0 0 0 0;margin:0;list-style:none;font-family:QlassikMediumRegular;font-size:12px;}
 .message_bar{background-image:url("../images/light_bground.jpg");background-repeat:repeat-x;height:90px;padding-top:15px;width:100%;clear:both;}
-.wrapper{width:960px;margin:0 auto;padding-bottom:40px;padding-top:40px;}
+.wrapper{width:960px;margin:0 auto;padding-bottom:20px;padding-top:40px;}
 .portfolio_title{font-family:QlassikMediumRegular;font-size:20px;color:#5F5F6E;margin:0;padding:10px 0 0 0;display:block;font-weight:normal;}
 .message_content{color:#5F5F6E;float:left;font-family:QlassikMediumRegular;font-size:24px;padding-top:23px;text-align:left;width:700px;}
 .message_button{float:right;}
 .shaded_bar{width:960px;height:30px;background-image:url(../images/shaded_bar.jpg);background-repeat:no-repeat;clear:both;}
 #topcontrol img{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}
-#footer ul.social li{display:inline;margin:0 5px 0 0;padding:2px 0 0 0;}
+#footer ul.social li{display:inline;margin:0 5px 0 0;padding:0px 0 0 0;}
 #footer ul.social{margin:0px;}
 #social{padding:20px 0 20px 0;}
 #footer img,img.a{padding:2px 0 0 0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}
@@ -151,7 +155,7 @@ STYLES FOR CONTACT FORM
 .contact_wrapper{float:left;}
 .input-submit{background-image:url(../images/subscribe.png);width:87px;height:35px;background-repeat:no-repeat;border:none;cursor:pointer;background-color:transparent;line-height:42px;}
 input[type=text]{background-color:#2D2E36;border:none;font-family:Helvetica,Arial,Georgia,"Times New Roman",Times,serif;color:#aaaab1;font-size:12px;width:150px;padding:8px;-webkit-border-radius:0.5em 0.5em 0.5em 0.5em;-moz-border-radius:0.5em 0.5em 0.5em 0.5em;border-radius:0.5em 0.5em 0.5em 0.5em;float:left;margin-right:10px;-webkit-box-shadow:0 2px 3px rgba(0,0,0,.7) inset;-moz-box-shadow:0 2px 3px rgba(0,0,0,0.7) inset;box-shadow:0 2px 3px rgba(0,0,0,.7) inset;}
-input[type=text]:focus{border:none;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px 3px 3px 3px;}
+/* input[type=text]:focus{border:none;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px 3px 3px 3px;} */
 .form_error{border:1px solid #406a27;}
 #thanks{border:1px solid #bcbcbc;width:400px;padding:0px 10px 0px 0px;background-color:#f2f3ea;text-align:left;}
 #contactmessage{clear:both;padding-top:20px;font-family:QlassikMediumRegular;font-size:20px;color:#ffffff;text-align:left;}
@@ -241,3 +245,5 @@ RETAILER LOGOS
 	zoom:1;
 	white-space: nowrap;
 }
+
+#beta-invite-err { color: #C00; margin-top: 5px; }
