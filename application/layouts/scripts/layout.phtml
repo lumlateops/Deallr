@@ -1,19 +1,29 @@
-<?php	
+<?php
+
 	$css = array(
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/style.css" type="text/css" media="screen" />',
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/invalid.css" type="text/css" media="screen" />',
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/orange.css" type="text/css" media="screen" />',
 		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/colorbox.css" type="text/css" media="screen" />',
-		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" />',
-		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/'.$this->controller.'.css?'.date('U').'" type="text/css" media="screen" />'
-		
+		'<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" />'
 	);
+	
+	if (file_exists(APPLICATION_PATH.'/../public/resources/css/'.$this->controller.'.css')) {
+		$css[] = '<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/'.$this->controller.'.css?'.date('U').'" type="text/css" media="screen" />';
+	}
+	
+	if ($this->controller === 'index') {
+		$css[] = '<link rel="stylesheet" href="'.$this->baseUrl().'/resources/css/landing.css" type="text/css" media="screen" />';
+	}
 	
 	$js = array(
 		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/simpla.jquery.configuration.js?1"></script>',
-		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/jquery.colorbox-min.js"></script>',
-		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/'.$this->controller.'.js?'.date('U').'"></script>'
+		'<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/library/jquery.colorbox-min.js"></script>'
 	);
+
+	if (file_exists(APPLICATION_PATH.'/../public/resources/js/'.$this->controller.'.js')) {
+		$js[] = '<script type="text/javascript" src="'.$this->baseUrl().'/resources/js/'.$this->controller.'.js?'.date('U').'"></script>';
+	}
 	
 	echo $this->partial('_header.phtml', array(
 		'css' => $css, 
@@ -29,6 +39,6 @@
 		<?php 
 			echo $this->layout()->content;					
 		?>
-		<div class="clear"></div>
+		<div class="clearboth"></div>
 	</div>
 <?php echo $this->partial('_footer.phtml'); ?>
