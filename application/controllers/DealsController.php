@@ -37,6 +37,10 @@ class DealsController extends DeallrBaseController
 		$this->view->show_load_more = $deals['max_pages'] > $page;
 		
 		$this->view->sort_params = Application_Model_Deals::$SORT_PARAMS;
+		
+		$this->view->deallr_address = Application_Model_User::getCurrentUserDeallrAddress();
+		
+		$this->view->fetch_status = $deals['fetch_status'];
     }
     
     public function detailsAction()

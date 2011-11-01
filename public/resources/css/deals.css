@@ -59,6 +59,12 @@
 #deals-sort-select-container select { font-size: 14px; }
 
 #no-deals-msg-container { font-size: 16px; text-align: center; }
+#no-deals-msg-container .warning-img { margin-right: 10px; top: -4px; position: relative; vertical-align: middle; }
 
-.tip-container { margin-top: 55px; font-size: 14px; }
-.tip-container img { margin-right: 10px; vertical-align: middle; float: left; }
+.tip-container { margin-top: 55px; font-size: 16px; text-align: center; }
+.tip-container img { margin-right: 5px; vertical-align: middle; position: relative; top: -4px; }
+
+#user-deallr-address-container { text-align: center; color: #555; font-size: 20px; margin-top: 15px; font-family: QlassikMediumRegular; padding-bottom: 0; }
+#user-deallr-address, #user-deallr-address-label { display: inline-block; *display: inline; zoom: 1; }
+#user-deallr-address-label { margin-right: 20px; }
+#user-deallr-address { padding: 10px 40px; background: #EFEFEF; border: 1px solid #EFEFEF; -moz-border-radius: 4px; -webkit-border-radius: 4px; }

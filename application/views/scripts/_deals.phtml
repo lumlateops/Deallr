@@ -1,9 +1,20 @@
+<?php
+
+	$tip = '<p class="tip-container">
+				<img src="/resources/images/light_bulb.png" alt="Tip" />
+				<span class="tip-message">Tip: Free your personal inbox from deals. Use the following dedicated Deallr address for deal signups.</span>
+			</p>
+			<div class="wrapper" id="user-deallr-address-container">
+				<div id="user-deallr-address-label">Your personal Deallr address: </div>
+				<div id="user-deallr-address">' . $this->deallr_address . '</div>
+			</div>
+	';
+?>
 <div class="content-box" id="<?= $this->wallet ? "user-wallet-deals" : "user-deals" ?>"><!-- Start Content Box -->
 		
 	<div class="content-box-content">
 		
 		<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
-<!-- 			<h1>Deals in your Wallet</h1> -->
 			<?php if ($this->user_deals['deals']): ?>
 				<div id="sidebar">
 					<div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
@@ -62,7 +73,7 @@
 				<div id="deals-container">
 					<div id="deals-filter-overlay" style="display: none;"><img src="<?= $this->baseUrl() ?>/resources/images/loading.gif" alt="Loading" /> Applying Filter...</div>
 					<div id="deals-loading"><img src="<?= $this->baseUrl() ?>/resources/images/loading.gif" alt="Loading" /> Loading Deals...</div>
-					<div id="filter-no-results" style="display: none;">No deals matching your filter conditions was found.</div>
+					<div id="filter-no-results" style="display: none;">No deals matching your filter conditions were found.</div>
 				</div>
 				<div id="load-more-deals-container">
 					<a class="button white" id="load-more-deals">Load more..</a>
@@ -72,11 +83,19 @@
 					Application.__deals_obj = new Deals();
 					Application.__deals_obj.init( Application.__user_deals, <?= $this->wallet ?> );
 				</script>
+			<?php elseif (!$this->user['hasSetupEmailAccounts'] && !$this->wallet) : ?>
+				<p id="no-deals-msg-container">No email address found to fetch deals from. Please <a href="<?= $this->baseUrl(). '/account/add' ?>">add an email account</a> first.</p>
+				<?= $tip ?>
+			<?php elseif (isset($this->fetch_status) && $this->fetch_status == "inprogress" && !$this->wallet): ?>
+				<p id="no-deals-msg-container"><img src="<?= $this->baseUrl() ?>/resources/images/loading-bar.gif" alt="Loading Bar" /><br/><br/>Deallr is currently fetching deals from your inbox. Please wait a few moments.</p>
+				<?= $tip ?>
+			<?php elseif (isset($this->fetch_status) && $this->fetch_status == "error" && !$this->wallet): ?>	
+				<p id="no-deals-msg-container"><img src="<?= $this->baseUrl() ?>/resources/images/warning.png" class="warning-img" alt="Warning" />There was an error in reading deals from your inbox.</p>
 			<?php else: ?>
-				<p id="no-deals-msg-container">You currently do not have any deals<?= $this->wallet ? ' in your wallet. You can add your favorites from the Deals page.' : '' ?>.</p>
-				<p class="tip-container"><img src="/resources/images/tip.png" alt="Tip" /><span class="tip-message">Deallr automatically creates an email address for you to register for deals. This enables you to free your personal inbox and have a dedicated deals address. Once you register using @deallr.com address, those deals will automatically appear in your account here.</span></p>
+				<p id="no-deals-msg-container">You currently do not have any deals<?= $this->wallet ? ' in your wallet. You can add your favorites from the <a href="'.$this->baseUrl().'/deals">Deals</a> page' : '' ?>.</p>
+				<?= $tip ?>
 		 	<?php endif; //user_deals ?>
-			<div class="clear"></div>
+			<div class="clearboth"></div>
 		</div> <!-- End #tab1 -->
 				
 	</div> <!-- End .content-box-content -->

@@ -56,7 +56,7 @@
 	<!-- Site JS -->
 	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/landing.js"></script>
 	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/custom.js"></script>
-	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/utils/DeallrUtils.js"></script>		
+	<script type="text/javascript" src="<?= $this->baseUrl(); ?>/resources/js/utils/DeallrUtils.js"></script>
 	<?php 
 		if( isset($this->js) && is_array($this->js) )
 		{
@@ -74,29 +74,10 @@
 	                         // not display:none when measuring. Call before initialising 
 	                         // containing tabs for same reason. 
 	    });
-		
-		/*************************************************************************
-		*************************  TIPSY SCRIPT LEAVE HERE!  *********************
-		**************************************************************************/
 		$(function() {
-			$('#example-1').tipsy();
-			
-			$('#north').tipsy({gravity: 'n'});
-			$('#south').tipsy({gravity: 's'});
-			$('#east').tipsy({gravity: 'e'});
-			$('#west').tipsy({gravity: 'w'});
-			
-			$('#auto-gravity').tipsy({gravity: $.fn.tipsy.autoNS});
-			
-			$('.fade').tipsy({fade: true});
-			
-			$('#example-custom-attribute').tipsy({title: 'id'});
-			$('#example-callback').tipsy({title: function() { return this.getAttribute('original-title').toUpperCase(); } });
-			$('#example-fallback').tipsy({fallback: "?" });
-			
-			$('#example-html').tipsy({html: true });			
-		});
-	</script>	
+		    $('.fade').tipsy({fade: true});
+		});	    
+	</script>
 	<script type="text/javascript">
 		Application = {};
 		Application.__user_deals = {};
