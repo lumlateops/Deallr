@@ -31,6 +31,9 @@ class DeallrBaseController extends Zend_Controller_Action
 			$auth_session = Zend_Registry::get('auth_session');
        		$this->view->user = $auth_session->auth_user;
         }
+        
+        $this->messenger = $this->_helper->getHelper('FlashMessenger');
+        $this->view->flashMessenger = $this->messenger;
 	}
 }
 

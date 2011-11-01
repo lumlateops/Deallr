@@ -13,6 +13,20 @@ class SignupController extends DeallrBaseController
 		$fbcode = $this->_getParam( 'code' );		
 		if(empty($fbcode))
 		{
+			$betacode = $this->_getParam('btoken');
+			if (!$betacode) {
+				$this->messenger->addMessage('Beta invite code missing.');
+				header('Location: /');
+				die();
+			} else {
+				$ret_arr = $this->_validateToken($betacode);
+				if (!$ret_arr['status']) {
+					$this->messenger->addMessage($ret_arr['message']);
+					header('Location: /');
+					die();
+				}
+			}
+
 			$csrf_state = md5(uniqid(rand(), TRUE)); //CSRF protection
 			$auth_session->state = $csrf_state;
 			$login_url = Application_Model_Facebook::getFacebookSignupUrl($redirect_url, $csrf_state);
@@ -44,6 +58,30 @@ class SignupController extends DeallrBaseController
 				echo("The state does not match. You may be a victim of CSRF.");
 			}
 		}
+    }
+    
+    private function _validateToken($token)
+    {
+    	$message = "";
+    	$status = false;
+    	
+    	try {
+	    	$service_params = array(
+	    		'token' => $token
+	    	);
+			$api_request = new Application_Model_APIRequest( array('token', 'validate'), $service_params );
+			$api_response = $api_request->call();
+			if (isset($api_response) && isset($api_response['tokenValid'][0]) && $api_response['tokenValid'][0]) {
+				$status = true;
+			}
+		} catch(Exception $e) {
+			$message = $e->getMessage();
+		}
+		
+		return array(
+			'status' => $status,
+			'message' => $message
+		);
     }
 }
 

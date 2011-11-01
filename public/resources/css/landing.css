@@ -15,9 +15,10 @@
 
 .wrapper { padding-top: 0; }
 
-#landing-img-container { float:right; }
-#landing-tag-line-container { color:#222;font-family:HelveticaNeue, 'Helvetica Neue', HelveticaNeueRoman, HelveticaNeue-Roman, 'Helvetica Neue Roman', TeXGyreHerosRegular, Helvetica, Tahoma, Geneva, Arial, sans-serif;font-size:40px;font-weight:bold;float:left;text-align:center;clear:both;margin-top:126px; }
-#landing-fb-login {float:left;margin-top:90px;}
+#landing-img-container { float:right; margin-top: -26px; }
+#landing-img-container img { height: 450px; margin-right: 40px; }
+#landing-tag-line-container { color:#222;font-family:HelveticaNeue, 'Helvetica Neue', HelveticaNeueRoman, HelveticaNeue-Roman, 'Helvetica Neue Roman', TeXGyreHerosRegular, Helvetica, Tahoma, Geneva, Arial, sans-serif;font-size:35px;font-weight:bold;float:left;text-align:center;clear:both;margin-top:126px; }
+#landing-fb-login {float:left;margin-top:90px;width:400px;}
 #landing-tag-line-container, #landing-fb-login {margin-left:25px;}
 #fb-login { cursor:pointer; }
 a.FBConnectButton, .FBConnectButton {
@@ -47,7 +48,7 @@ a.FBConnectButton, .FBConnectButton {
 	margin: 1px 1px 0 0;
 	text-shadow: none;
 	margin-left: 37px;
-	font-size: 18px; 
+	font-size: 16px; 
 }
 
 .FBConnectButton_Small {
@@ -70,3 +71,5 @@ h3 { padding-top: 25px; }
 	position: absolute;
 	top: -18px;
 }
+
+#beta-invite-input { color: #5F5F6E; float: left; width: 140px; height: 23px; font-size: 14px; background: none; border: 1px solid #CCC;}
