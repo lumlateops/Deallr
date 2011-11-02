@@ -58,11 +58,11 @@ class AccountController extends DeallrBaseController
 		$account_obj = new Application_Model_Account($provider);
 		$response = $account_obj->upgradeToken($oauth_verifier, $oauth_token, $accountId);
 		if ($response['status']) {
+			Application_Model_User::setAuthorizedEmailAccountsFlag();
 			$this->_redirector->gotoSimple('thankyou', 'account', null, array('email' => $response['email']));
-		}
-		else {
+		} else {
 			$this->_redirector->gotoSimple('add', 'account', null, array());
-		}    	
+		}
     }
     
     public function thankyouAction()

@@ -13,20 +13,25 @@ class SignupController extends DeallrBaseController
 		$fbcode = $this->_getParam( 'code' );		
 		if(empty($fbcode))
 		{
-			$betacode = $this->_getParam('btoken');
-			if (!$betacode) {
-				$this->messenger->addMessage('Beta invite code missing.');
-				header('Location: /');
-				die();
-			} else {
-				$ret_arr = $this->_validateToken($betacode);
-				if (!$ret_arr['status']) {
-					$this->messenger->addMessage($ret_arr['message']);
+			$betaCodeInCookie = isset($_COOKIE['bic']) && trim($_COOKIE['bic']) ? base64_decode($_COOKIE['bic']) : '';
+			
+			if (!$betaCodeInCookie) {
+				$betacode = $this->_getParam('btoken') ? $this->_getParam('btoken') : '';
+				if (!$betacode) {
+					$this->messenger->addMessage('Beta invite code missing.');
 					header('Location: /');
 					die();
+				} else {
+					$ret_arr = $this->_validateToken($betacode);
+					if (!$ret_arr['status']) {
+						$this->messenger->addMessage($ret_arr['message']);
+						header('Location: /');
+						die();
+					}
+					setcookie('bic', base64_encode($betacode), time()+30*24*60*60, '/', '.deallr.com');
 				}
 			}
-
+			
 			$csrf_state = md5(uniqid(rand(), TRUE)); //CSRF protection
 			$auth_session->state = $csrf_state;
 			$login_url = Application_Model_Facebook::getFacebookSignupUrl($redirect_url, $csrf_state);
@@ -39,7 +44,14 @@ class SignupController extends DeallrBaseController
 		{
 			if( $fbstate == $auth_session->state )
 			{
-				Application_Model_User::signupUserFromFB( $fbcode, $redirect_url );
+				try {
+					Application_Model_User::signupUserFromFB( $fbcode, $redirect_url );
+				} catch(Exception $e) {
+					$this->messenger->addMessage($e->getMessage());
+					header('Location: /');
+					die();
+				}
+				
 		        $is_authenticated = Application_Model_User::isAuthenticated();
 		        if( $is_authenticated )
 		        {

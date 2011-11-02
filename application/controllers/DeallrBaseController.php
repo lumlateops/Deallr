@@ -32,6 +32,7 @@ class DeallrBaseController extends Zend_Controller_Action
        		$this->view->user = $auth_session->auth_user;
         }
         
+        $this->view->hasBetaCookie = isset($_COOKIE['bic']) && trim($_COOKIE['bic']);
         $this->messenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->flashMessenger = $this->messenger;
 	}

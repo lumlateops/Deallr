@@ -59,7 +59,8 @@ class Application_Model_Deals
 				'max_pages' => 0, 
 				'current_page' => $page,
 				'current_sort' => $sort,
-				'deals' =>  array()
+				'deals' =>  array(),
+				'fetch_status' => '' 	
 			);
 			return $ret_arr;
 		}
