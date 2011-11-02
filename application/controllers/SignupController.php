@@ -8,7 +8,7 @@ class SignupController extends DeallrBaseController
     public function indexAction()
     {
 		$auth_session = Zend_Registry::get('auth_session');
-		$redirect_url = 'http://dev.deallr.com/signup/index';
+		$redirect_url = 'http://'. (APPLICATION_ENV == 'production' ? '' : 'dev.') . 'deallr.com/signup/index';
 		
 		$fbcode = $this->_getParam( 'code' );		
 		if(empty($fbcode))

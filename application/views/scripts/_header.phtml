@@ -3,7 +3,7 @@
 <head>
 	<?php
 		$default_title = 'Start Loving Deals Again'; 
-		$default_image = 'http://dev.deallr.com/resources/images/logo.png';
+		$default_image = 'http://' . (APPLICATION_ENV == 'production' ? '' : 'dev.') . 'deallr.com/resources/images/logo.png';
 	?>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

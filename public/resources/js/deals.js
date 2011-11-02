@@ -30,14 +30,14 @@ Deals = function() {
 			<div class="deal-logo">\
 				<img src="{deal_publisher_logo}" alt="{deal_publisher} Logo" />\
 			</div>\
-			<h3><a class="deal-title" name="{deal_id}" href="http://dev.deallr.com/deals/details/deal_id/{deal_id}" title="{deal_title}">{deal_title}</a></h3>\
+			<h3><a class="deal-title" name="{deal_id}" href="http://'+window.location.host+'/deals/details/deal_id/{deal_id}" title="{deal_title}">{deal_title}</a></h3>\
 			<div class="deal-content">\
 				<div class="add-to-wallet"></div>\
 				<div class="add-to-wallet-button-container"><a class="button white add-to-wallet-button" name="{deal_id}" title="Add">Add</a></div>\
 				<div class="deal-details">{deal_details}</div>\
 				<div class="deal-tags">{deal_tags}</div>\
 				<div class="deal-facebook-like">\
-					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fdev.deallr.com%2Fdeal%2F{deal_share_url}&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>\
+					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2F'+window.location.host+'%2Fdeal%2F{deal_share_url}&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:30px;" allowTransparency="true"></iframe>\
 				</div>\
 				<div class="deal-shipping" style="display:{deal_free_shipping};">FREE SHIPPING</div>\
 				<div class="deal-post-date">Posted: {deal_post_date}</div>\
