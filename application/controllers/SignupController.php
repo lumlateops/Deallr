@@ -28,7 +28,7 @@ class SignupController extends DeallrBaseController
 						header('Location: /');
 						die();
 					}
-					setcookie('bic', base64_encode($betacode), time()+30*24*60*60, '/', '.deallr.com');
+					setcookie('bic', base64_encode($betacode), time()+(30*24*60*60), '/', '.deallr.com');
 				}
 			}
 			

@@ -67,7 +67,7 @@ class Application_Model_Deals
 		
 		$deal_count = intval($api_response['numberOfResults'][0], 10);
 		$max_pages = isset($api_response['numberOfPages']) ? intval($api_response['numberOfPages'][0], 10) : 0;
-		$fetch_status = isset($api_response['fetchStatus']) ? $api_response['fetchStatus'][0] : '';
+		$fetch_status = isset($api_response['fetchStatus']) ? strtolower($api_response['fetchStatus'][0]) : '';
 		
 		if ($is_wallet) {
 			$deals = isset( $api_response['wallet'] ) ? $api_response['wallet'] : array();
