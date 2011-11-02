@@ -17,4 +17,5 @@
 /******** ThankYou Page ************/
 #thankyou-text-container { margin: 40px auto 150px; }
 .thankyou-text { font-size: 18px; line-height: 30px; margin: 0 auto; text-align: center; width: 600px; }
+.thankyou-text strong { font-weight: bold; }
 .add-email-button-container a.add-more { width: 250px; }

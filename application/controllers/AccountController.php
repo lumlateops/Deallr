@@ -49,16 +49,16 @@ class AccountController extends DeallrBaseController
     public function upgradeAction()
     {
     	$userId = $this->_getParam('userId');
+    	$accountId = $this->_getParam('accountId');
     	$provider = $this->_getParam('provider');
     	$oauth_verifier = $this->_getParam('oauth_verifier');
     	$oauth_token = $this->_getParam('oauth_token');
     	
     	//Validate UserId
 		$account_obj = new Application_Model_Account($provider);
-		$this->view->status = $account_obj->upgradeToken($oauth_verifier, $oauth_token);
-		$email = '';
-		if ($this->view->status) {
-			$this->_redirector->gotoSimple('thankyou', 'account', null, array('email' => $email));
+		$response = $account_obj->upgradeToken($oauth_verifier, $oauth_token, $accountId);
+		if ($response['status']) {
+			$this->_redirector->gotoSimple('thankyou', 'account', null, array('email' => $response['email']));
 		}
 		else {
 			$this->_redirector->gotoSimple('add', 'account', null, array());
