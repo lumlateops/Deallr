@@ -8,7 +8,7 @@ class DealsController extends DeallrBaseController
 	{
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
         $ajaxContext->addActionContext('index', 'json');
-        //$ajaxContext->addActionContext('details', 'json');
+        $ajaxContext->addActionContext('got-any', 'json');
         $ajaxContext->initContext();
         $this->view->wallet = 0;
 		parent::init();
@@ -77,6 +77,12 @@ class DealsController extends DeallrBaseController
 			$this->view->deal_details = $details;
 			$this->view->deal_id = $details['deal_id'];
 		}
+    }
+    
+    public function gotAnyAction()
+    {
+		$deals = Application_Model_Deals::getDeals();
+		$this->view->status = (int)$deals['deal_count'] > 0 ? 1 : 0;
     }
 }
 

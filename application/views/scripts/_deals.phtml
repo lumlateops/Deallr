@@ -89,6 +89,10 @@
 			<?php elseif (isset($this->fetch_status) && $this->fetch_status == "inprogress" && !$this->wallet): ?>
 				<p id="no-deals-msg-container"><img src="<?= $this->baseUrl() ?>/resources/images/loading-bar.gif" alt="Loading Bar" /><br/><br/>Deallr is currently fetching deals from your inbox. Please wait a few moments.</p>
 				<?= $tip ?>
+				<script type="text/javascript">
+					var df = new DealFetcher();
+					df.init();
+				</script>
 			<?php elseif (isset($this->fetch_status) && $this->fetch_status == "error" && !$this->wallet): ?>	
 				<p id="no-deals-msg-container"><img src="<?= $this->baseUrl() ?>/resources/images/warning.png" class="warning-img" alt="Warning" />There was an error in reading deals from your inbox.</p>
 			<?php else: ?>

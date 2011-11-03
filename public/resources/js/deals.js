@@ -333,3 +333,29 @@ Deals = function() {
 		}, FILTER_INTERVAL);
 	};
 };
+
+var DealFetcher = function() {
+	var _pollTimer = '';
+	var _pollFrequency = 3000;
+
+	this.init = function() {
+		_checkDeals();
+		_pollTimer = setInterval(_checkDeals, _pollFrequency);
+	};
+	
+	var _checkDeals = function() {
+		var self = this;
+		$.ajax({
+			type: "GET",
+			url: "/deals/got-any",
+			data: "format=json",
+			dataType: "json",
+			success: function(response) {
+				if (response.status === 1) {
+					clearInterval(_pollTimer);
+					window.location.reload();
+				}
+			}
+		});
+	};
+};
