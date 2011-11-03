@@ -83,6 +83,7 @@ Deals = function() {
 		// Add to Wallet
 		$('.add-to-wallet-button').live('click', function(){
 			$(this).html('Adding..').attr('disabled', 'disabled').addClass('wallet-adding-in-progress').removeClass('add-to-wallet-button');
+			var add_wallet_button = this;
 			$.ajax({
 				type: "POST",
 				url: "/wallet/add",
@@ -90,19 +91,20 @@ Deals = function() {
 				dataType: "json",
 				success: function(response) {
 					if(response.status) {
-						$(this).removeClass('wallet-adding-in-progress').addClass('remove-from-wallet-button').removeAttr('disabled').html('Remove').attr('title','Remove deal from Wallet');
-						$(this).parents('.deal-content').addClass('deal-in-wallet');
+						$(add_wallet_button).removeClass('wallet-adding-in-progress').addClass('remove-from-wallet-button').removeAttr('disabled').html('Remove').attr('title','Remove deal from Wallet');
+						$(add_wallet_button).parents('.deal-content').addClass('deal-in-wallet');
 					} else {
-						$(this).removeClass('wallet-adding-in-progress').addClass('add-to-wallet-button').removeAttr('disabled').html('Add').attr('title','Add deal to Wallet');
-						$(this).parents('.deal-content').removeClass('deal-in-wallet');
+						$(add_wallet_button).removeClass('wallet-adding-in-progress').addClass('add-to-wallet-button').removeAttr('disabled').html('Add').attr('title','Add deal to Wallet');
+						$(add_wallet_button).parents('.deal-content').removeClass('deal-in-wallet');
 					}
-				}.bind(this)
+				}
 			});
 		});
 
 		// Remove from Wallet
 		$('.remove-from-wallet-button').live('click', function(){
 			$(this).html('Removing..').attr('disabled', 'disabled').addClass('wallet-removing-in-progress').removeClass('remove-from-wallet-button');
+			var remove_wallet_button = this;
 			$.ajax({
 				type: "POST",
 				url: "/wallet/remove",
@@ -110,13 +112,13 @@ Deals = function() {
 				dataType: "json",
 				success: function(response) {
 					if(response.status) {
-						$(this).removeClass('wallet-removing-in-progress').addClass('add-to-wallet-button').removeAttr('disabled').html('Add').attr('title','Add deal to Wallet');
-						$(this).parents('.deal-content').removeClass('deal-in-wallet');
+						$(remove_wallet_button).removeClass('wallet-removing-in-progress').addClass('add-to-wallet-button').removeAttr('disabled').html('Add').attr('title','Add deal to Wallet');
+						$(remove_wallet_button).parents('.deal-content').removeClass('deal-in-wallet');
 					} else {
-						$(this).removeClass('wallet-removing-in-progress').addClass('remove-from-wallet-button').removeAttr('disabled').html('Remove').attr('title','Remove deal from Wallet');
-						$(this).parents('.deal-content').addClass('deal-in-wallet');
+						$(remove_wallet_button).removeClass('wallet-removing-in-progress').addClass('remove-from-wallet-button').removeAttr('disabled').html('Remove').attr('title','Remove deal from Wallet');
+						$(remove_wallet_button).parents('.deal-content').addClass('deal-in-wallet');
 					}
-				}.bind(this)
+				}
 			});
 		});
 	};
