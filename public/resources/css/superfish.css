@@ -10,7 +10,7 @@
 .webkit .sf-menu li:hover ul,
 .webkit .sf-menu li.sfHover ul{left:0px;}
 .sf-menu li:hover ul,
-.sf-menu li.sfHover ul{left:12px;top:3.65em;/* match top ul list item height */
+.sf-menu li.sfHover ul{left:12px;top:3.2em;/* match top ul list item height */
 z-index:99;}
 ul.sf-menu li:hover li ul,
 ul.sf-menu li.sfHover li ul{top:-999em;}
