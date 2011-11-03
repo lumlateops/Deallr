@@ -56,16 +56,35 @@ class AccountController extends DeallrBaseController
     	
     	//Validate UserId
 		$account_obj = new Application_Model_Account($provider);
-		$response = $account_obj->upgradeToken($oauth_verifier, $oauth_token, $accountId);
-		if ($response['status']) {
-			Application_Model_User::setAuthorizedEmailAccountsFlag();
-			$this->_redirector->gotoSimple('thankyou', 'account', null, array('email' => $response['email']));
-		} else {
-			$this->_redirector->gotoSimple('add', 'account', null, array());
+		
+		try {
+			$response = $account_obj->upgradeToken($oauth_verifier, $oauth_token, $accountId);
+			if ($response['status']) {
+				Application_Model_User::setAuthorizedEmailAccountsFlag();
+				$this->_redirector->gotoSimple('thankyou', 'account', null, array('email' => $response['email']));
+			} else {
+				$this->_redirector->gotoSimple('add', 'account', null, array());
+			}
+		} catch(Exception $e) {
+			if ($e->getCode() == Application_Model_APIRequest::ERR_CODE_OAUTH_EXCEPTION) {
+				$deallr_address = Application_Model_User::getCurrentUserDeallrAddress();
+				$this->_redirector->gotoSimple('deny', 'account', null, array('email' => $deallr_address));
+			}
 		}
     }
     
     public function thankyouAction()
+    {
+    	$email = $this->_getParam('email');
+    	if (!$email) {
+    		$this->_redirector->gotoSimple('add', 'account', null, array());
+    	}
+    	else {
+    		$this->view->email = $this->_getParam('email');
+    	}
+    }
+    
+    public function denyAction()
     {
     	$email = $this->_getParam('email');
     	if (!$email) {

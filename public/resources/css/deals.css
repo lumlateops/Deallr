@@ -63,8 +63,3 @@
 
 .tip-container { margin-top: 55px; font-size: 16px; text-align: center; }
 .tip-container img { margin-right: 5px; vertical-align: middle; position: relative; top: -4px; }
-
-#user-deallr-address-container { text-align: center; color: #555; font-size: 20px; margin-top: 15px; font-family: QlassikMediumRegular; padding-bottom: 0; }
-#user-deallr-address, #user-deallr-address-label { display: inline-block; *display: inline; zoom: 1; }
-#user-deallr-address-label { margin-right: 20px; }
-#user-deallr-address { padding: 10px 40px; background: #EFEFEF; border: 1px solid #EFEFEF; -moz-border-radius: 4px; -webkit-border-radius: 4px; }

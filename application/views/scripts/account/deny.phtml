@@ -1,0 +1,34 @@
+<div id="deny-text-container">
+	<p class="deny-text">
+		Oops! Looks like you denied us access to your email.
+		<br/>
+		We need access to get all your deals and allow you to manage them here.
+		<br/>
+		<br/>
+		There are several advantages to doing this:
+	</p>
+	<ul>
+		<li>We remove all your deal and coupon clutter.</li>
+		<li>You would never have to miss a good deal hidden in your personal emails.</li>
+		<li>We mark your deals as read freeing your inbox.</li>
+	</ul>
+	<br/>
+	<div class="add-email-button-container">
+		<div class="buttonbackground">
+			<a class="add-more button white bigrounded" href="<?= $this->baseUrl(); ?>/account/add">Add email account now</a>
+		</div>
+	</div>
+	<p>We respect your privacy and will never read any personal emails.</p>
+	<br/>	
+	<h2>Still not feeling so sure?</h2>
+	<p class="deny-additional-text">Deallr creates a personalized email account for you just for deals. Use that to subscribe/unsubscribe for deals.</p>
+	<br/>
+	<p class="deny-additional-text">Deals from this email address will automatically appear in your Deallr account.</p>
+	<br/>
+	<div class="wrapper" id="user-deallr-address-container">
+		<div id="user-deallr-address-label">Your personal Deallr address: </div>
+		<div id="user-deallr-address"><?= $this->email ?></div>
+	</div>
+	<br/>
+	<br/>
+</div>
