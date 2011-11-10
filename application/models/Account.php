@@ -26,13 +26,15 @@ class Application_Model_Account
 			$api_response = $api_request->call();
 			if (isset($api_response) && isset($api_response['AuthUrl'][0])) {
 				 $url = $api_response['AuthUrl'][0];
+				 $secret = $api_response['tokenSecret'][0];
+				 $this->_session->token_secret = $secret;
 			}
 		}
 		
 		return $url;
 	}
 	
-	public function upgradeToken($verifier, $token, $accountId)
+	public function upgradeToken($verifier, $token)
 	{
 		$status = false;
 		$email = '';
@@ -40,7 +42,7 @@ class Application_Model_Account
 		if (isset($this->_session) && isset($this->_session->auth_user['id'])) {
 			$service_params = array(
 				'userId' => $this->_session->auth_user['id'],
-				'accountId' => $accountId,
+				'tokenSecret' => $this->_session->token_secret,
 				'provider' => $this->_provider,
 				'queryString' => rawurlencode('oauth_verifier='.$verifier.'&oauth_token='.$token)
 			);
@@ -50,6 +52,8 @@ class Application_Model_Account
 			if (isset($api_response) && isset($api_response['Message'][0]) && isset($api_response['email'][0])) {
 				$status = true;
 				$email = $api_response['email'][0];
+				// Clear token secret once the call is successful.
+				unset($this->_session->token_secret);
 			}
 		}
 		

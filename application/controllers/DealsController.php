@@ -45,9 +45,10 @@ class DealsController extends DeallrBaseController
     
     public function detailsAction()
     {
+    	$is_public = $this->_hasParam('s') ? $this->_getParam('s') : false;
     	$details = array();
     	if ($deal_id = $this->_getParam('deal_id')) {
-    		$details = Application_Model_Deals::getDetails($deal_id);
+    		$details = Application_Model_Deals::getDetails($deal_id, $is_public);
     	}
     	$this->_helper->layout->setLayout('dealdetails');
     	$this->view->details = $details;

@@ -121,10 +121,11 @@ class Application_Model_Deals
 		return $ret_arr;
 	}
 	
-	static function getDetails($deal_id)
+	static function getDetails($deal_id, $is_public = false)
 	{
 		$service_params = array(
-			'dealId' => $deal_id
+			'dealId' => $deal_id,
+			'isShareDetail' => !!$is_public ? 1 : 0
 		);
 		$api_request = new Application_Model_APIRequest( array('deal','detail'), $service_params );
 		$api_response = $api_request->call();

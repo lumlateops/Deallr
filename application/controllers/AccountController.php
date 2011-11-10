@@ -40,6 +40,11 @@ class AccountController extends DeallrBaseController
     		}
     	}
     	
+    	$messages = array();
+    	if (!$this->view->err_msg && $messages = $this->messenger->getMessages()) {
+    		$this->view->err_msg = implode('<br/>', $messages);
+    	}
+    	
     	// action body
         $api_request = new Application_Model_APIRequest( array('providers', 'active') );
 		$response = $api_request->call();
@@ -49,7 +54,6 @@ class AccountController extends DeallrBaseController
     public function upgradeAction()
     {
     	$userId = $this->_getParam('userId');
-    	$accountId = $this->_getParam('accountId');
     	$provider = $this->_getParam('provider');
     	$oauth_verifier = $this->_getParam('oauth_verifier');
     	$oauth_token = $this->_getParam('oauth_token');
@@ -58,7 +62,7 @@ class AccountController extends DeallrBaseController
 		$account_obj = new Application_Model_Account($provider);
 		
 		try {
-			$response = $account_obj->upgradeToken($oauth_verifier, $oauth_token, $accountId);
+			$response = $account_obj->upgradeToken($oauth_verifier, $oauth_token);
 			if ($response['status']) {
 				Application_Model_User::setAuthorizedEmailAccountsFlag();
 				$this->_redirector->gotoSimple('thankyou', 'account', null, array('email' => $response['email']));
@@ -69,6 +73,10 @@ class AccountController extends DeallrBaseController
 			if ($e->getCode() == Application_Model_APIRequest::ERR_CODE_OAUTH_EXCEPTION) {
 				$deallr_address = Application_Model_User::getCurrentUserDeallrAddress();
 				$this->_redirector->gotoSimple('deny', 'account', null, array('email' => $deallr_address));
+			} else if ($e->getCode() == Application_Model_APIRequest::ERR_CODE_DUPLICATE_ACCOUNT) {
+				$this->messenger->clearMessages();
+				$this->messenger->addMessage($e->getMessage());
+				$this->_redirector->gotoSimple('add', 'account', null, array());
 			}
 		}
     }
