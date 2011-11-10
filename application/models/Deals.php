@@ -179,10 +179,8 @@ class Application_Model_Deals
 		$api_response = $api_request->call();
 		
 		$deal_details = array(
-			'deal_email_content' => $api_response['deal'][0]['dealEmail']['content'],
-			'deal_email_subject' => $api_response['deal'][0]['dealEmail']['subject'],
 			'deal_title' => $api_response['deal'][0]['title'],
-			'deal_details' => $api_response['deal'][0]['dealEmail']['parsedContent'],
+			'deal_details' => $api_response['deal'][0]['description'],
 			'deal_id' => $api_response['deal'][0]['id']
 		);
 		
