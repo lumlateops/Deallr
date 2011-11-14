@@ -8,7 +8,7 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta property="og:app_id" content="218435764843462" />
-	<meta property="og:title" content="<?= isset($this->page_title) ? 'Deallr | Deal - ' . $this->page_title : $default_title ?>" />
+	<meta property="og:title" content="<?= isset($this->page_title) ? 'Deallr | ' . $this->page_title : $default_title ?>" />
 	<meta property="og:image" content="<?= $default_image ?>" />
 	<meta property="og:site_name" content="Deallr" />
 	<meta property="og:type" content="deal"/>
@@ -21,7 +21,7 @@
 	<meta property="fb:admins" content="100002376999672" />
 	<meta property="fb:app_id" content="218435764843462" />
 	
-	<title>Deallr | <?= isset($this->page_title) ? 'Deal - ' . $this->page_title : $default_title ?></title>
+	<title>Deallr | <?= isset($this->page_title) ? $this->page_title : $default_title ?></title>
 		
 	<!-- Reset Stylesheet -->
 	<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/resources/css/reset.css" type="text/css" media="screen" />

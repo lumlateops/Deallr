@@ -73,7 +73,7 @@ class DealsController extends DeallrBaseController
 								 . $this->_getParam('deal_share_handle');
 			
 			$details = Application_Model_Deals::getDealDetailByShareURLHandle($deal_share_handle);
-			$this->view->page_title = $details['deal_title'];
+			$this->view->page_title = 'Deal - ' . $details['deal_title'];
 			$this->view->page_desc = $details['deal_details'];
 			$this->view->deal_details = $details;
 			$this->view->deal_id = $details['deal_id'];

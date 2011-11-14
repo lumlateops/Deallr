@@ -3,24 +3,16 @@ $(document).ready(function(){
 	//Sidebar Accordion Menu:
 		
 		$("#main-filter li ul").hide(); // Hide all sub menus
-		$("#main-filter li a.current").parent().find("ul").slideToggle("normal"); // Slide down the current menu item's sub menu
+		$("#main-filter li a.current").parent().find("ul").slideToggle("fast"); // Slide down the current menu item's sub menu
 		
 		$("#main-filter li a.filter-group").click( // When a top menu item is clicked...
 			function () {
-				$(this).next().slideToggle("normal"); // Slide down the clicked sub menu
+				$(this).next().slideToggle("fast"); // Slide down the clicked sub menu
 				$(this).toggleClass("current");
+				$(this).find(".expanded").toggleClass("hidden");
+				$(this).find(".collapsed").toggleClass("hidden");
+				$(this).prev().toggleClass("filter-hidden");
 				return false;
-			}
-		);
-		
-    // Sidebar Accordion Menu Hover Effect:
-		
-		$("#main-filter li .filter-group").hover(
-			function () {
-				$(this).stop().animate({ paddingRight: "25px" }, 200);
-			}, 
-			function () {
-				$(this).stop().animate({ paddingRight: "15px" });
 			}
 		);
 

@@ -63,3 +63,10 @@
 
 .tip-container { margin-top: 55px; font-size: 16px; text-align: center; }
 .tip-container img { margin-right: 5px; vertical-align: middle; position: relative; top: -4px; }
+
+#main-filter .filter-hidden { display: none; }
+.all-none-select-container { float: right; margin-right: 10px; position: relative; top: 5px; color: #333; }
+.all-none-select-container .selector { cursor: pointer; text-decoration: underline; font-size: 12px; }
+.all-none-select-container .separator { margin: 0 10px; }
+
+.expand-collapse-indicator { position: relative; left: -6px; }

@@ -9,6 +9,9 @@ class Application_Model_Deals
 	const SORT_DISCOUNT_PERCENTAGE = 'discountPercentage';
 	const SORT_EXPIRY_DATE = 'expiryDate';
 	
+	const MIXED_CATEGORY_ID = -1;
+	const MIXED_CATEGORY_NAME = "Mixed";
+	
 	static $SORT_PARAMS = array(
 		self::SORT_POST_DATE => 'Post Date',
 		self::SORT_DISCOUNT_PERCENTAGE => 'Discount Percentage',
@@ -84,6 +87,10 @@ class Application_Model_Deals
 				foreach( $deal['categories'] as $deal_category ) {
 					$deal_categories[] = array( $deal_category['id'], $deal_category['description'] );
 				}
+			}
+			
+			if (!count($deal_categories)) {
+				$deal_categories[] = array( self::MIXED_CATEGORY_ID, self::MIXED_CATEGORY_NAME );
 			}
 			
 			$tags = isset($deal['tags']) && $deal['tags'] ? $deal['tags'] : '';

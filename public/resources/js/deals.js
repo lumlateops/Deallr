@@ -63,7 +63,24 @@ Deals = function() {
 		if( !_is_wallet ) {
 			_initWalletHandlers();
 		}
+		_initFilterSelectorHandler();
 		_initDealEmailTriggerHandler();
+	};
+	
+	var _initFilterSelectorHandler = function() {
+		$(document).ready(function(){
+			$(".all-none-select-container .selector").click(function(){
+				var all_filter_checks = $(this).parents("li").find("input[type=\"checkbox\"]");
+				
+				if($(this).attr("name") == "all") {
+					all_filter_checks.attr("checked", "checked");
+				} else {
+					all_filter_checks.removeAttr("checked");
+				}
+				
+				_applyFilters();
+			});
+		});	
 	};
 	
 	var _initDealEmailTriggerHandler = function() {
