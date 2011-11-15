@@ -60,6 +60,7 @@
 
 #no-deals-msg-container { font-size: 16px; text-align: center; }
 #no-deals-msg-container .warning-img { margin-right: 10px; top: -4px; position: relative; vertical-align: middle; }
+#no-deals-msg-container h2 { color: #4AAADB; }
 
 .tip-container { margin-top: 55px; font-size: 16px; text-align: center; }
 .tip-container img { margin-right: 5px; vertical-align: middle; position: relative; top: -4px; }

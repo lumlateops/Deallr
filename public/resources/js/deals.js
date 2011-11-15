@@ -354,6 +354,8 @@ Deals = function() {
 var DealFetcher = function() {
 	var _pollTimer = '';
 	var _pollFrequency = 3000;
+	var _maxPolls = 6;
+	var _numberOfPolls = 0;
 
 	this.init = function() {
 		_checkDeals();
@@ -362,6 +364,7 @@ var DealFetcher = function() {
 	
 	var _checkDeals = function() {
 		var self = this;
+		_numberOfPolls++;
 		$.ajax({
 			type: "GET",
 			url: "/deals/got-any",
@@ -371,6 +374,11 @@ var DealFetcher = function() {
 				if (response.status === 1) {
 					clearInterval(_pollTimer);
 					window.location.reload();
+				} else {
+					if (_numberOfPolls == _maxPolls) {
+						clearInterval(_pollTimer);
+						$("#no-deals-msg-container").html("<h2>Uh oh! Looks like the cogwheels are turning slower than usual.</h2><h2>We will send you an email once we have read deals from your inbox.</h2>");
+					}
 				}
 			}
 		});

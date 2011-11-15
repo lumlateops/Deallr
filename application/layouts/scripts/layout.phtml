@@ -33,7 +33,12 @@
 		'ga_id' => $this->ga_id
 	));
 	
-	echo $this->partial('_topHeader.phtml', array('controller' => $this->controller, 'user' => $this->user, 'action' => $this->action));
+	echo $this->partial('_topHeader.phtml', array(
+		'controller' => $this->controller, 
+		'user' => $this->user, 
+		'action' => $this->action,
+		'has_email_accounts' => $this->has_email_accounts
+	));
 ?>
 	<div class="wrapper"> <!-- Wrapper for the radial gradient background -->
 		<?php 

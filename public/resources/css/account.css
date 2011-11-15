@@ -7,8 +7,8 @@
 .add-email-button-container { margin-top:30px; margin-bottom:20px;text-align:center; }
 .add-email-button-container a { width: 130px; }
 
-.provider-image { float: left; margin-left: 20px; width: 300px; position: relative; top: 30px; }
-.provider-email-input-container { float: left; }
+.provider-image { display: inline-block; *display: inline; zoom: 1; }
+.provider-email-input-container { margin-left: 100px; display: inline-block; *display: inline; zoom: 1;  }
 .provider-image img { vertical-align: middle; }
 
 .error { font-size: 15px; margin: 10px 0px; padding: 10px; }
@@ -23,3 +23,8 @@
 .deny-text { font-size: 16px; line-height: 30px; width: 600px; }
 #deny-text-container ul li { font-family: Georgia, Arial; color: #555; font-size: 16px; list-style: lower-alpha; list-style-position: inside; }
 .deny-additional-text { font-size: 16px; }
+
+h4 { color: #5F5F6E; }
+h2 { color: #4AAADB; }
+
+#account-add-container { text-align: center; }

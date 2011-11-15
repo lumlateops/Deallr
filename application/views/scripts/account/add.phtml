@@ -1,44 +1,49 @@
-<h2>Authorize an email account</h2>
-<p id="add-email-intro">You are one step away from managing your deals in Deallr. Please add an email account from which Deallr should fetch deals.</p>
-<br/><br/><br/>
-<h3>Supported Providers:</h3>
-
-<div id="providers-form-errors" class="error" style="<?= trim($this->err_msg) ? "" : "display:none;" ?>">
-	<?= $this->err_msg ?>
-</div>
-<ul id="providers">
-<?php
-
-$has_providers = false;
-foreach ($this->providers as $provider)
-{
-	if (isset($provider['logoUrl'])) {
-		$has_providers = true;	
-		echo '<li name="'.strtolower($provider['name']).'">';
-		echo '<div class="provider-image"><img src="'.$provider['logoUrl'].'" alt="Provider Image" /></div>';
-		echo '<div class="provider-email-input-container">
-				<div class="add-email-button-container">
-					<div class="buttonbackground">
-						<a class="button white bigrounded" href="' . $this->baseUrl() .'/account/add/provider/'.strtolower($provider['name']).'">Add Email</a>
-					</div>
-		 		</div>
-			</div>';
-		echo '<div class="clearboth"></div>';
-		echo '</li>';
+<div id="account-add-container">
+	<?php if ($this->is_new_user === 1 && $this->has_email_accounts === 0): ?>
+		<h2>Awesome, you are in!</h2>
+	<?php elseif ($this->is_new_user === 0): ?>
+		<h2>You are one step away from your deals.</h2>
+	<?php endif; ?>
+	
+	<h4>Add an email account from which Deallr should get your deals.</h4>
+	
+	<h4>Don't worry, we won't read your personal emails.</h4>
+	
+	<!-- <p id="add-email-intro">You are one step away from managing your deals in Deallr. Please add an email account from which Deallr should fetch deals.</p> -->
+	
+	<br/><br/><br/>
+	<!-- <h3>Supported Providers:</h3> -->
+	<div id="providers-form-errors" class="error" style="<?= trim($this->err_msg) ? "" : "display:none;" ?>">
+		<?= $this->err_msg ?>
+	</div>
+	<ul id="providers">
+	<?php
+	
+	$has_providers = false;
+	foreach ($this->providers as $provider)
+	{
+		if (isset($provider['logoUrl'])) {
+			$has_providers = true;	
+			echo '<li name="'.strtolower($provider['name']).'">';
+			echo '<div class="provider-image"><img src="'.$provider['logoUrl'].'" alt="Provider Image" /></div>';
+			echo '<div class="provider-email-input-container">
+					<div class="add-email-button-container">
+						<div class="buttonbackground">
+							<a class="button white bigrounded" href="' . $this->baseUrl() .'/account/add/provider/'.strtolower($provider['name']).'">Add Email</a>
+						</div>
+			 		</div>
+				</div>';
+			echo '<div class="clearboth"></div>';
+			echo '</li>';
+		}
 	}
-}
-
-echo '</ul>';
-
-if( !$has_providers )
-{
-	echo '<h3>Error: No active providers found.</h3>';
-}
-?>
-
-<p id="email-add-disclaimer">
-	DISCLAIMER:
-	<br/>
-	Deallr would never read any personal info from your emails. Our engine only reads deal and promotion emails from known retailer addresses. 
-	<br/>We take consumer privacy very seriously.
-</p>
+	
+	echo '</ul>';
+	
+	if( !$has_providers )
+	{
+		echo '<h3>Error: No active providers found.</h3>';
+	}
+	
+	?>
+</div>

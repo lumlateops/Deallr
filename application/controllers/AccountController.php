@@ -45,6 +45,8 @@ class AccountController extends DeallrBaseController
     		$this->view->err_msg = implode('<br/>', $messages);
     	}
     	
+    	$this->view->is_new_user = Application_Model_User::isNewUser();
+    	
     	// action body
         $api_request = new Application_Model_APIRequest( array('providers', 'active') );
 		$response = $api_request->call();

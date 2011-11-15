@@ -211,6 +211,7 @@ class Application_Model_User
 			$auth_session->auth_user = $service_params;
 			$auth_session->auth_user['id'] = $api_response['user'][0]['id'];
 			$auth_session->auth_user['email'] = $api_response['user'][0]['emailAddress'];
+			$auth_session->auth_user['newUser'] = 1;
 			$auth_session->auth_user['hasSetupEmailAccounts'] = 0;
 			$auth_session->lastAuthCheck = time();
 			return $api_response['user'][0];
@@ -244,8 +245,22 @@ class Application_Model_User
 	public static function hasAuthorizedEmailAccounts()
 	{
 		$auth_session = Zend_Registry::get('auth_session');	
-		error_log("hasSetupEmailAccounts = ". $auth_session->auth_user['hasSetupEmailAccounts']);
-		return isset( $auth_session->auth_user['hasSetupEmailAccounts'] ) ? $auth_session->auth_user['hasSetupEmailAccounts'] == 1 : 0;
+		if ($auth_session && isset($auth_session->auth_user) && isset($auth_session->auth_user['hasSetupEmailAccounts']) ) {
+			error_log("hasSetupEmailAccounts = " . ($auth_session->auth_user['hasSetupEmailAccounts'] ? 1 : 0));
+			return $auth_session->auth_user['hasSetupEmailAccounts'] == 1 ? 1 : 0;
+		}
+		
+		return 0;
+	}
+
+	public static function isNewUser()
+	{
+		$auth_session = Zend_Registry::get('auth_session');
+		if ($auth_session && isset($auth_session->auth_user) && isset($auth_session->auth_user['newUser']) ) {
+			return $auth_session->auth_user['newUser'] == 1 ? 1 : 0;
+		}
+		
+		return 0;
 	}
 
 	public static function setAuthorizedEmailAccountsFlag()

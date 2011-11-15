@@ -103,7 +103,7 @@
 			<?php elseif (!$this->user['hasSetupEmailAccounts'] && !$this->wallet) : ?>
 				<p id="no-deals-msg-container">No email address found to fetch deals from. Please <a href="<?= $this->baseUrl(). '/account/add' ?>">add an email account</a> first.</p>
 				<?= $tip ?>
-			<?php elseif (isset($this->fetch_status) && $this->fetch_status == "inprogress" && !$this->wallet): ?>
+			<?php elseif (isset($this->fetch_status) && ($this->fetch_status == "inprogress" || $this->fetch_status == "none") && !$this->wallet): ?>
 				<p id="no-deals-msg-container"><img src="<?= $this->baseUrl() ?>/resources/images/loading-bar.gif" alt="Loading Bar" /><br/><br/>Deallr is currently fetching deals from your inbox. Please wait a few moments.</p>
 				<?= $tip ?>
 				<script type="text/javascript">
