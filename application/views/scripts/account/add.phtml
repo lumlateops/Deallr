@@ -1,7 +1,7 @@
 <div id="account-add-container">
 	<?php if ($this->is_new_user === 1 && $this->has_email_accounts === 0): ?>
 		<h2>Awesome, you are in!</h2>
-	<?php elseif ($this->is_new_user === 0): ?>
+	<?php elseif ($this->has_email_accounts === 0): ?>
 		<h2>You are one step away from your deals.</h2>
 	<?php endif; ?>
 	
