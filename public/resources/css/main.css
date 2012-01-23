@@ -245,9 +245,6 @@ RETAILER LOGOS
 	zoom:1;
 	white-space: nowrap;
 }
-
-#beta-invite-err { color: #C00; margin-top: 5px; }
-
 #user-deallr-address-container { text-align: center; color: #555; font-size: 20px; margin-top: 15px; font-family: QlassikMediumRegular; padding-bottom: 0; }
 #user-deallr-address, #user-deallr-address-label { display: inline-block; *display: inline; zoom: 1; }
 #user-deallr-address-label { margin-right: 20px; }

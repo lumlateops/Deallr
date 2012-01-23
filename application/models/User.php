@@ -201,7 +201,7 @@ class Application_Model_User
 			'fbLocationName' => isset( $params['location']['name'] ) ? $params['location']['name'] : '',
 			'fbLocationId' => isset( $params['location']['id'] ) ? $params['location']['id'] : '',
 			'fbAuthToken' => $params['auth_token'],
-			'betaToken' => isset($_COOKIE['bic']) && trim($_COOKIE['bic']) ? base64_decode(trim($_COOKIE['bic'])) : ''
+			'betaToken' => 'NZSDO'
 		);
 		$api_request = new Application_Model_APIRequest( array('user', 'add'), $service_params );
 		$api_request->setMethod( Application_Model_APIRequest::METHOD_POST );

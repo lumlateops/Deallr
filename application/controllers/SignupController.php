@@ -8,30 +8,11 @@ class SignupController extends DeallrBaseController
     public function indexAction()
     {
 		$auth_session = Zend_Registry::get('auth_session');
-		$redirect_url = 'http://'. (APPLICATION_ENV == 'production' ? '' : 'dev.') . 'deallr.com/signup/index';
+		$redirect_url = 'http://'. (APPLICATION_ENV == 'production' ? '' : 'dev.') . 'deallr.com/signup/index/';
 		
 		$fbcode = $this->_getParam( 'code' );		
 		if(empty($fbcode))
-		{
-			$betaCodeInCookie = isset($_COOKIE['bic']) && trim($_COOKIE['bic']) ? base64_decode($_COOKIE['bic']) : '';
-			
-			if (!$betaCodeInCookie) {
-				$betacode = $this->_getParam('btoken') ? $this->_getParam('btoken') : '';
-				if (!$betacode) {
-					$this->messenger->addMessage('Beta invite code missing.');
-					header('Location: /');
-					die();
-				} else {
-					$ret_arr = $this->_validateToken($betacode);
-					if (!$ret_arr['status']) {
-						$this->messenger->addMessage($ret_arr['message']);
-						header('Location: /');
-						die();
-					}
-					setcookie('bic', base64_encode($betacode), time()+(30*24*60*60), '/', '.deallr.com');
-				}
-			}
-			
+		{			
 			$csrf_state = md5(uniqid(rand(), TRUE)); //CSRF protection
 			$auth_session->state = $csrf_state;
 			$login_url = Application_Model_Facebook::getFacebookSignupUrl($redirect_url, $csrf_state);
@@ -40,6 +21,7 @@ class SignupController extends DeallrBaseController
 		}
 		
 		$fbstate = $this->_getParam( 'state' );
+		echo $auth_session->state;
 		if( isset($auth_session->state) )
 		{
 			if( $fbstate == $auth_session->state )

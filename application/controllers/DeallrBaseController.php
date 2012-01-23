@@ -36,7 +36,6 @@ class DeallrBaseController extends Zend_Controller_Action
 	        }
 	        
 	        $this->view->has_email_accounts = Application_Model_User::hasAuthorizedEmailAccounts();
-	        $this->view->hasBetaCookie = isset($_COOKIE['bic']) && trim($_COOKIE['bic']);
 	        $this->messenger = $this->_helper->getHelper('FlashMessenger');
 	        $this->view->flashMessenger = $this->messenger;
 		}
